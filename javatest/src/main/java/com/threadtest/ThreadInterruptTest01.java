@@ -4,8 +4,13 @@ public class ThreadInterruptTest01 {
     private final static  String TAG = ThreadInterruptTest01.class.getSimpleName();
     public static void main(String[] args) {
         test1();
+        testThread();
 
+    }
 
+    private static void testThread() {
+
+        System.out.println("testThread,Thread.currentThread():" + Thread.currentThread());
     }
 
     private static void test1() {

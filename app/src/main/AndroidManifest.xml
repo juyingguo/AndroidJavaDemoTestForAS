@@ -44,7 +44,7 @@
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-              <!--  <action android:name="action_test_abc" />-->
+                <!-- <action android:name="action_test_abc" /> -->
             </intent-filter>
         </receiver>
 
@@ -63,6 +63,7 @@
         <activity android:name=".TouchViewTestActivity" />
         <activity android:name=".MoboPlayerTestActivity" />
         <!-- 关键代码 -->
+        <activity android:name="com.handler.HandlerTestActivity"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.groupdance.GroupDanceTest;
+import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
 import com.sp.spmultipleapp.service.MyIntentService;
@@ -105,6 +106,8 @@ public class MainActivity extends Activity {
 //        dealSettingIme();
 
 //        dealGramPath();
+
+        startActivity(new Intent(this, HandlerTestActivity.class));
     }
 
     @Override

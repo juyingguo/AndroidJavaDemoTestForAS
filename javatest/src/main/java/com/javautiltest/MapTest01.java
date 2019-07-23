@@ -25,7 +25,7 @@ public class MapTest01 {
     }
     private static void initDataHashMap() {
         System.out.println("---------initDataHashMap--------");
-        HashMap<String,Integer> hashMap =  new HashMap<>();
+        HashMap<String,Integer> hashMap =  new HashMap<String,Integer>();
         testMap(hashMap);
 
     }

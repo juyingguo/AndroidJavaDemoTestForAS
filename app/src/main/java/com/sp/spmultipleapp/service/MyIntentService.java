@@ -99,6 +99,12 @@ public class MyIntentService extends IntentService {
             Log.d(TAG,"handleMessage()");
         }
     };
+    Handler mHandler2 = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            return false;
+        }
+    });
 
     @Override
     public void onDestroy() {
