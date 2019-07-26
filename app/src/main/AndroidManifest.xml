@@ -63,7 +63,8 @@
         <activity android:name=".TouchViewTestActivity" />
         <activity android:name=".MoboPlayerTestActivity" />
         <!-- 关键代码 -->
-        <activity android:name="com.handler.HandlerTestActivity"></activity>
+        <activity android:name="com.handler.HandlerTestActivity" />
+        <activity android:name="com.testokhttp.OkhttpTestActivity"></activity>
     </application>
 
 </manifest>
