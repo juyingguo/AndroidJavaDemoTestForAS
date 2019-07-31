@@ -1,4 +1,4 @@
-package com.type;
+package com.simpledatatype;
 
 import java.io.File;
 import java.io.FileNotFoundException;

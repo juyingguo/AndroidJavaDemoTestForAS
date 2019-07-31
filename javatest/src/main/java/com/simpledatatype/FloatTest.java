@@ -1,4 +1,4 @@
-package com.type;
+package com.simpledatatype;
 
 /**
  * Java基本数据类型和byte数组相互转化 
