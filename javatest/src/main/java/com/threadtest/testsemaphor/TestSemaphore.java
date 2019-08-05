@@ -1,4 +1,4 @@
-package thread.testsemaphor;
+package com.threadtest.testsemaphor;
 import java.util.concurrent.ExecutorService;
 
 import java.util.concurrent.Executors;

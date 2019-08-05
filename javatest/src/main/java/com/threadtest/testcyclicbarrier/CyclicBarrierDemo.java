@@ -1,4 +1,4 @@
-package thread.testcyclicbarrier;
+package com.threadtest.testcyclicbarrier;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
