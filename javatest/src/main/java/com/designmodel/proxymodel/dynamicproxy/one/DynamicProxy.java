@@ -10,14 +10,20 @@ public class DynamicProxy
   public static void main( String args[] )   
   {   
     RealSubject real = new RealSubject();   
-    Subject proxySubject = (Subject)Proxy.newProxyInstance(Subject.class.getClassLoader(), 
-     new Class[]{Subject.class}, 
+//    Subject proxySubject = (Subject)Proxy.newProxyInstance(Subject.class.getClassLoader(),
+//     new Class[]{Subject.class},
+//     new ProxyHandler(real));
+    Subject proxySubject  = (Subject)Proxy.newProxyInstance(Subject.class.getClassLoader(),
+     real.getClass().getInterfaces(),
      new ProxyHandler(real));
-         
+
     proxySubject.doSomething();
    
     //write proxySubject class binary data to file   
-    createProxyClassFile();   
+    createProxyClassFile();
+    Class[] classes = {Subject.class};
+    String interfaceName = classes[0].getName();
+    System.out.println("interfaceName:" + interfaceName);
   }   
      
   public static void createProxyClassFile()   
