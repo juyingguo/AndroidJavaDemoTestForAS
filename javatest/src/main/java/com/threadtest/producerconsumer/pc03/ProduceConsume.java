@@ -8,6 +8,15 @@
 package com.threadtest.producerconsumer.pc03;
  
 public class ProduceConsume {
+    /*
+     * 打印结果会出现：先打印消费，后打印生产
+     * 消费了steamBread:0
+     生产了steamBread:0
+     生产了steamBread:1
+     生产了steamBread:2
+     消费了steamBread:2
+     * @param args
+     */
  
 	public static void main(String[] args) {
 		SyncStack ss = new SyncStack();//建造一个装馒头的框
