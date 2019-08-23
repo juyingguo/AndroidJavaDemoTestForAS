@@ -22,6 +22,8 @@ import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
+import com.sp.spmultipleapp.gamecourse.GameCourseActivity;
+import com.sp.spmultipleapp.gamecourse.GameCoursePrimaryClassActivity;
 import com.sp.spmultipleapp.service.MyIntentService;
 import com.sp.spmultipleapp.service.SdcardReadWriteDealService;
 import com.sp.spmultipleapp.service.TestBackgroundService;
@@ -216,7 +218,7 @@ public class MainActivity extends Activity {
     }
 
 
-    @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video})
+    @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course})
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
             startActivity(new Intent(mContext,FileExploreActivity.class));
@@ -237,6 +239,8 @@ public class MainActivity extends Activity {
 
         }else if (view.getId() == R.id.tv_test_video){
             startActivity(new Intent(mContext,MoboPlayerTestActivity.class));
+        }else if (view.getId() == R.id.btn_game_course){
+            startActivity(new Intent(mContext, GameCourseActivity.class));
         }
     }
 

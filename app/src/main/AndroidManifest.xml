@@ -65,6 +65,8 @@
         <!-- 关键代码 -->
         <activity android:name="com.handler.HandlerTestActivity" />
         <activity android:name="com.testokhttp.OkhttpTestActivity"></activity>
+        <activity android:name=".gamecourse.GameCourseActivity"></activity>
+        <activity android:name=".gamecourse.GameCoursePrimaryClassActivity"></activity>
     </application>
 
 </manifest>
