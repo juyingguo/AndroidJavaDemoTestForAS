@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
     <application
         android:name="com.application.CoreApplication"
         android:allowBackup="true"
@@ -31,6 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.activity.LinearLayoutTestActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,12 +61,11 @@
         <activity android:name=".OpenOtherActivityTest" />
         <activity android:name=".FileExploreActivity" />
         <activity android:name=".TouchViewTestActivity" />
-        <activity android:name=".MoboPlayerTestActivity" />
-        <!-- 关键代码 -->
+        <activity android:name=".MoboPlayerTestActivity" /> <!-- 关键代码 -->
         <activity android:name="com.handler.HandlerTestActivity" />
-        <activity android:name="com.testokhttp.OkhttpTestActivity"></activity>
-        <activity android:name=".gamecourse.GameCourseActivity"></activity>
-        <activity android:name=".gamecourse.GameCoursePrimaryClassActivity"></activity>
+        <activity android:name="com.testokhttp.OkhttpTestActivity" />
+        <activity android:name=".gamecourse.GameCourseActivity" />
+        <activity android:name=".gamecourse.GameCoursePrimaryClassActivity" />
     </application>
 
 </manifest>

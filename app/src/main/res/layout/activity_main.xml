@@ -63,7 +63,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="游戏课程" />
-
+            <Button
+                android:id="@+id/btn_linearlayout_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="linearlayout 测试" />
         </LinearLayout>
     </ScrollView>
 

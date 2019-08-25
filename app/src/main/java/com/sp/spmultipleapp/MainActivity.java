@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activity.LinearLayoutTestActivity;
 import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
@@ -61,6 +62,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG,"onCreate");
+
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
         butterKnifeBind = ButterKnife.bind(this);
@@ -115,6 +119,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG,"onResume");
 //        startService(new Intent(this,SdcardReadWriteDealService.class));
 
         startService(new Intent(this, TestServiceFromActivity.class));
@@ -124,6 +129,19 @@ public class MainActivity extends Activity {
         DevicePath.getStoragePaths(this);
 
         TestNewBuildService.getInstance();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG,"onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"onStop");
     }
 
     private void checkStorage(){
@@ -218,7 +236,9 @@ public class MainActivity extends Activity {
     }
 
 
-    @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course})
+    @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,
+            R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course
+            ,R.id.btn_linearlayout_test})
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
             startActivity(new Intent(mContext,FileExploreActivity.class));
@@ -241,6 +261,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext,MoboPlayerTestActivity.class));
         }else if (view.getId() == R.id.btn_game_course){
             startActivity(new Intent(mContext, GameCourseActivity.class));
+        }else if (view.getId() == R.id.btn_linearlayout_test){
+            startActivity(new Intent(mContext, LinearLayoutTestActivity.class));
         }
     }
 
@@ -500,6 +522,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d(TAG,"onDestroy");
         if (tempNetCheckTimer != null){
             tempNetCheckTimer.cancel();
         }
