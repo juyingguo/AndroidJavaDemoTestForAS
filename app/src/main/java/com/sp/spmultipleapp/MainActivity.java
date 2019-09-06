@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.LinearLayoutTestActivity;
+import com.activity.UpgradeInstallTestActivity;
 import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
@@ -30,6 +31,7 @@ import com.sp.spmultipleapp.service.SdcardReadWriteDealService;
 import com.sp.spmultipleapp.service.TestBackgroundService;
 import com.sp.spmultipleapp.service.TestNewBuildService;
 import com.sp.spmultipleapp.service.TestServiceFromActivity;
+import com.viewtest.verifyviewmethod.one.InvalidateTestActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -113,7 +115,6 @@ public class MainActivity extends Activity {
 
 //        dealGramPath();
 
-        startActivity(new Intent(this, HandlerTestActivity.class));
     }
 
     @Override
@@ -238,7 +239,7 @@ public class MainActivity extends Activity {
 
     @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,
             R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course
-            ,R.id.btn_linearlayout_test})
+            ,R.id.btn_linearlayout_test,R.id.btn_view_test,R.id.btn_install_upgrade_imitate})
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
             startActivity(new Intent(mContext,FileExploreActivity.class));
@@ -263,6 +264,12 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, GameCourseActivity.class));
         }else if (view.getId() == R.id.btn_linearlayout_test){
             startActivity(new Intent(mContext, LinearLayoutTestActivity.class));
+        }else if (view.getId() == R.id.btn_view_test){
+            startActivity(new Intent(mContext, InvalidateTestActivity.class));
+        }else if (view.getId() == R.id.btn_handler_test){
+            startActivity(new Intent(mContext, HandlerTestActivity.class));
+        }else if (view.getId() == R.id.btn_install_upgrade_imitate){
+            startActivity(new Intent(mContext, UpgradeInstallTestActivity.class));
         }
     }
 

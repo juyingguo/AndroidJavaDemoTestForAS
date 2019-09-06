@@ -7,8 +7,8 @@ android {
         applicationId "com.sp.spmultipleapp"
         minSdkVersion MIN_SDK_VER
         targetSdkVersion TARGET_SDK_VER
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
