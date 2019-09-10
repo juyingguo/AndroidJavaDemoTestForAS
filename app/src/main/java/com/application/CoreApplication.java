@@ -22,15 +22,15 @@ public class CoreApplication extends Application {
     @Override
     public void onCreate() {
         Log.d(TAG,"onCreate()");
-        Intent intent = new Intent(this, SdcardReadWriteDealService.class);
-        bindService(intent,connect, Service.BIND_AUTO_CREATE);
+//        Intent intent = new Intent(this, SdcardReadWriteDealService.class);
+//        bindService(intent,connect, Service.BIND_AUTO_CREATE);
 
 
 
 
 
         /////////////////////
-        startService(new Intent(this, TestService.class));
+//        startService(new Intent(this, TestService.class));
 
 //        startSeviceByAlarm();
     }

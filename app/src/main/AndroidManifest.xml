@@ -31,8 +31,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.activity.UpgradeInstallTestActivity"
-            android:theme="@style/Theme.AppCompat"></activity>
+        <activity android:name="com.activity.KeepAliveServiceActivity"
+            android:theme="@style/Theme.AppCompat" ></activity>
+
+        <service
+            android:name=".service.keepaliveservice.one.KeepAliveTest01Service"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name="com.activity.UpgradeInstallTestActivity"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name="com.viewtest.verifyviewmethod.one.InvalidateTestActivity"
             android:theme="@style/Theme.AppCompat" />
