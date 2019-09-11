@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
@@ -179,7 +180,6 @@ public class MainActivity extends Activity {
         handlerThread.start();
 
         handlerBack = new Handler(handlerThread.getLooper());
-
         handlerBack.post(new Runnable() {
             @Override
             public void run() {
@@ -213,7 +213,6 @@ public class MainActivity extends Activity {
 
             }
         });
-
 
     }
 
