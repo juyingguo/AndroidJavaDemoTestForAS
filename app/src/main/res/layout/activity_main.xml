@@ -93,6 +93,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="keep_alive_service_test" />
+            <Button
+                android:id="@+id/btn_activity_task_stack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="activity_task_stack" />
         </LinearLayout>
     </ScrollView>
 

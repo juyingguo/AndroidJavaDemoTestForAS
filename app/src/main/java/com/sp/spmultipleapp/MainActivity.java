@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
 import com.activity.UpgradeInstallTestActivity;
+import com.activity.taskstack.TaskStackMainActivity;
 import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
@@ -240,7 +241,8 @@ public class MainActivity extends Activity {
     @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,
             R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course
             ,R.id.btn_linearlayout_test,R.id.btn_view_test,R.id.btn_install_upgrade_imitate
-            ,R.id.btn_keep_alive_service_test})
+            ,R.id.btn_keep_alive_service_test
+            ,R.id.btn_activity_task_stack})
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
             startActivity(new Intent(mContext,FileExploreActivity.class));
@@ -273,6 +275,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, UpgradeInstallTestActivity.class));
         }else if (view.getId() == R.id.btn_keep_alive_service_test){
             startActivity(new Intent(mContext, KeepAliveServiceActivity.class));
+        }else if (view.getId() == R.id.btn_activity_task_stack){
+            startActivity(new Intent(mContext, TaskStackMainActivity.class));
         }
     }
 

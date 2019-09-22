@@ -31,8 +31,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.activity.KeepAliveServiceActivity"
-            android:theme="@style/Theme.AppCompat" ></activity>
+
+
+        <!--android:taskAffinity="com.taskAffinity.b"-->
+        <activity android:name="com.activity.taskstack.TaskStackActivityB"
+            ></activity>
+        <!--<activity android:name="com.activity.taskstack.TaskStackActivityB"
+            android:process=":com.process.testB"
+            ></activity>-->
+        <activity android:name="com.activity.taskstack.TaskStackActivityA" />
+        <activity android:name="com.activity.taskstack.TaskStackMainActivity" />
+        <activity
+            android:name="com.activity.KeepAliveServiceActivity"
+            android:theme="@style/Theme.AppCompat" />
 
         <service
             android:name=".service.keepaliveservice.one.KeepAliveTest01Service"
