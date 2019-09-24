@@ -19,7 +19,7 @@ public class TaskStackActivityB extends Activity {
     public void onClickToOtherApp(View view) {
         try {
             Intent intent = new Intent();
-            intent.setClassName("com.example.username.okhttp_test","com.example.username.okhttp_test.MainActivity");
+            intent.setClassName("com.example.demotest","com.example.demotest.MainActivity");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } catch (Exception e) {
