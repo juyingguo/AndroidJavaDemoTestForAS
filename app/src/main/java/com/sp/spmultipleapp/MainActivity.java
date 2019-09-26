@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
 import com.activity.UpgradeInstallTestActivity;
+import com.activity.ViewTestActivity;
 import com.activity.taskstack.TaskStackMainActivity;
 import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
@@ -112,7 +113,7 @@ public class MainActivity extends Activity {
 
         NetDetectHelper.detectNet(this);
 
-        GroupDanceTest.testDanceFileAndVerifyTimePoint();
+//        GroupDanceTest.testDanceFileAndVerifyTimePoint();
 
 //        dealSettingIme();
 
@@ -268,7 +269,7 @@ public class MainActivity extends Activity {
         }else if (view.getId() == R.id.btn_linearlayout_test){
             startActivity(new Intent(mContext, LinearLayoutTestActivity.class));
         }else if (view.getId() == R.id.btn_view_test){
-            startActivity(new Intent(mContext, InvalidateTestActivity.class));
+            startActivity(new Intent(mContext, ViewTestActivity.class));
         }else if (view.getId() == R.id.btn_handler_test){
             startActivity(new Intent(mContext, HandlerTestActivity.class));
         }else if (view.getId() == R.id.btn_install_upgrade_imitate){

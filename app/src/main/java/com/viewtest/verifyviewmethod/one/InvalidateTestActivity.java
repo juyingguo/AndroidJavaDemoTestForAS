@@ -11,7 +11,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.sp.spmultipleapp.R;
-
+//————————————————
+//
+//简单例子解释invalidate()， requestLayout() (常用还是需要知道的)
+//    版权声明：本文为CSDN博主「王亟亟」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+//    原文链接：https://blog.csdn.net/ddwhan0123/article/details/50601782
 public class InvalidateTestActivity extends AppCompatActivity {
 
     @Override
@@ -80,7 +84,5 @@ public class InvalidateTestActivity extends AppCompatActivity {
             canvas.drawText("DemoView", 100, 240, paint);
         }
     }
-//————————————————
-//    版权声明：本文为CSDN博主「王亟亟」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-//    原文链接：https://blog.csdn.net/ddwhan0123/article/details/50601782
+
 }

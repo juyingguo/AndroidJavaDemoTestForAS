@@ -31,14 +31,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <!--android:taskAffinity="com.taskAffinity.b"-->
-        <activity android:name="com.activity.taskstack.TaskStackActivityB"
-            ></activity>
-        <!--<activity android:name="com.activity.taskstack.TaskStackActivityB"
+        <activity android:name="com.activity.MoveViewTestActivity"
+            android:theme="@style/Theme.AppCompat"></activity>
+        <activity
+            android:name="com.activity.ViewTestActivity"
+            android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
+        <activity android:name="com.activity.taskstack.TaskStackActivityB" />
+        <!--
+<activity android:name="com.activity.taskstack.TaskStackActivityB"
             android:process=":com.process.testB"
-            ></activity>-->
+            ></activity>
+        -->
         <activity android:name="com.activity.taskstack.TaskStackActivityA" />
         <activity android:name="com.activity.taskstack.TaskStackMainActivity" />
         <activity
