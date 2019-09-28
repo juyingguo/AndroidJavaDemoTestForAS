@@ -21,8 +21,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:onClick="MoveViewTestActivity"
+                android:onClick="moveViewTestActivity"
                 android:text="Move-View-Test-Activity"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="viewEventDispatchTestActivity"
+                android:text="View-Event-Dispatch-Test-Activity"
                 />
         </LinearLayout>
     </ScrollView>

@@ -21,7 +21,11 @@ public class ViewTestActivity extends AppCompatActivity {
         startActivity(new Intent(this, InvalidateTestActivity.class));
     }
 
-    public void MoveViewTestActivity(View view) {
+    public void moveViewTestActivity(View view) {
         startActivity(new Intent(this, MoveViewTestActivity.class));
+    }
+
+    public void viewEventDispatchTestActivity(View view) {
+        startActivity(new Intent(this, ViewEventDispatchTestActivity.class));
     }
 }
