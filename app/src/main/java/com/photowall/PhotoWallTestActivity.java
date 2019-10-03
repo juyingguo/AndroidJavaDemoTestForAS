@@ -1,21 +1,38 @@
 package com.photowall;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.GridView;
 
-import com.activity.MoveViewTestActivity;
-import com.activity.ViewEventDispatchTestActivity;
 import com.sp.spmultipleapp.R;
-import com.viewtest.verifyviewmethod.one.InvalidateTestActivity;
 
 public class PhotoWallTestActivity extends AppCompatActivity {
+
+    /**
+     * 用于展示照片墙的GridView
+     */
+    private GridView mPhotoWall;
+
+    /**
+     * GridView的适配器
+     */
+    private PhotoWallAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_wall_test);
-
+        mPhotoWall = (GridView) findViewById(R.id.photo_wall);
+        adapter = new PhotoWallAdapter(this, 0, Images.imageThumbUrls, mPhotoWall);
+        mPhotoWall.setAdapter(adapter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 退出程序时结束所有的下载任务
+        adapter.cancelAllTasks();
+    }
+
+
 }

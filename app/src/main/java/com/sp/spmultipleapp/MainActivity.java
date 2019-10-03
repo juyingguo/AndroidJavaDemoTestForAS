@@ -27,6 +27,7 @@ import com.activity.ViewTestActivity;
 import com.activity.taskstack.TaskStackMainActivity;
 import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
+import com.photowall.PhotoWallTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
 import com.sp.spmultipleapp.gamecourse.GameCourseActivity;
@@ -246,6 +247,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_keep_alive_service_test
             ,R.id.btn_activity_task_stack
             ,R.id.btn_activity_lrucache
+            ,R.id.btn_activity_photowall
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -283,6 +285,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, TaskStackMainActivity.class));
         }else if (view.getId() == R.id.btn_activity_lrucache){
             startActivity(new Intent(mContext, LruCacheTestActivity.class));
+        }else if (view.getId() == R.id.btn_activity_photowall){
+            startActivity(new Intent(mContext, PhotoWallTestActivity.class));
         }
     }
 

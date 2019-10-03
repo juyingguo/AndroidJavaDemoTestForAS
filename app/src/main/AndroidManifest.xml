@@ -40,6 +40,9 @@
             android:name="com.activity.LruCacheTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
+            android:name="com.photowall.PhotoWallTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
             android:name="com.activity.ViewTestActivity"
             android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
         <activity android:name="com.activity.taskstack.TaskStackActivityB" />

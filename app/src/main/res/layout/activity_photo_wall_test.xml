@@ -1,36 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.activity.ViewTestActivity">
-    <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <GridView
+        android:id="@+id/photo_wall"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="invalidateTestActivity"
-                android:text="invalidate-Test-Activity"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:onClick="moveViewTestActivity"
-                android:text="Move-View-Test-Activity"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:onClick="viewEventDispatchTestActivity"
-                android:text="View-Event-Dispatch-Test-Activity"
-                />
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:columnWidth="90dip"
+        android:stretchMode="columnWidth"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dip"
+        android:gravity="center"
+        ></GridView>
+
 </LinearLayout>
