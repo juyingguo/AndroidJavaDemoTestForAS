@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
+import com.activity.LruCacheTestActivity;
 import com.activity.UpgradeInstallTestActivity;
 import com.activity.ViewTestActivity;
 import com.activity.taskstack.TaskStackMainActivity;
@@ -243,7 +244,9 @@ public class MainActivity extends Activity {
             R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course
             ,R.id.btn_linearlayout_test,R.id.btn_view_test,R.id.btn_install_upgrade_imitate
             ,R.id.btn_keep_alive_service_test
-            ,R.id.btn_activity_task_stack})
+            ,R.id.btn_activity_task_stack
+            ,R.id.btn_activity_lrucache
+                })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
             startActivity(new Intent(mContext,FileExploreActivity.class));
@@ -278,6 +281,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, KeepAliveServiceActivity.class));
         }else if (view.getId() == R.id.btn_activity_task_stack){
             startActivity(new Intent(mContext, TaskStackMainActivity.class));
+        }else if (view.getId() == R.id.btn_activity_lrucache){
+            startActivity(new Intent(mContext, LruCacheTestActivity.class));
         }
     }
 
