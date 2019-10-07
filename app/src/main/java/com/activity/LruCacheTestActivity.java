@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.module.lrutest.ImageDownloader;
 import com.sp.spmultipleapp.R;
+import com.utils.imageutils.ImageUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +47,7 @@ public class LruCacheTestActivity extends AppCompatActivity {
     public void showBitmap(View view) {
         Bitmap bitmap = imageDownloader.getBitmapFromMemCache("bitmap");
         if (bitmap == null) {
-            bitmapUrl = "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1569923124&di=53150827bfc13883ecfcf30449c3d8e7&src=http://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/bd315c6034a85edfe555ff7748540923dc54758c.jpg";
+            bitmapUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570106276989&di=41dd2795f11855097ac59f361e8b569d&imgtype=0&src=http%3A%2F%2Fimg3.redocn.com%2F20120331%2FRedocn_2012033106470673.jpg";
             new BitmapThread(bitmapUrl).start();
         } else {
             imageView.setImageBitmap(bitmap);
@@ -74,10 +75,15 @@ public class LruCacheTestActivity extends AppCompatActivity {
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     inputStream = connection.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(inputStream);
+//                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    bitmap = ImageUtils.decodeSampledBitmapFromStream02(inputStream,200,300);
                 }
-                imageDownloader.addBitmapToMemory("bitmap", bitmap);
-                handler.obtainMessage(DOWNLOAD_IMAGE, bitmap).sendToTarget();
+                Log.i(TAG, "run，bitmap: " + bitmap);
+                if (bitmap != null){
+                    imageDownloader.addBitmapToMemory("bitmap", bitmap);
+                    handler.obtainMessage(DOWNLOAD_IMAGE, bitmap).sendToTarget();
+
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

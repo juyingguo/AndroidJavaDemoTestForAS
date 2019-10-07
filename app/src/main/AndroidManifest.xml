@@ -40,7 +40,16 @@
             android:name="com.activity.LruCacheTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
+            android:name="com.activity.UniversalImageLoaderTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name="com.activity.ImageScaleTypeTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
             android:name="com.photowall.PhotoWallTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name="com.activity.ImageTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name="com.activity.ViewTestActivity"

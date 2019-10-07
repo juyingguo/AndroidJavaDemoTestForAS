@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
 import com.activity.LruCacheTestActivity;
@@ -246,8 +247,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_linearlayout_test,R.id.btn_view_test,R.id.btn_install_upgrade_imitate
             ,R.id.btn_keep_alive_service_test
             ,R.id.btn_activity_task_stack
-            ,R.id.btn_activity_lrucache
-            ,R.id.btn_activity_photowall
+            ,R.id.btn_activity_image_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -283,10 +283,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, KeepAliveServiceActivity.class));
         }else if (view.getId() == R.id.btn_activity_task_stack){
             startActivity(new Intent(mContext, TaskStackMainActivity.class));
-        }else if (view.getId() == R.id.btn_activity_lrucache){
-            startActivity(new Intent(mContext, LruCacheTestActivity.class));
-        }else if (view.getId() == R.id.btn_activity_photowall){
-            startActivity(new Intent(mContext, PhotoWallTestActivity.class));
+        }else if (view.getId() == R.id.btn_activity_image_test){
+            startActivity(new Intent(mContext, ImageTestActivity.class));
         }
     }
 

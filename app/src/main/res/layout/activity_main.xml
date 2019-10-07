@@ -100,17 +100,11 @@
                 android:layout_marginTop="50dp"
                 android:text="activity_task_stack" />
             <Button
-                android:id="@+id/btn_activity_lrucache"
+                android:id="@+id/btn_activity_image_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="activity_lrucache" />
-            <Button
-                android:id="@+id/btn_activity_photowall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="activity_photowall" />
+                android:text="activity_image_test" />
         </LinearLayout>
     </ScrollView>
 
