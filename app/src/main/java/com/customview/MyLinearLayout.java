@@ -9,7 +9,10 @@ import android.widget.LinearLayout;
 public class MyLinearLayout extends LinearLayout
 {
 	private static final String TAG = MyLinearLayout.class.getSimpleName();
- 
+	public MyLinearLayout(Context context)
+	{
+		super(context,null);
+	}
 	public MyLinearLayout(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
