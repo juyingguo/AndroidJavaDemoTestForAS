@@ -13,7 +13,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import util.LogUtil;
+import com.utils.LogUtil;
 
 public class MoboPlayerTestActivity extends Activity {
     private String TAG = MoboPlayerTestActivity.class.getSimpleName();

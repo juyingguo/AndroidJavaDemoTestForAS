@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.sp.spmultipleapp.R;
 
-import util.DensityUtil;
+import com.utils.DensityUtil;
 
 public class LinearLayoutTestActivity extends Activity {
     String TAG = LinearLayoutTestActivity.class.getSimpleName();

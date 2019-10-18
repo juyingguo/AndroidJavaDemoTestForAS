@@ -3,7 +3,7 @@ package com.sp.spmultipleapp;
 import android.content.Context;
 import android.util.Log;
 
-import util.NetUtils;
+import com.utils.NetUtils;
 
 public class NetDetectHelper {
     private static String TAG = NetDetectHelper.class.getSimpleName();

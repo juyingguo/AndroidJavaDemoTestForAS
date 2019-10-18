@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
 
-import util.LogUtil;
+import com.utils.LogUtil;
 
 public class GroupDanceTest {
     static  String TAG = GroupDanceTest.class.getSimpleName();

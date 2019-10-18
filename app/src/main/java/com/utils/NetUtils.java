@@ -1,4 +1,4 @@
-package util;
+package com.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +19,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import com.application.CoreApplication;
 import com.sp.spmultipleapp.bean.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,30 +31,13 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class NetUtils {
     private static final String TAG = "NetUtils";
-    /**
-     * 检测网络是否连接。该方法并不能检查假连接
-     * @see #checkUnusefulNetworkByPing(Context, String[])
-     * @see #checkUnusefulNetworkByInetAddress()
-     * @return 没有打开网络false;
-     */
-    public static boolean isNetworkConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-            if (mNetworkInfo != null) {
-                return mNetworkInfo.isConnected();
-                //return mNetworkInfo.isConnectedOrConnecting();
-                //return mNetworkInfo.isAvailable();
-            }
-        }
-        return false;
-    }
 
-    /* @author suncat
-* @category 判断是否有外网连接（普通方法不能判断外网的网络是否连接，比如连接上局域网）
-* @return
-*/
+
+    /**
+     * @author suncat
+     * @category 判断是否有外网连接（普通方法不能判断外网的网络是否连接，比如连接上局域网）
+     * @return
+     */
     public static final boolean ping() {
 
         String result = null;
@@ -86,7 +70,25 @@ public class NetUtils {
         }
         return false;
     }
-
+    /**
+     * 检测网络是否连接。该方法并不能检查假连接
+     * @see #checkUnusefulNetworkByPing(Context, String[])
+     * @see #checkUnusefulNetworkByInetAddress()
+     * @return 没有打开网络false;
+     */
+    public static boolean isNetworkConnected02(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isConnected();
+                //return mNetworkInfo.isConnectedOrConnecting();
+                //return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
     /**
      *
      * @param context
@@ -110,7 +112,7 @@ public class NetUtils {
      * 检测网络是否连接
      * @return
      */
-    public static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null) {
@@ -126,7 +128,20 @@ public class NetUtils {
         }
         return false;
     }
-
+    /**
+     * 是否有网络
+     * @return
+     */
+    public static boolean isNetWorkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) CoreApplication.getInstance()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetInfo == null || !activeNetInfo.isAvailable()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     /**
      * 判断WIFI网络是否可用，已经链接成功了
      */

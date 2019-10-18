@@ -1,8 +1,6 @@
 package com.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +11,7 @@ import android.widget.ImageView;
 
 import com.module.lrutest.ImageDownloader;
 import com.sp.spmultipleapp.R;
-import com.utils.imageutils.ImageUtils;
+import com.utils.ImageUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

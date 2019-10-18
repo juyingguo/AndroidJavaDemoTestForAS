@@ -18,7 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.sp.spmultipleapp.R;
-import com.utils.imageutils.ImageUtils;
+import com.utils.ImageUtils;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

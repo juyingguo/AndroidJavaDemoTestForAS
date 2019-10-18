@@ -11,34 +11,25 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.activity.CameraTestActivity;
 import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
-import com.activity.LruCacheTestActivity;
 import com.activity.UpgradeInstallTestActivity;
 import com.activity.ViewTestActivity;
+import com.activity.nettest.NetTestActivity;
 import com.activity.taskstack.TaskStackMainActivity;
-import com.groupdance.GroupDanceTest;
 import com.handler.HandlerTestActivity;
-import com.photowall.PhotoWallTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
 import com.sp.spmultipleapp.gamecourse.GameCourseActivity;
-import com.sp.spmultipleapp.gamecourse.GameCoursePrimaryClassActivity;
-import com.sp.spmultipleapp.service.MyIntentService;
-import com.sp.spmultipleapp.service.SdcardReadWriteDealService;
-import com.sp.spmultipleapp.service.TestBackgroundService;
 import com.sp.spmultipleapp.service.TestNewBuildService;
-import com.sp.spmultipleapp.service.TestServiceFromActivity;
-import com.viewtest.verifyviewmethod.one.InvalidateTestActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,9 +49,9 @@ import java.util.regex.PatternSyntaxException;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import util.DevicePath;
-import util.FileUtils;
-import util.ThreadUtils;
+import com.utils.DevicePath;
+import com.utils.FileUtils;
+import com.utils.ThreadUtils;
 
 public class MainActivity extends Activity {
 
@@ -248,6 +239,8 @@ public class MainActivity extends Activity {
             ,R.id.btn_keep_alive_service_test
             ,R.id.btn_activity_task_stack
             ,R.id.btn_activity_image_test
+            ,R.id.btn_activity_net_test
+            ,R.id.btn_activity_camera_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -285,6 +278,10 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, TaskStackMainActivity.class));
         }else if (view.getId() == R.id.btn_activity_image_test){
             startActivity(new Intent(mContext, ImageTestActivity.class));
+        }else if (view.getId() == R.id.btn_activity_net_test){
+            startActivity(new Intent(mContext, NetTestActivity.class));
+        }else if (view.getId() == R.id.btn_activity_camera_test){
+            startActivity(new Intent(mContext, CameraTestActivity.class));
         }
     }
 

@@ -4,7 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import util.LogUtil;
+import com.utils.LogUtil;
 
 public class KeepAliveTest01Service extends Service {
 

@@ -1,4 +1,18 @@
-package util;
+package com.utils;
+
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -15,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -1101,5 +1117,352 @@ public class FileUtils {
         int lastSep = filePath.lastIndexOf(File.separator);
         if (lastPoi == -1 || lastSep >= lastPoi) return "";
         return filePath.substring(lastPoi + 1);
+    }
+
+    /**
+     * 是否为图片
+     * @param filePath 文件路径
+     * @return true 图片
+     */
+    public static boolean isImage(String filePath){
+        if (filePath != null){
+            String temp = filePath.toLowerCase();
+            return temp.endsWith(".jpg") || temp.endsWith(".jpeg") ||temp.endsWith(".png")|| temp.endsWith(".gif")|| temp.endsWith(".bmp");
+        }
+        return false;
+    };
+    /**
+     * 是否为音视频文件
+     * @param filePath 文件路径或文件名均可
+     * @return true is audio or video
+     */
+    public static boolean isAudioOrVideo(String filePath){
+        if (filePath != null){
+            return checkSuffix(filePath,new String[]{".mp3", ".aac", ".amr", ".wav", ".wmv", ".avi", ".mp4", ".rmvb"});
+        }
+        return false;
+    };
+    /**
+     * 是否为音频文件
+     * @param filePath 文件路径或文件名均可
+     * @return true is audio
+     */
+    public static boolean isAudio(String filePath){
+        if (filePath != null){
+            return checkSuffix(filePath,new String[]{".mp3", ".aac", ".amr", ".wav"});
+        }
+        return false;
+    };
+    /**
+     * 是否为视频文件
+     * @param filePath 文件路径或文件名均可
+     * @return true is audio or video
+     */
+    public static boolean isVideo(String filePath){
+        if (filePath != null){
+            return checkSuffix(filePath,new String[]{".wmv", ".avi", ".mp4", ".rmvb"});
+        }
+        return false;
+    };
+    /**
+     * 是否为文档类型
+     * @param filePath 文件路径或文件名均可
+     * @return true is document
+     */
+    public static boolean isDocument(String filePath){
+        if (filePath != null){
+            return checkSuffix(filePath, new String[]{".doc", ".docx", ".dot", ".xls", ".xlsx", ".pdf", ".ppt", ".pptx", ".txt"});
+        }
+        return false;
+    };
+    public static boolean checkSuffix(String fileName,
+                                      String[] fileSuffix) {
+        for (String suffix : fileSuffix) {
+            if (fileName != null) {
+                if (fileName.toLowerCase().endsWith(suffix)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    /**
+     * 获取文件路径
+     * 4.4 以下系统调用方法
+     * @param context Context
+     * @param contentUri Uri
+     * @return path String
+     * https://www.cnblogs.com/panhouye/p/6751710.html
+     */
+    public static String getRealPathFromURI(Context context, Uri contentUri) {
+        String res = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+        if(null!=cursor&&cursor.moveToFirst()){;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+            cursor.close();
+        }
+        return res;
+    }
+    /**
+     * 获取文件路径;
+     * 专为Android4.4设计的从Uri获取文件绝对路径，以前的方法已不好使
+     * https://www.cnblogs.com/panhouye/p/6751710.html
+     */
+    @SuppressLint("NewApi")
+    public static String getPath(final Context context, final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[]{split[1]};
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null){
+                cursor.close();
+            }
+        }
+        return null;
+    }
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+    public static String getRealFilePath(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null){
+            data = uri.getPath();
+        }else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+    public static String getFileMD5(File file) {
+        if (!file.isFile()) {
+            return null;
+        }
+        MessageDigest digest = null;
+        FileInputStream in = null;
+        byte buffer[] = new byte[1024];
+        int len;
+        try {
+            digest = MessageDigest.getInstance("MD5");
+            in = new FileInputStream(file);
+            while ((len = in.read(buffer, 0, 1024)) != -1) {
+                digest.update(buffer, 0, len);
+            }
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        BigInteger bigInt = new BigInteger(1, digest.digest());
+        return bigInt.toString(16);
+    }
+    /**
+     * des:打开文件,适配7.0版本
+     */
+    public static void openFile(Context context,File file) {
+        if (context == null) return;
+        if (file == null || !file.isFile() ||  !file.exists()){
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if (isAudioOrVideo(file.getAbsolutePath())){//音视频时，需另外设置参数
+            intent.putExtra("oneshot", 0);
+            intent.putExtra("configchange", 0);
+        }
+        String MIMEType = FileMIMEUtils.getMIMEType(file);
+        Uri uri=null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider",file);
+        }else {
+            uri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(uri,MIMEType);
+        if(intent.resolveActivity(context.getPackageManager()) != null){
+            context.startActivity(intent);
+        }else {
+            Toast.makeText(context,"请安装对应文件查看器",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    /**
+     * 从输入流中解析文件长度
+     * @param inputStream InputStream
+     * @return fileLength
+     * @throws IOException IOException
+     */
+    public static  long parseFileLength(InputStream inputStream) throws IOException{
+        byte tempBuf[]= new byte[1];
+        int n;
+        byte[] assumeFileLengthMaxBuffer = new byte[16];//先假定文件字节长度，实际应小于16个字节
+        int actualFileLength = -1;
+        boolean nameLengthReadEnd = false;
+        for (int i =0;i<assumeFileLengthMaxBuffer.length ;i++){
+            n = inputStream.read(tempBuf);
+            if (n == -1){
+                return -1;
+            }
+            if (tempBuf[0] == "\n".getBytes()[0] /*&&  !nameLengthReadEnd*/){
+                nameLengthReadEnd = true;
+                actualFileLength = i;
+            }
+            if (!nameLengthReadEnd){
+                assumeFileLengthMaxBuffer[i] = tempBuf[0];
+            }
+            if (nameLengthReadEnd){
+                break;
+            }
+        }
+        byte[] actualFileLengthBuffer = new byte[actualFileLength];//构建实际文件长度字节数组
+        System.arraycopy(assumeFileLengthMaxBuffer,0,actualFileLengthBuffer,0,actualFileLength);
+
+        long fileLength = ByteUtil.getLong(actualFileLengthBuffer);
+        return fileLength;
+    }
+
+    /**
+     * 从输入流中解析文件名
+     * @param inputStream  InputStream
+     * @return  fileName
+     * @throws IOException IOException
+     */
+    public static String parseFileName(InputStream inputStream) throws IOException {
+        //如果客户端发送的文件名小于定义的文件名字节长度(不足长度，字节值补0)，将所有字节直接转化为UTF-8字符串，无法根据该字符串创建文件
+        byte[] assumeFileNameMaxBuffer = new byte[256];//先假定文件名字节长度，实际应小于256个字节
+        int actualFileNameLength = -1;
+        byte tempBuf[]= new byte[1];
+        int n;
+        boolean nameReadEnd = false;
+        boolean nameLengthReadEnd = false;
+        for (int i =0;i<assumeFileNameMaxBuffer.length ;i++){
+            n = inputStream.read(tempBuf);
+            if (n == -1){
+                return "";
+            }
+            if (tempBuf[0] == "\n".getBytes()[0] /*&&  !nameReadEnd*/){
+                nameReadEnd = true;
+                actualFileNameLength = i;
+            }
+            if (!nameReadEnd){
+                assumeFileNameMaxBuffer[i] = tempBuf[0];
+            }
+            if (nameReadEnd){
+                break;
+            }
+        }
+        byte[] actualFileNameBuffer = new byte[actualFileNameLength];//构建实际文件名字节数组
+        System.arraycopy(assumeFileNameMaxBuffer,0,actualFileNameBuffer,0,actualFileNameLength);
+        final String fileName = new String(actualFileNameBuffer);
+        return fileName;
     }
 }

@@ -5,9 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.utils.NetUtils;
 
 /**
  * Created by 123 on 2018/4/8.
@@ -24,6 +28,10 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d(TAG,"onReceive>>action:" + action);
         if (TextUtils.equals(Intent.ACTION_BOOT_COMPLETED,action)){
             showDialog();
+        }else if (TextUtils.equals(ConnectivityManager.CONNECTIVITY_ACTION,action)){
+            boolean networkAvailable = NetUtils.isNetworkConnected(context);
+            Log.d(TAG,"onReceive>>networkAvailable:" + networkAvailable);
+            Toast.makeText(context,"网络情况：" + networkAvailable,Toast.LENGTH_LONG).show();
         }
 
     }

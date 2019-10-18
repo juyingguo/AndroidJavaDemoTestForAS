@@ -1,4 +1,4 @@
-package com.utils.imageutils;
+package com.utils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
