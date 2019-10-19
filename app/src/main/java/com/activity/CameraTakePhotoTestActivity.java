@@ -33,7 +33,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
+/**
+ * 问题1：小米9，横屏拍照后没有照片文件。
+ */
 public class CameraTakePhotoTestActivity extends AppCompatActivity {
     private static final String TAG = "CameraTakePhotoTestActivity";
     Unbinder butterKnifeBind = null;
@@ -198,19 +208,42 @@ public class CameraTakePhotoTestActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CAMERA_CAPTURE && resultCode == RESULT_OK) {
             LogUtil.i(TAG, "onActivityResult,path:" + path);
-            int degree = PictureUtil.readPictureDegree(path);
-            LogUtil.i(TAG, "onActivityResult,path:" + degree);
-            if (degree != 0){
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
-                LogUtil.e(TAG,"onActivityResult bitmap width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight() );
-                Bitmap rotateBitmap = BitmapUtil.rotateBitmap(degree,bitmap);
-                try {
-                    String newPath = PictureUtil.rawBitmapToFilepath(rotateBitmap, path, 100);
-                    LogUtil.i(TAG, "onActivityResult,newPath:" + newPath);
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+            Disposable subscribe = Observable.create(new ObservableOnSubscribe<String>() {
+                @Override
+                public void subscribe(ObservableEmitter<String> emitter) {
+                    int degree = PictureUtil.readPictureDegree(path);
+                    String newPath2 = path;
+                    LogUtil.i(TAG, "onActivityResult,path:" + degree);
+                    if (degree != 0) {
+                        try {
+                            Bitmap bitmap = BitmapFactory.decodeFile(path);
+                            LogUtil.e(TAG, "onActivityResult bitmap width = " + bitmap.getWidth() + " height = " + bitmap.getHeight());
+                            Bitmap rotateBitmap = BitmapUtil.rotateBitmap(degree, bitmap);
+                            String newPath = PictureUtil.rawBitmapToFilepath(rotateBitmap, path, 100);
+                            LogUtil.i(TAG, "onActivityResult,newPath:" + newPath);
+
+                                    /*Bitmap bitmap2 = BitmapFactory.decodeFile(newPath);
+                                    String newPath2 = PictureUtil.rawBitmapToFilepath(rotateBitmap, newPath, 60);//再次质量压缩
+                                    LogUtil.i(TAG, "onActivityResult,newPath:" + newPath2);*/
+                            newPath2 = PictureUtil.pictureScaleAndQualityToFilepath(newPath, 2, 100);//再次质量压缩
+                            LogUtil.i(TAG, "onActivityResult,newPath2:" + newPath2);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    emitter.onNext(newPath2);
                 }
-            }
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<String>() {
+                        @Override
+                        public void accept(String filePath) throws Exception {
+                            LogUtil.d(TAG, ">>accept()>>filePath:" + filePath);
+                        }
+                    });
+            subscribe.dispose();
+
         }else{
         }
     }

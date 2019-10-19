@@ -289,6 +289,58 @@ public class PictureUtil {
         return sdPath + File.separator + imgName;//返回图片路径
     }
     /**
+     * 尺寸及质量压缩
+     *
+     * @param filePath String
+     * @param sampleSize int
+     * @param quality  Hint to the compressor, 0-100
+     * @return bitmapToPath
+     * @throws IOException IOException
+     */
+    public static String pictureScaleAndQualityToFilepath(String filePath, int sampleSize, int quality) throws IOException {
+        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath,filePath:" +filePath + ",quality:" + quality);
+        if (!FileUtils.isFileExists(filePath)){
+            throw new IllegalArgumentException("filePath not exists");
+        }
+        final String appendFileName = "_deal";
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath,options);
+        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath  bitmap width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight());
+        options.inSampleSize = sampleSize;
+        options.inJustDecodeBounds = false;
+        bitmap = BitmapFactory.decodeFile(filePath,options);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);// TODO: 2019/10/18 格式对实际图片的影响,JPEG, 使用PNG格式保存后的图片比较大
+        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath compressImage bitmapToPath width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight() + " length = "+baos.toByteArray().length);
+
+        String imgName = FileUtils.getFileNameNoExtension(filePath) + appendFileName + "."  + FileUtils.getFileExtension(filePath) ;
+        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath ，imgName:"+ imgName);
+        //根据源文件，获取父目录，新生成的文件也在放在同样目录下。
+        File rawFile = new File(filePath);
+        File baseDir = rawFile.getParentFile();
+        if (!baseDir.exists()){
+            baseDir.mkdirs();
+        }
+        String sdPath = baseDir.getPath();
+        File parent = new File(sdPath);
+        if (!parent.exists()) {
+            parent.mkdirs();
+        }
+        File newFile = new File(parent, imgName);
+        newFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(baos.toByteArray());
+        fos.flush();
+        fos.close();
+        baos.close();
+        if (!bitmap.isRecycled()){
+            bitmap.recycle();
+        }
+        return sdPath + File.separator + imgName;//返回图片路径
+    }
+    /**
      * @param path
      * @return
      */
@@ -439,6 +491,10 @@ public class PictureUtil {
 //        IbotnApplication.getInstance().getBaseContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file)));
     }
 
+    /*————————————————
+        版权声明：本文为CSDN博主「陆游i」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+        原文链接：https://blog.csdn.net/ls15256928597/article/details/78741757*/
+    ///////////////////////////
     /**
      * 读取图片属性：旋转的角度
      *
@@ -466,8 +522,5 @@ public class PictureUtil {
         }
         return degree;
     }
-    /*————————————————
-        版权声明：本文为CSDN博主「陆游i」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-        原文链接：https://blog.csdn.net/ls15256928597/article/details/78741757*/
 }
 
