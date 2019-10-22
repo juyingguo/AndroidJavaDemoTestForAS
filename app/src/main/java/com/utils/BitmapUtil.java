@@ -1,8 +1,12 @@
 package com.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Date:2019/10/18,13:54
@@ -30,5 +34,43 @@ public class BitmapUtil {
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizedBitmap;
+    }
+    public static void recycleBitmap(Bitmap bitmap) {
+        if (null != bitmap && !bitmap.isRecycled()){
+            bitmap.recycle();
+        }
+    }
+    public static double bitmapSize(String imagePath) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = 1;
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath,options);
+        LogUtil.e(TAG,"bitmapSize  bitmap width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        return baos.size()/1024F;
+    }
+    public static double bitmapSize(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        return baos.size()/1024F;
+    }
+
+    public static double bitmapMemorySize(Bitmap bitmap) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return bitmap.getByteCount()/1024F;
+        }
+        // Pre HC-MR1
+        return bitmap.getRowBytes() * bitmap.getHeight() / 1024F;
+    }
+    public static double bitmapSize03(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        return baos.toByteArray().length/1024F/1024F;
+    }
+    public static double bitmapSize02(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        return baos.size()/1024F/1024F;
     }
 }

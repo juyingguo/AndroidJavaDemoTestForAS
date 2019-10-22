@@ -13,4 +13,20 @@
         android:textStyle="normal"
         android:text="take_photo"
         />
+    <Button
+        android:id="@+id/button_only_compress_quality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="normal"
+        android:text="picture_only_compress_quality"
+        />
+    <Button
+        android:id="@+id/button_only_scale_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="normal"
+        android:text="only_scale_image"
+        />
 </LinearLayout>

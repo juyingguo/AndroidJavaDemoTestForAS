@@ -67,7 +67,7 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name="com.activity.CameraTakePhotoTestActivity"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name="com.activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />

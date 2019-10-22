@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -1465,4 +1466,35 @@ public class FileUtils {
         final String fileName = new String(actualFileNameBuffer);
         return fileName;
     }
+    /**
+     * 获取指定文件大小
+     * @param file File
+     * @return long
+     */
+    public static long getFileSize(File file) {
+        long size = 0;
+        if (isFileExists(file)) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+                size = fis.available();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("获取文件大小", "文件不存在!");
+        }
+        return size;
+    }
+    /**
+     * 获取指定文件大小 　　
+     * @param filePath String
+     * @return long
+     */
+    public static long getFileSize(String filePath) {
+        return getFileSize(getFileByPath(filePath)) ;
+    }
+
 }

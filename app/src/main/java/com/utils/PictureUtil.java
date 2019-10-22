@@ -28,6 +28,10 @@ public class PictureUtil {
 
     //图片质量比例
     private static final int IMAGE_COMPRESSION = 50;
+    /**
+     * kb
+     */
+    public static final float MIN_COMPRESS_PICTURE_FILE_SIZE = (float) (10.5*1024F);
 
     /**
      * 1.质量压缩
@@ -297,8 +301,8 @@ public class PictureUtil {
      * @return bitmapToPath
      * @throws IOException IOException
      */
-    public static String pictureScaleAndQualityToFilepath(String filePath, int sampleSize, int quality) throws IOException {
-        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath,filePath:" +filePath + ",quality:" + quality);
+    public static String pictureScaleAndQualityCompressToFilepath(String filePath, int sampleSize, int quality) throws IOException {
+        LogUtil.e(TAG,"pictureScaleAndQualityCompressToFilepath,filePath:" +filePath + ",quality:" + quality);
         if (!FileUtils.isFileExists(filePath)){
             throw new IllegalArgumentException("filePath not exists");
         }
@@ -306,17 +310,17 @@ public class PictureUtil {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeFile(filePath,options);
-        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath  bitmap width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight());
+        LogUtil.e(TAG,"pictureScaleAndQualityCompressToFilepath  bitmap width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight());
         options.inSampleSize = sampleSize;
         options.inJustDecodeBounds = false;
         bitmap = BitmapFactory.decodeFile(filePath,options);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);// TODO: 2019/10/18 格式对实际图片的影响,JPEG, 使用PNG格式保存后的图片比较大
-        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath compressImage bitmapToPath width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight() + " length = "+baos.toByteArray().length);
+        LogUtil.e(TAG,"pictureScaleAndQualityCompressToFilepath compressImage bitmapToPath width = "+ bitmap.getWidth() + " height = "+ bitmap.getHeight() + " length = "+baos.toByteArray().length/1024F);
 
         String imgName = FileUtils.getFileNameNoExtension(filePath) + appendFileName + "."  + FileUtils.getFileExtension(filePath) ;
-        LogUtil.e(TAG,"pictureScaleAndQualityToFilepath ，imgName:"+ imgName);
+        LogUtil.e(TAG,"pictureScaleAndQualityCompressToFilepath ，imgName:"+ imgName);
         //根据源文件，获取父目录，新生成的文件也在放在同样目录下。
         File rawFile = new File(filePath);
         File baseDir = rawFile.getParentFile();
