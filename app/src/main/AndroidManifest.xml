@@ -63,7 +63,10 @@
             android:name="com.activity.ImageTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.CameraTestActivity"
+            android:name="com.activity.CameraPictureVideoTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name="com.activity.PictureScaleCompressTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name="com.activity.CameraTakePhotoTestActivity"

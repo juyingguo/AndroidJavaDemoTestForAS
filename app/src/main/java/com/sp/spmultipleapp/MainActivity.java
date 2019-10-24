@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.activity.CameraTestActivity;
+import com.activity.CameraPictureVideoTestActivity;
 import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.LinearLayoutTestActivity;
@@ -281,7 +281,7 @@ public class MainActivity extends Activity {
         }else if (view.getId() == R.id.btn_activity_net_test){
             startActivity(new Intent(mContext, NetTestActivity.class));
         }else if (view.getId() == R.id.btn_activity_camera_test){
-            startActivity(new Intent(mContext, CameraTestActivity.class));
+            startActivity(new Intent(mContext, CameraPictureVideoTestActivity.class));
         }
     }
 
