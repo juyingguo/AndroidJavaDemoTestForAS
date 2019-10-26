@@ -117,7 +117,7 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
         /**
          * #01.
          * PictureUtil.pictureScaleAndQualityCompressToFilepath(newPath, 1, 100);
-         * fileSize:4408 ; 3136*4224
+         * fileSize:4408k ; 3136*4224
          * 2019-10-22 11:09:59.736 15021-15126/com.sp.spmultipleapp I/CameraTakePhotoTestActivity: subscribe,path:/storage/emulated/0/take_photo/compress/big_img_test.jpg,bitmapSize:5704.4697265625
          * 2019-10-22 11:09:59.736 15021-15126/com.sp.spmultipleapp I/CameraTakePhotoTestActivity: subscribe,fileSize:4408
          *
@@ -151,6 +151,12 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
          *  2019-10-22 15:55:48.147 7743-7792/com.sp.spmultipleapp I/CameraTakePhotoTestActivity: subscribe,newPath2:/storage/emulated/0/take_photo/compress/big_img_test_deal.jpg,bitmapSize:1193.66015625
          * 2019-10-22 15:55:48.147 7743-7792/com.sp.spmultipleapp I/CameraTakePhotoTestActivity: subscribe,fileSize:713
          *
+         * #05 PictureUtil.pictureScaleAndQualityCompressToFilepath(newPath, 2, 90);
+         *
+         * 2019-10-25 10:39:02.014 20575-20627/com.sp.spmultipleapp E/PictureUtil: pictureScaleAndQualityCompressToFilepath compressImage bitmapToPath width = 1568 height = 2112 length = 433.4336
+         *
+         * 2019-10-25 10:39:02.244 20575-20627/com.sp.spmultipleapp I/PictureScaleCompressTestActivity: subscribe,newPath2:/storage/emulated/0/take_photo/compress/big_img_test_deal.jpg,bitmapSize:932.755859375
+         * 2019-10-25 10:39:02.245 20575-20627/com.sp.spmultipleapp I/PictureScaleCompressTestActivity: subscribe,fileSize:433
          *
          */
 
@@ -198,7 +204,7 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
                         LogUtil.i(TAG, "subscribe,path:" + path + ",bitmapSize:" + bitmapSize);
                         LogUtil.i(TAG, "subscribe,fileSize:" + fileSize);
 
-                        newPath2 = PictureUtil.pictureScaleAndQualityCompressToFilepath(path, 4, 100);//再次质量压缩
+                        newPath2 = PictureUtil.pictureScaleAndQualityCompressToFilepath(path, 2, 90);//再次质量压缩
                         LogUtil.i(TAG, "subscribe,newPath2:" + newPath2);
 
                         BitmapUtil.recycleBitmap(bitmap);

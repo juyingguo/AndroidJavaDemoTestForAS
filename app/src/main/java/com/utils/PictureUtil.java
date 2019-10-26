@@ -31,7 +31,7 @@ public class PictureUtil {
     /**
      * kb
      */
-    public static final float MIN_COMPRESS_PICTURE_FILE_SIZE = (float) (10.5*1024F);
+    public static final float MIN_COMPRESS_PICTURE_FILE_SIZE = (float) (1*1024F);
 
     /**
      * 1.质量压缩
