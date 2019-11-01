@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.activity.AppDetectTestActivity;
 import com.activity.CameraPictureVideoTestActivity;
 import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
@@ -241,6 +242,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_activity_image_test
             ,R.id.btn_activity_net_test
             ,R.id.btn_activity_camera_test
+            ,R.id.btn_app_detect_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -282,6 +284,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, NetTestActivity.class));
         }else if (view.getId() == R.id.btn_activity_camera_test){
             startActivity(new Intent(mContext, CameraPictureVideoTestActivity.class));
+        }else if (view.getId() == R.id.btn_app_detect_test){
+            startActivity(new Intent(mContext, AppDetectTestActivity.class));
         }
     }
 

@@ -79,11 +79,15 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
         LogUtil.d(TAG,"pictureLubanCompressTest");
         FileUtils.createOrExistsDir(compressBasePath);
         path = compressBasePath + File.separator + "big_img_test02.jpg";
+        boolean fileExists = FileUtils.isFileExists(path);
 
+        LogUtil.d(TAG,"pictureLubanCompressTest,path:" + path + ",fileExists:" + fileExists);
+        final  String lubanTargetDir = compressBasePath + File.separator + "luban";
+        FileUtils.createOrExistsDir(lubanTargetDir);
         Luban.with(this)
                 .load(path)
-                .ignoreBy(100)
-                .setTargetDir(compressBasePath)
+                .ignoreBy(500)
+                .setTargetDir(lubanTargetDir)
                 .filter(new CompressionPredicate() {
                     @Override
                     public boolean apply(String path) {
@@ -168,6 +172,8 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
         Disposable subscribe = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) {
+                LogUtil.d(TAG, "subscribe,currentThread():" + Thread.currentThread());
+                LogUtil.d(TAG, "subscribe,currentThread().getName():" + Thread.currentThread().getName());
                 int degree = PictureUtil.readPictureDegree(path);
                 String newPath2 = path;
                 LogUtil.i(TAG, "subscribe,degree:" + degree);
@@ -225,6 +231,7 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String filePath) throws Exception {
+                        LogUtil.d(TAG, "accept,currentThread():" + Thread.currentThread());
                         LogUtil.d(TAG, ">>accept()>>filePath:" + filePath);
                     }
                 });

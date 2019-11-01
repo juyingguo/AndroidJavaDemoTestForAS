@@ -63,6 +63,9 @@
             android:name="com.activity.ImageTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
+            android:name="com.activity.AppDetectTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
             android:name="com.activity.CameraPictureVideoTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity

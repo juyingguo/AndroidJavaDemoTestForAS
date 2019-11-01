@@ -117,6 +117,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="activity_camera_test" />
+            <Button
+                android:id="@+id/btn_app_detect_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="app_detect_test" />
         </LinearLayout>
     </ScrollView>
 
