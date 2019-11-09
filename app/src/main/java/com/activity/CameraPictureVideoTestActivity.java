@@ -23,7 +23,6 @@ public class CameraPictureVideoTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera_test);
         mContext = this;
         butterKnifeBind = ButterKnife.bind(this);
-
     }
 
     @OnClick({

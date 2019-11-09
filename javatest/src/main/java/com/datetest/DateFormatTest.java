@@ -10,7 +10,9 @@ import java.util.Date;
 public class DateFormatTest {
     static String TAG = "DateFormatTest";
     public static void main(String[] args) {
-        formatTime(1570840772487L);
+        long time = 1572568309740042L;
+//        formatTime(1570840772487L);
+        formatTime(time);
     }
 
     private static void formatTime(Long time) {
