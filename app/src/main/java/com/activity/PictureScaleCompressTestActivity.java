@@ -17,6 +17,8 @@ import com.utils.BitmapUtil;
 import com.utils.FileUtils;
 import com.utils.LogUtil;
 import com.utils.PictureUtil;
+import com.zxy.tiny.Tiny;
+import com.zxy.tiny.callback.FileCallback;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import id.zelory.compressor.Compressor;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -63,6 +66,9 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
             R.id.btn_picture_scale
             ,R.id.btn_picture_compress
             ,R.id.btn_picture_luban_compress
+            ,R.id.btn_picture_use_compressor
+            ,R.id.btn_picture_use_compressor_with_rxjava
+            ,R.id.btn_picture_compress_use_tiny
     })
     public void clickView(View view) {
         if (view.getId() == R.id.btn_picture_scale){
@@ -72,6 +78,91 @@ public class PictureScaleCompressTestActivity extends AppCompatActivity {
             pictureQualityCompressTest();
         }else  if (view.getId() == R.id.btn_picture_luban_compress){
             pictureLubanCompressTest();
+        }else  if (view.getId() == R.id.btn_picture_use_compressor){
+//            pictureCompressByCompressorTest();
+            pictureCompressByCompressorCustomTest();
+        }else  if (view.getId() == R.id.btn_picture_use_compressor_with_rxjava){
+            pictureCompressByCompressorCustomWithRxjavaTest();
+        }else  if (view.getId() == R.id.btn_picture_compress_use_tiny){
+            pictureCompressByTinyTest();
+        }
+    }
+
+    private void pictureCompressByTinyTest() {
+        FileUtils.createOrExistsDir(compressBasePath);
+        path = compressBasePath + File.separator + "big_img_test02.jpg";
+        boolean fileExists = FileUtils.isFileExists(path);
+        LogUtil.d(TAG,"pictureCompressByTinyTest,path:" + path + ",fileExists:" + fileExists);
+        final  String tinyTargetDir = compressBasePath + File.separator + "tiny";
+        Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
+        options.compressDirectory = tinyTargetDir;
+        options.size = 2048;
+        Tiny.getInstance().source(path)
+                .asFile().withOptions(options)
+                .compress(new FileCallback() {
+                    @Override
+                    public void callback(boolean isSuccess, String outfile, Throwable t) {
+                        LogUtil.d(TAG,"Tiny,callback,isSuccess:" + isSuccess + ",outfile:" + outfile + ",Throwable:" + t);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void pictureCompressByCompressorCustomWithRxjavaTest() {
+        FileUtils.createOrExistsDir(compressBasePath);
+        path = compressBasePath + File.separator + "big_img_test02.jpg";
+        boolean fileExists = FileUtils.isFileExists(path);
+        LogUtil.d(TAG,"pictureCompressByCompressorCustomWithRxjavaTest,path:" + path + ",fileExists:" + fileExists);
+
+        new Compressor(this)
+                .setMaxWidth(1024)
+                .setMaxHeight(2000)
+                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .compressToFileAsFlowable(FileUtils.getFileByPath(path))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<File>() {
+
+                    @Override
+                    public void accept(File file) throws Exception {
+                        LogUtil.d(TAG,"accept,file:" + file);
+                    }
+                });
+
+    }
+
+    private void pictureCompressByCompressorTest() {
+
+        FileUtils.createOrExistsDir(compressBasePath);
+        path = compressBasePath + File.separator + "big_img_test02.jpg";
+        boolean fileExists = FileUtils.isFileExists(path);
+        LogUtil.d(TAG,"pictureCompressByCompressorTest,path:" + path + ",fileExists:" + fileExists);
+//        final  String lubanTargetDir = compressBasePath + File.separator + "luban";
+        try {
+            File compressedfile = new Compressor(this).compressToFile(FileUtils.getFileByPath(path));
+//            2019-11-12 10:20:59.757 3456-3456/com.sp.spmultipleapp D/PictureScaleCompressTestActivity: pictureCompressByCompressorTest,file:/data/user/0/com.sp.spmultipleapp/cache/images/big_img_test02.jpg
+            LogUtil.d(TAG,"pictureCompressByCompressorTest,compressedfile:" + compressedfile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void pictureCompressByCompressorCustomTest() {
+
+        FileUtils.createOrExistsDir(compressBasePath);
+        path = compressBasePath + File.separator + "big_img_test02.jpg";
+        boolean fileExists = FileUtils.isFileExists(path);
+        LogUtil.d(TAG,"pictureCompressByCompressorCustomTest,path:" + path + ",fileExists:" + fileExists);
+//        final  String lubanTargetDir = compressBasePath + File.separator + "luban";
+        try {
+            File compressedfile = new Compressor(this)
+                    .setMaxWidth(1024)
+                    .setMaxHeight(2000)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .compressToFile(FileUtils.getFileByPath(path));
+//            2019-11-12 10:20:59.757 3456-3456/com.sp.spmultipleapp D/PictureScaleCompressTestActivity: pictureCompressByCompressorTest,file:/data/user/0/com.sp.spmultipleapp/cache/images/big_img_test02.jpg
+            LogUtil.d(TAG,"pictureCompressByCompressorCustomTest,file:" + compressedfile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

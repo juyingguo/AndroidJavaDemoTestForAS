@@ -29,6 +29,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="picture_luban_compress" />
+            <Button
+                android:id="@+id/btn_picture_use_compressor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="picture_use_compressor" />
+            <Button
+                android:id="@+id/btn_picture_use_compressor_with_rxjava"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="picture_use_compressor_with_rxjava" />
+            <Button
+                android:id="@+id/btn_picture_compress_use_tiny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="picture_compress_use_tiny" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

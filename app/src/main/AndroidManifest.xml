@@ -78,6 +78,12 @@
             android:name="com.activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
+            android:name="com.activity.RecyclerViewTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name="com.activity.RecyclerViewWithSmartRefreshLayoutTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
             android:name="com.activity.ViewTestActivity"
             android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
         <activity android:name="com.activity.taskstack.TaskStackActivityB" />
