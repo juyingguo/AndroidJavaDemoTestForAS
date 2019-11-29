@@ -8,28 +8,28 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- * @author yj9451
+ * @author jy
  * AES加密算法模式有四种：ECB、CBC、CFB、OFB
  * 要想AES加密，至少需要一个16位的密钥，如果是非ECB模式的加密，至少还得需要密钥偏移量。
  * 当前采用：加密方式AES；算法模式 CBC ；补码方式:PKCS5Padding;加密结果编码方式：十六进制(字母为小写)
  */
-public class AesCBC_base64 {
+public class AesCBCWithBase64 {
     public static final String DEFAULT_CHARSET = "UTF-8";
     private static final String ALGORITHM_AES = "AES";
     /*
     * 加密用的Key 可以用26个字母和数字组成
 	* 此处使用AES-128-CBC加密模式,key需要为16位。
 	*/
-    public static final String AES_KEY = "1234567890123456";
-    public static final String AES_IV_PARAMETER = "1234567812345678";
-    private static AesCBC_base64 instance = null;
+    public static final String AES_KEY = "DSzn0818#ibotn%^";
+    public static final String AES_IV_PARAMETER = "^%ntobi#8180nzSD";
+    private static volatile AesCBCWithBase64 instance = null;
 
-    private AesCBC_base64() {
+    private AesCBCWithBase64() {
     }
 
-    public static AesCBC_base64 getInstance() {
+    public static AesCBCWithBase64 getInstance() {
         if (instance == null){
-            instance = new AesCBC_base64();
+            instance = new AesCBCWithBase64();
         }
         return instance;
     }
@@ -40,8 +40,8 @@ public class AesCBC_base64 {
      * @param encodingFormat 编码格式
      * @param sKey 秘钥
      * @param ivParameter 偏移量
-     * @return
-     * @throws Exception
+     * @return String
+     * @throws Exception Exception
      */
     public String encrypt(String sSrc, String encodingFormat, String sKey,
                           String ivParameter) throws Exception {
@@ -56,13 +56,13 @@ public class AesCBC_base64 {
     }
 
     /**
-     *
-     * @param sSrc
-     * @param encodingFormat
-     * @param sKey
-     * @param ivParameter
-     * @return
-     * @throws Exception
+     * 解密方式AES，算法模式 CBC ；补码方式:PKCS5Padding;解密结果编码方式：十六进制(字母为小写)
+     * @param sSrc 待加密内容
+     * @param encodingFormat 编码格式
+     * @param sKey 秘钥
+     * @param ivParameter 偏移量
+     * @return String
+     * @throws Exception Exception
      */
     public String decrypt(String sSrc, String encodingFormat, String sKey,
                           String ivParameter) throws Exception {
@@ -81,14 +81,13 @@ public class AesCBC_base64 {
             return null;
         }
     }
-
     public static void main(String[] args) throws Exception {
         //需要加密的字串
-        String cSrc = "123456";
+        String cSrc = "abc";
         System.out.println(cSrc);
         //加密
         long lStart = System.currentTimeMillis();
-        String enString = AesCBC_base64.getInstance().encrypt(cSrc, DEFAULT_CHARSET, AES_KEY,
+        String enString = AesCBCWithBase64.getInstance().encrypt(cSrc, DEFAULT_CHARSET, AES_KEY,
                 AES_IV_PARAMETER);
         System.out.println("加密后的字串是：" + enString);
 
@@ -96,11 +95,23 @@ public class AesCBC_base64 {
         System.out.println("加密耗时：" + lUseTime + "毫秒");
         //解密
         lStart = System.currentTimeMillis();
-        String DeString = AesCBC_base64.getInstance().decrypt(enString, DEFAULT_CHARSET, AES_KEY,
+        String DeString = AesCBCWithBase64.getInstance().decrypt("eD/LZtKTqst6YU0BqCb6hY2SnMEVaH/+ZQ4m1Xu1kO+EEGON2Q9du3wSsqEMABhB", DEFAULT_CHARSET, AES_KEY,
                 AES_IV_PARAMETER);
         System.out.println("解密后的字串是：" + DeString);
         lUseTime = System.currentTimeMillis() - lStart;
         System.out.println("解密耗时：" + lUseTime + "毫秒");
     }
+
+    /**
+     * abc
+     * 加密后的字串是：Rqpop0x8J64rHCwosP2tgg==
+     *
+     * 加密耗时：139毫秒
+     * 解密后的字串是：abc
+     * 解密耗时：2毫秒
+     *
+     * 使用在线aes加密工具：http://tool.chacuo.net/cryptaes
+     * Rqpop0x8J64rHCwosP2tgg==
+     */
 
 }
