@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -65,6 +66,14 @@ public class TestActivity extends Activity implements OnClickListener,
         mButton1.setOnClickListener(this);
         mButton2 = (TextView) findViewById(R.id.button2);
         mButton2.setOnLongClickListener(this);
+        mButton2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+//                Log.d(TAG, "mButton2,onTouch reurn true");
+//                return true;
+            }
+        });
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
