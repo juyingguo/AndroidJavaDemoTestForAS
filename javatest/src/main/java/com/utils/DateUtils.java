@@ -130,8 +130,8 @@ public class DateUtils {
 
     /**
      * 计算两个日期之间相差的天数
-     * @param smallDate 较小的时间
-     * @param bigDate  较大的时间
+     * @param smallDate 较小的时间,日期格式为"yyyyMMdd"
+     * @param bigDate  较大的时间,日期格式为"yyyyMMdd"
      * @return 相差天数
      */
     public static int daysBetween(String smallDate,String bigDate){
@@ -152,7 +152,7 @@ public class DateUtils {
         return Integer.parseInt(String.valueOf(betweenDays));
     }
     /**
-     *
+     * 该方式计算完全有误。
      * @param date1 <String>
      * @param date2 <String>
      * @return int
@@ -247,8 +247,8 @@ public class DateUtils {
     /**
      * 计算2个日期之间相差的  相差多少年月日
      * 比如：2011-02-02 到  2017-03-02 相差 6年，1个月，0天
-     * @param dateStr1
-     * @param dateStr2
+     * @param dateStr1 日期格式为"yyyyMMdd"
+     * @param dateStr2 日期格式为"yyyyMMdd"
      * @return DayCompare DayCompare
      */
     public static DayCompare dayComparePrecise2(String dateStr1,String dateStr2){
@@ -306,6 +306,12 @@ public class DateUtils {
         }
 
         System.out.println(formatDate("20191010",4));
+
+        System.out.println("*******************");
+        Date date2 = new Date();
+        long time = date2.getTime();
+        long timeInMillis = Calendar.getInstance().getTimeInMillis();
+        System.out.println("time:" + time + ",timeInMillis:" + timeInMillis);
     }
 
 }
