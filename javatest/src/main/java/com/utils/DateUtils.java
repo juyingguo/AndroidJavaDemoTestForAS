@@ -23,6 +23,7 @@ public class DateUtils {
      * @return
      */
     public static String formatDate(Date date,int formatType){
+        Date date1 = new Date();
         SimpleDateFormat dateFormat = null;
         if (formatType == 1)
         {
@@ -307,11 +308,18 @@ public class DateUtils {
 
         System.out.println(formatDate("20191010",4));
 
-        System.out.println("*******************");
+        System.out.println("*********1**********");
         Date date2 = new Date();
         long time = date2.getTime();
         long timeInMillis = Calendar.getInstance().getTimeInMillis();
         System.out.println("time:" + time + ",timeInMillis:" + timeInMillis);
+
+        System.out.println("*********2**********");
+
+        System.out.println("time,1576806637926L:" + formatDate(new Date(1576806637926L),1));
+        System.out.println("time,553640294L:" + formatDate(new Date(553640294L),1));
+        System.out.println("time,558608098:" + formatDate(new Date(558608098),1));
+
     }
 
 }
