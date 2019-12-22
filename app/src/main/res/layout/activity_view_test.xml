@@ -31,6 +31,13 @@
                 android:onClick="viewEventDispatchTestActivity"
                 android:text="View-Event-Dispatch-Test-Activity"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="recyclerViewTest"
+                android:text="recyclerView-Test"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -8,7 +8,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import util.NetUtils;
+import com.utils.NetUtils;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in

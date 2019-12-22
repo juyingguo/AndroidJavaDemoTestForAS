@@ -5,6 +5,7 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Binder;
@@ -18,9 +19,18 @@ import com.sp.spmultipleapp.service.TestService;
 public class CoreApplication extends Application {
     String TAG = CoreApplication.class.getSimpleName();
 
+    private static Context mContext;
+    public static Context getInstance() {
+        return mContext;
+    }
+
 
     @Override
     public void onCreate() {
+        super.onCreate();
+
+        mContext = getApplicationContext();
+
         Log.d(TAG,"onCreate()");
 //        Intent intent = new Intent(this, SdcardReadWriteDealService.class);
 //        bindService(intent,connect, Service.BIND_AUTO_CREATE);

@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.sp.spmultipleapp.R;
@@ -17,8 +15,8 @@ import java.io.File;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import util.FileUtils;
-import util.LogUtil;
+
+import com.utils.LogUtil;
 
 public class UpgradeInstallTestActivity extends AppCompatActivity {
     private String TAG = UpgradeInstallTestActivity.class.getSimpleName();

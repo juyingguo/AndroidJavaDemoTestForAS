@@ -28,4 +28,9 @@ public class ViewTestActivity extends AppCompatActivity {
     public void viewEventDispatchTestActivity(View view) {
         startActivity(new Intent(this, ViewEventDispatchTestActivity.class));
     }
+
+    public void recyclerViewTest(View view) {
+        startActivity(new Intent(this, RecyclerViewTestActivity.class));
+
+    }
 }

@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import util.FileUtils;
+import com.utils.FileUtils;
 
 /**
  * Created by 123 on 2018/4/19.
