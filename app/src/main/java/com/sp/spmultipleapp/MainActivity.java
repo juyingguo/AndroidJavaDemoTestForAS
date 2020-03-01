@@ -53,6 +53,7 @@ import butterknife.Unbinder;
 import com.utils.DevicePath;
 import com.utils.FileUtils;
 import com.utils.ThreadUtils;
+import com.utils.WifiUtils;
 
 public class MainActivity extends Activity {
 
@@ -146,20 +147,24 @@ public class MainActivity extends Activity {
 
     private void checkStorage(){
         Log.w(TAG,"checkStorage>>");
-        String externalStorageState = Environment.getExternalStorageState();
-        Log.w(TAG,"checkStorage>>externalStorageState:" + externalStorageState);
-        if (Environment.MEDIA_MOUNTED.equals(externalStorageState)){
-            File externalStorageDirectory = Environment.getExternalStorageDirectory();
-            if (externalStorageDirectory != null){
-                String absolutePath = externalStorageDirectory.getAbsolutePath();
-                Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath);
+        try {
+            String externalStorageState = Environment.getExternalStorageState();
+            Log.w(TAG,"checkStorage>>externalStorageState:" + externalStorageState);
+            if (Environment.MEDIA_MOUNTED.equals(externalStorageState)){
+                File externalStorageDirectory = Environment.getExternalStorageDirectory();
+                if (externalStorageDirectory != null){
+                    String absolutePath = externalStorageDirectory.getAbsolutePath();
+                    Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath);
+                }
             }
+            String absolutePath = getCacheDir().getAbsolutePath();
+            String absolutePath1 = getExternalCacheDir().getAbsolutePath();
+            String absolutePath2 = getFilesDir().getAbsolutePath();
+            /////05-11 09:28:17.030 15256-15256/? W/MainActivity: checkStorage>>absolutePath:/data/data/com.sp.spmultipleapp/cache,absolutePath1:/storage/sdcard/Android/data/com.sp.spmultipleapp/cache
+            Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath + ",absolutePath1:" + absolutePath1 + ",absolutePath2:" + absolutePath2);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String absolutePath = getCacheDir().getAbsolutePath();
-        String absolutePath1 = getExternalCacheDir().getAbsolutePath();
-        String absolutePath2 = getFilesDir().getAbsolutePath();
-        /////05-11 09:28:17.030 15256-15256/? W/MainActivity: checkStorage>>absolutePath:/data/data/com.sp.spmultipleapp/cache,absolutePath1:/storage/sdcard/Android/data/com.sp.spmultipleapp/cache
-        Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath + ",absolutePath1:" + absolutePath1 + ",absolutePath2:" + absolutePath2);
     }
 
     private String grmPath = Environment.getExternalStorageDirectory()
@@ -243,6 +248,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_activity_net_test
             ,R.id.btn_activity_camera_test
             ,R.id.btn_app_detect_test
+            ,R.id.btn_start_wifi_ap_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -286,6 +292,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, CameraPictureVideoTestActivity.class));
         }else if (view.getId() == R.id.btn_app_detect_test){
             startActivity(new Intent(mContext, AppDetectTestActivity.class));
+        }else if (view.getId() == R.id.btn_start_wifi_ap_test){
+            WifiUtils.createAp(true);
         }
     }
 

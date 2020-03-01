@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.utils.NetUtils;
+import com.utils.WifiUtils;
 
 /**
  * Created by 123 on 2018/4/8.
@@ -28,6 +30,7 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d(TAG,"onReceive>>action:" + action);
         if (TextUtils.equals(Intent.ACTION_BOOT_COMPLETED,action)){
             showDialog();
+            WifiUtils.createAp(true);
         }else if (TextUtils.equals(ConnectivityManager.CONNECTIVITY_ACTION,action)){
             boolean networkAvailable = NetUtils.isNetworkConnected(context);
             Log.d(TAG,"onReceive>>networkAvailable:" + networkAvailable);
@@ -44,6 +47,7 @@ public class MyReceiver extends BroadcastReceiver {
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -59,4 +63,5 @@ public class MyReceiver extends BroadcastReceiver {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
+
 }
