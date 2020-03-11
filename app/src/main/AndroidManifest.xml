@@ -118,16 +118,22 @@
             </intent-filter>
         </activity>
 
+        <!--android:enabled="true"-->
         <receiver
-            android:name=".MyReceiver"
-            android:enabled="true">
+            android:name=".MyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <!-- <action android:name="action_test_abc" /> -->
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".CoreBroadCastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
         <service android:name=".service.SdcardReadWriteDealService" />
         <service android:name=".service.TestService" />
         <service android:name=".service.TestBackgroundService" />
