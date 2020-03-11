@@ -19,7 +19,7 @@ public class DateUtils {
     /**
      *
      * @param date Date
-     * @param formatType  if formatType is 1 ："yyyyMMddHHmmss" ;2: "MM-dd HH:mm:ss";3:"yyyyMMdd"
+     * @param formatType  if formatType is 1 ："yyyyMMddHHmmss" ;2: "MM-dd HH:mm:ss";3:"yyyyMMdd";4:yyyyMMddHHmmssSSS
      * @return
      */
     public static String formatDate(Date date,int formatType){
@@ -34,6 +34,12 @@ public class DateUtils {
         }else if (formatType == 3)
         {
             dateFormat = new SimpleDateFormat("yyyyMMdd");
+        }else if (formatType == 4)
+        {
+            dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        }else if (formatType == 5)
+        {
+            dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSSZ");
         }
         if (dateFormat == null)
         {
@@ -318,7 +324,10 @@ public class DateUtils {
 
         System.out.println("time,1576806637926L:" + formatDate(new Date(1576806637926L),1));
         System.out.println("time,553640294L:" + formatDate(new Date(553640294L),1));
-        System.out.println("time,558608098:" + formatDate(new Date(558608098),1));
+        System.out.println("time,1577237600074L:" + formatDate(new Date(1577237600074L),1));
+        System.out.println("time,15772376000740001L:" + formatDate(new Date(15772376000740001L),4));
+        System.out.println("time,new Date():" + formatDate(new Date(),4));
+        System.out.println("time,new Date():" + formatDate(new Date(),5));
 
     }
 

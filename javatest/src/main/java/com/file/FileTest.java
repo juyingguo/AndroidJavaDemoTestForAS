@@ -11,17 +11,20 @@ public class FileTest {
     private final static  String TAG = FileTest.class.getSimpleName();
     public static void main(String[] args) {
         test2();
-
+        test3();
 
     }
 
+    private static void test3() {
+    }
+
     private static void test2() {
-        File file = new File("D:\\juying\\test-file","1.wav");
+        File file = new File("D:\\juying\\test-file","102.wav");
         System.out.println(TAG + ">>file.exists():" + file.exists());
         System.out.println(TAG + ">>file.isFile():" + file.isFile());
         System.out.println(TAG + ">>file.getAbsolutePath():" + file.getAbsolutePath());
 
-        File fileMake = new File("D:\\juying\\test-file","test.txt");
+        File fileMake = new File("D:\\juying\\test-file","102.wav");
         if (!fileMake.exists()){
             try {
                 fileMake.createNewFile();
