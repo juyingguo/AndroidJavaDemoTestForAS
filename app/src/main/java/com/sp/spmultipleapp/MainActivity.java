@@ -50,6 +50,8 @@ import java.util.regex.PatternSyntaxException;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import com.sp.spmultipleapp.showbigimage.ShowBigImageTestActivity;
 import com.utils.DevicePath;
 import com.utils.FileUtils;
 import com.utils.ThreadUtils;
@@ -160,8 +162,13 @@ public class MainActivity extends Activity {
             String absolutePath = getCacheDir().getAbsolutePath();
             String absolutePath1 = getExternalCacheDir().getAbsolutePath();
             String absolutePath2 = getFilesDir().getAbsolutePath();
-            /////05-11 09:28:17.030 15256-15256/? W/MainActivity: checkStorage>>absolutePath:/data/data/com.sp.spmultipleapp/cache,absolutePath1:/storage/sdcard/Android/data/com.sp.spmultipleapp/cache
-            Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath + ",absolutePath1:" + absolutePath1 + ",absolutePath2:" + absolutePath2);
+            String absolutePath3 = getExternalFilesDir("test").getAbsolutePath();
+            //打印记录：：
+            ////2020-03-12 11:01:59.732 32558-32558/com.sp.spmultipleapp W/MainActivity: checkStorage>>absolutePath:/data/user/0/com.sp.spmultipleapp/cache,
+            // absolutePath1:/storage/emulated/0/Android/data/com.sp.spmultipleapp/cache,
+            // absolutePath2:/data/user/0/com.sp.spmultipleapp/files,
+            // absolutePath3:/storage/emulated/0/Android/data/com.sp.spmultipleapp/files/test
+            Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath + ",absolutePath1:" + absolutePath1 + ",absolutePath2:" + absolutePath2 + ",absolutePath3:" + absolutePath3);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,6 +256,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_activity_camera_test
             ,R.id.btn_app_detect_test
             ,R.id.btn_start_wifi_ap_test
+            ,R.id.btn_big_image_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -294,6 +302,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, AppDetectTestActivity.class));
         }else if (view.getId() == R.id.btn_start_wifi_ap_test){
             WifiUtils.createAp(true);
+        }else if (view.getId() == R.id.btn_big_image_test){
+            startActivity(new Intent(mContext, ShowBigImageTestActivity.class));
         }
     }
 

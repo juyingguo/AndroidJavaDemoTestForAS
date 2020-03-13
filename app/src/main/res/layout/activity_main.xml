@@ -130,6 +130,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="start_wifi_ap_test" />
+            <Button
+                android:id="@+id/btn_big_image_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="big_image_test" />
         </LinearLayout>
     </ScrollView>
 

@@ -152,6 +152,10 @@
         <activity android:name="com.testokhttp.OkhttpTestActivity" />
         <activity android:name=".gamecourse.GameCourseActivity" />
         <activity android:name=".gamecourse.GameCoursePrimaryClassActivity" />
+        <activity android:name=".showbigimage.one.LargeImageViewActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showbigimage.one.LargeImageViewWithScaleActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showbigimage.ShowBigImageTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showbigimage.one.LargeImageWithGalleryActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>
