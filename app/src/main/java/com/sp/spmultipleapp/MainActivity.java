@@ -52,6 +52,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import com.sp.spmultipleapp.showbigimage.ShowBigImageTestActivity;
+import com.sp.spmultipleapp.showimage.ShowMultiImageActivity;
 import com.utils.DevicePath;
 import com.utils.FileUtils;
 import com.utils.ThreadUtils;
@@ -257,6 +258,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_app_detect_test
             ,R.id.btn_start_wifi_ap_test
             ,R.id.btn_big_image_test
+            ,R.id.btn_show_multi_image_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -304,6 +306,8 @@ public class MainActivity extends Activity {
             WifiUtils.createAp(true);
         }else if (view.getId() == R.id.btn_big_image_test){
             startActivity(new Intent(mContext, ShowBigImageTestActivity.class));
+        }else if (view.getId() == R.id.btn_show_multi_image_test){
+            startActivity(new Intent(mContext, ShowMultiImageActivity.class));
         }
     }
 

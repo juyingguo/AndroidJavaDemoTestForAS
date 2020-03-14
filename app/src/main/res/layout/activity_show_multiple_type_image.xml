@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".showbigimage.ShowBigImageTestActivity">
+    tools:context=".showimage.ShowMultiImageActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,29 +12,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btn_large_image_view"
+                android:id="@+id/btn_show_scale_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="large_image_view_one" />
+                android:text="show_scale_image" />
             <Button
-                android:id="@+id/btn_bitmap_region_decoder"
+                android:id="@+id/btn_show_scale_image_with_photoview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="bitmap_region_decoder" />
-            <Button
-                android:id="@+id/btn_large_image_view_with_scale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="large_image_view_with_scale" />
-            <Button
-                android:id="@+id/btn_load_image_with_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="load_image_with_gallery" />
+                android:text="show_scale_image_with_photoview" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

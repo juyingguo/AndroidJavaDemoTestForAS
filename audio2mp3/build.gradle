@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 version = "1.0.4"
 android {
-    compileSdkVersion 22
-    buildToolsVersion "25.0.3"
+    compileSdkVersion COMPILE_SDK_VER
+    buildToolsVersion BUILD_TOOLS_VER
     resourcePrefix "AndroidMP3RecorderLibrary_"	//这个随便填
     defaultConfig {
         minSdkVersion 19

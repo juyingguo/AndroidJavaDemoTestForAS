@@ -153,9 +153,13 @@
         <activity android:name=".gamecourse.GameCourseActivity" />
         <activity android:name=".gamecourse.GameCoursePrimaryClassActivity" />
         <activity android:name=".showbigimage.one.LargeImageViewActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showbigimage.one.BitmapRegionDecoderTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".showbigimage.one.LargeImageViewWithScaleActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".showbigimage.ShowBigImageTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".showbigimage.one.LargeImageWithGalleryActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showimage.ShowMultiImageActivity"/>
+        <activity android:name=".showimage.ShowScaleImageActivity"/>
+        <activity android:name=".showimage.ShowScaleImageWithPhotoViewActivity"/>
     </application>
 
 </manifest>

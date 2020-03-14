@@ -7,6 +7,7 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -18,6 +19,7 @@ import java.io.InputStream;
  */
 public class LargeImageView extends View
 {
+    private String TAG = "LargeImageView";
     private BitmapRegionDecoder mDecoder;
     /**
      * 图片的宽度和高度
@@ -49,7 +51,8 @@ public class LargeImageView extends View
             BitmapFactory.decodeStream(is, null, tmpOptions);
             mImageWidth = tmpOptions.outWidth;
             mImageHeight = tmpOptions.outHeight;
-
+            Log.d(TAG,"setInputStream,mImageWidth:" + mImageWidth);
+            Log.d(TAG,"setInputStream,mImageHeight:" + mImageHeight);
             requestLayout();
             invalidate();
         } catch (IOException e)
@@ -77,19 +80,23 @@ public class LargeImageView extends View
             {
                 int moveX = (int) detector.getMoveX();
                 int moveY = (int) detector.getMoveY();
-
-                if (mImageWidth > getWidth())
+                Log.d(TAG,"onMove,moveX:" + moveX);//
+                Log.d(TAG,"onMove,moveY:" + moveY);
+                Log.d(TAG,"onMove,getWidth():" + getWidth());
+                Log.d(TAG,"onMove,getHeight():" + getHeight());
+                if (mImageWidth > getWidth() && Math.abs(moveX)>=1)//Math.abs(moveX)>=5 在执行绘制操作，防止绘制过于频繁，显示卡顿
                 {
                     mRect.offset(-moveX, 0);
                     checkWidth();
-                    invalidate();
                 }
-                if (mImageHeight > getHeight())
+                if (mImageHeight > getHeight() && Math.abs(moveY)>=1)//Math.abs(moveY)>=5 在执行绘制操作，防止绘制过于频繁，显示卡顿
                 {
                     mRect.offset(0, -moveY);
+
                     checkHeight();
-                    invalidate();
                 }
+
+                invalidate();//放到外面执行一次即可。防止多次调用卡顿
 
                 return true;
             }
@@ -100,7 +107,7 @@ public class LargeImageView extends View
     private void checkWidth()
     {
 
-
+        Log.d(TAG,"checkWidth,mRect:" + mRect);
         Rect rect = mRect;
         int imageWidth = mImageWidth;
         int imageHeight = mImageHeight;
@@ -121,7 +128,7 @@ public class LargeImageView extends View
 
     private void checkHeight()
     {
-
+        Log.d(TAG,"checkHeight,mRect:" + mRect);
         Rect rect = mRect;
         int imageWidth = mImageWidth;
         int imageHeight = mImageHeight;
@@ -156,6 +163,7 @@ public class LargeImageView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
+        Log.d(TAG,"onDraw,mRect:" + mRect);
         Bitmap bm = mDecoder.decodeRegion(mRect, options);
         canvas.drawBitmap(bm, 0, 0, null);
     }
@@ -171,10 +179,17 @@ public class LargeImageView extends View
         int imageWidth = mImageWidth;
         int imageHeight = mImageHeight;
 
+        Log.d(TAG,"onMeasure,getMeasuredWidth():" + width);
+        Log.d(TAG,"onMeasure,getMeasuredHeight():" + height);
+        Log.d(TAG,"onMeasure,imageWidth:" + imageWidth);
+        Log.d(TAG,"onMeasure,imageHeight:" + imageHeight);
+
         mRect.left = imageWidth / 2 - width / 2;
         mRect.top = imageHeight / 2 - height / 2;
         mRect.right = mRect.left + width;
         mRect.bottom = mRect.top + height;
+
+        Log.d(TAG,"onMeasure,mRect:" + mRect);
 
     }
 

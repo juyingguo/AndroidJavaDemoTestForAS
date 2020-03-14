@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.sp.spmultipleapp.R;
+import com.sp.spmultipleapp.showbigimage.one.BitmapRegionDecoderTestActivity;
 import com.sp.spmultipleapp.showbigimage.one.LargeImageViewActivity;
 import com.sp.spmultipleapp.showbigimage.one.LargeImageViewWithScaleActivity;
 import com.sp.spmultipleapp.showbigimage.one.LargeImageWithGalleryActivity;
@@ -30,12 +31,15 @@ public class ShowBigImageTestActivity extends AppCompatActivity {
 
     @OnClick({
             R.id.btn_large_image_view
+            ,R.id.btn_bitmap_region_decoder
             ,R.id.btn_large_image_view_with_scale
             ,R.id.btn_load_image_with_gallery
     })
     public void clickView(View view) {
         if (view.getId() == R.id.btn_large_image_view){
             startActivity(new Intent(mContext , LargeImageViewActivity.class));
+        }else if (view.getId() == R.id.btn_bitmap_region_decoder){
+            startActivity(new Intent(mContext , BitmapRegionDecoderTestActivity.class));
         }else if (view.getId() == R.id.btn_large_image_view_with_scale){
             startActivity(new Intent(mContext , LargeImageViewWithScaleActivity.class));
         }else if (view.getId() == R.id.btn_load_image_with_gallery){
