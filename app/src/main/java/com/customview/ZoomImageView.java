@@ -16,6 +16,16 @@ import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 
+/**
+ * ZoomImageView是一个类似photoview的图片预览控件，实现了对图片的手势放大缩小平移，
+ * 以及双击放大缩小解决和viewpager滑动冲突等功能，主要是通过GestureDetector,
+ * Matrix相关api以及对事件的ontouch处理实现的，这个代码网上能搜索到很多，
+ * 但是因为注释少所以要完全读懂有些困难，于是本人整理了一段时间，写了一个完整的注释版本，
+ * 基本每行代码都做到了讲解，大家共同学习。
+ * ————————————————
+ * 版权声明：本文为CSDN博主「tijjyire」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+ * 原文链接：https://blog.csdn.net/tijjyire/article/details/73743212
+ */
 public class ZoomImageView extends ImageView implements OnGlobalLayoutListener,
         OnScaleGestureListener, OnTouchListener {
     private boolean mOnce;
