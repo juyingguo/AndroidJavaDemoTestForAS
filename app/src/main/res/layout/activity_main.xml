@@ -142,6 +142,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="show_multi_image_test" />
+            <Button
+                android:id="@+id/btn_sensor_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="sensor_test" />
         </LinearLayout>
     </ScrollView>
 

@@ -21,6 +21,7 @@ import com.activity.AppDetectTestActivity;
 import com.activity.CameraPictureVideoTestActivity;
 import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
+import com.activity.KeepAliveTestActivity;
 import com.activity.LinearLayoutTestActivity;
 import com.activity.UpgradeInstallTestActivity;
 import com.activity.ViewTestActivity;
@@ -30,6 +31,7 @@ import com.handler.HandlerTestActivity;
 import com.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
 import com.sp.spmultipleapp.gamecourse.GameCourseActivity;
+import com.sp.spmultipleapp.sensor.SensorTestActivity;
 import com.sp.spmultipleapp.service.TestNewBuildService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,6 +53,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import com.sp.spmultipleapp.service.keepaliveservice.two.StepService;
 import com.sp.spmultipleapp.showbigimage.ShowBigImageTestActivity;
 import com.sp.spmultipleapp.showimage.ShowMultiImageActivity;
 import com.utils.DevicePath;
@@ -259,6 +262,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_start_wifi_ap_test
             ,R.id.btn_big_image_test
             ,R.id.btn_show_multi_image_test
+            ,R.id.btn_sensor_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -291,7 +295,8 @@ public class MainActivity extends Activity {
         }else if (view.getId() == R.id.btn_install_upgrade_imitate){
             startActivity(new Intent(mContext, UpgradeInstallTestActivity.class));
         }else if (view.getId() == R.id.btn_keep_alive_service_test){
-            startActivity(new Intent(mContext, KeepAliveServiceActivity.class));
+            startActivity(new Intent(mContext, KeepAliveTestActivity.class));
+
         }else if (view.getId() == R.id.btn_activity_task_stack){
             startActivity(new Intent(mContext, TaskStackMainActivity.class));
         }else if (view.getId() == R.id.btn_activity_image_test){
@@ -308,6 +313,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, ShowBigImageTestActivity.class));
         }else if (view.getId() == R.id.btn_show_multi_image_test){
             startActivity(new Intent(mContext, ShowMultiImageActivity.class));
+        }else if (view.getId() == R.id.btn_sensor_test){
+            startActivity(new Intent(mContext, SensorTestActivity.class));
         }
     }
 
@@ -583,5 +590,8 @@ public class MainActivity extends Activity {
             handlerBack.removeCallbacksAndMessages(null);
         }
 //        stopService(new Intent(this,SdcardReadWriteDealService.class) );
+
+        Log.d(TAG, "onDestroy>>to start Foreground service : StepService" );
+//        startService(new Intent(getApplicationContext(), StepService.class));
     }
 }

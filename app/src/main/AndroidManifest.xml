@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
     <application
         android:name="com.application.CoreApplication"
         android:allowBackup="true"
@@ -140,11 +140,13 @@
         <service android:name=".service.TestForegroundService" />
         <service android:name=".service.TestNewBuildService" />
         <service android:name=".service.TestServiceFromActivity" />
+        <service android:name=".service.keepaliveservice.two.GuardService" />
+        <service android:name=".service.keepaliveservice.two.DownloadService" />
+        <service android:name=".service.keepaliveservice.two.StepService" />
         <service
             android:name=".service.MyIntentService"
             android:exported="false" />
 
-        <activity android:name=".OpenOtherActivityTest" />
         <activity android:name=".FileExploreActivity" />
         <activity android:name=".TouchViewTestActivity" />
         <activity android:name=".MoboPlayerTestActivity" /> <!-- 关键代码 -->
@@ -160,6 +162,8 @@
         <activity android:name=".showimage.ShowMultiImageActivity"/>
         <activity android:name=".showimage.ShowScaleImageActivity"/>
         <activity android:name=".showimage.ShowScaleImageWithPhotoViewActivity"/>
+        <activity android:name=".sensor.SensorTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name="com.activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

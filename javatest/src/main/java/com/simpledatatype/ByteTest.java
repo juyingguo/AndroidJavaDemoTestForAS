@@ -52,4 +52,10 @@ public class ByteTest {
 
 
     }
+    private static void test4() {
+
+        System.out.println("Byte.MAX_VALUE:" + Byte.MAX_VALUE);
+
+
+    }
 } 
