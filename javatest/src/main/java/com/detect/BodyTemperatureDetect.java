@@ -50,10 +50,11 @@ public class BodyTemperatureDetect {
         System.out.println("(a + 0X69):" + (a + 0X69));// 256 + 105 = 361
 
         System.out.println("************************************");
-        byte[] byteTest = new byte[]{1};
+        byte[] byteTest = new byte[]{1,20,5,60};
         for (int i = 0;i<byteTest.length;i++) {
             System.out.println("(byteTest[" + i + "]:" + (byteTest[i]));
         }
+        printArray(byteTest);
         System.out.println("ByteUtil.byteArrToHex(byteTest):" + ByteUtil.byteArrToHex(byteTest));
         System.out.println("ByteUtil.bytesToHexString(byteTest):" + ByteUtil.bytesToHexString(byteTest));
         System.out.println("******************test02******************");
@@ -63,5 +64,12 @@ public class BodyTemperatureDetect {
         System.out.println("************************************");
 
         dealBodyTemperatureDetect(bt,7);
+    }
+    private  static void printArray(byte[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0;i<array.length;i++) {
+            sb.append(array[i]).append(" ");
+        }
+        System.out.println("printArray:" + sb.toString());
     }
 }
