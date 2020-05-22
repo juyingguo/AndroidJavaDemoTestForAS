@@ -22,6 +22,7 @@ public class StringTest {
         System.out.println(String.format("温度: %.1f",36.02));
         System.out.println(String.format("温度: %5.1f",35.555));
         System.out.println(String.format("温度: %-5.5f",35.555));
+        System.out.println(String.format("温度: %-5.5f",35.555));
 
     }
 

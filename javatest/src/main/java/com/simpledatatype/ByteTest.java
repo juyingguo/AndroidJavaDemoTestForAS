@@ -10,7 +10,9 @@ public class ByteTest {
     public static void main(String[] args) {
 //        test2();
 
-        test3();
+//        test3();
+
+        test5ForFormat();
     }
 
     private static void test2() {
@@ -55,6 +57,15 @@ public class ByteTest {
     private static void test4() {
 
         System.out.println("Byte.MAX_VALUE:" + Byte.MAX_VALUE);
+
+
+    }
+    private static void test5ForFormat() {
+        byte[] outB = new byte[]{15,1};
+        String format = String.format("0x%02x", outB[0]);
+        String format2 = String.format("0x%02x", outB[1]);
+        System.out.println("format:" + format);
+        System.out.println("format2:" + format2);
 
 
     }
