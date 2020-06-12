@@ -1,6 +1,7 @@
 package com.example.liuwangshu.moonmvpsimple.net;
 
 import android.annotation.SuppressLint;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.liuwangshu.moonmvpsimple.LoadTasksCallBack;
@@ -31,9 +32,11 @@ public class IpInfoTask implements NetTask<String> {
         return INSTANCE;
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public void execute(String ip, final LoadTasksCallBack loadTasksCallBack) {
-        RequestParams requestParams = new RequestParams();
+        Log.d(TAG,"execute,ip:" + ip);
+        final RequestParams requestParams = new RequestParams();
         requestParams.addFormDataPart("ip", ip);
         /**
          * com.example.liuwangshu.moonmvpsimple.net.IpInfoTask: execute,onFailure,errorCode:1002,msg:Data parse exception
@@ -67,37 +70,54 @@ public class IpInfoTask implements NetTask<String> {
                 loadTasksCallBack.onFailed();
             }
         });*/
-
-        HttpRequest.get(HOST, requestParams, new BaseHttpRequestCallback<String>() {
+        Log.d(TAG,"execute,call [SystemClock.sleep(3000)].");
+        new Thread(new Runnable() {
             @Override
-            public void onStart() {
-                super.onStart();
-                loadTasksCallBack.onStart();
-            }
+            public void run() {
+                SystemClock.sleep(3000);
+                HttpRequest.get(HOST, requestParams, new BaseHttpRequestCallback<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        loadTasksCallBack.onStart();
+                    }
 
-            @SuppressLint("LongLogTag")
-            @Override
-            protected void onSuccess(String s) {
-                super.onSuccess(s);
-                Log.d(TAG,"execute,onSuccess,result:" + s);
-                loadTasksCallBack.onSuccess(null);
-            }
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    protected void onSuccess(String s) {
+                        super.onSuccess(s);
+                        Log.d(TAG,"execute,onSuccess,result:" + s);
+                        Log.d(TAG,"execute,onSuccess,call [SystemClock.sleep(3000)].");
+                        SystemClock.sleep(3000);
+                        loadTasksCallBack.onSuccess(null);
+                    }
 
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                loadTasksCallBack.onFinish();
-            }
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                        loadTasksCallBack.onFinish();
+                    }
 
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onFailure(int errorCode, String msg) {
-                super.onFailure(errorCode, msg);
-                Log.d(TAG,"execute,onFailure,errorCode:" + errorCode + ",msg:" + msg);
-                loadTasksCallBack.onFailed();
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onFailure(int errorCode, String msg) {
+                        super.onFailure(errorCode, msg);
+                        Log.d(TAG,"execute,onFailure,errorCode:" + errorCode + ",msg:" + msg);
+                        loadTasksCallBack.onFailed();
+                    }
+                });
+
             }
-        });
+        }).start();
+
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public void cancelTask() {
+        Log.d(TAG,"cancelTask");
+        HttpRequest.cancel(HOST);//模拟取消请求
     }
 }
 

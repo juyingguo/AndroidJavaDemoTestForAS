@@ -88,4 +88,10 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
     public boolean isActive() {
         return isAdded();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.cancelTask();
+    }
 }

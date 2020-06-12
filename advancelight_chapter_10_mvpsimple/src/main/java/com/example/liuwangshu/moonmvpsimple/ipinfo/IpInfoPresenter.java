@@ -1,5 +1,8 @@
 package com.example.liuwangshu.moonmvpsimple.ipinfo;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import com.example.liuwangshu.moonmvpsimple.LoadTasksCallBack;
 import com.example.liuwangshu.moonmvpsimple.model.IpInfo;
 import com.example.liuwangshu.moonmvpsimple.net.NetTask;
@@ -10,6 +13,7 @@ import com.example.liuwangshu.moonmvpsimple.net.NetTask;
  */
 
 public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallBack<IpInfo> {
+    private final String TAG = "com.example.liuwangshu.moonmvpsimple.ipinfo.IpInfoPresenter";
     private NetTask netTask;
     private IpInfoContract.View addTaskView;
 
@@ -23,8 +27,17 @@ public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallB
     }
 
     @Override
+    public void cancelTask() {
+        netTask.cancelTask();
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
     public void onSuccess(IpInfo ipInfo) {
-        if(addTaskView.isActive()){
+        Log.d(TAG,"onSuccess,ipInfo:" + ipInfo);
+        boolean active = addTaskView.isActive();
+        Log.d(TAG,"onSuccess,addTaskView.isActive():" + active);
+        if(active){
             addTaskView.setIpInfo(ipInfo);
         }
     }
