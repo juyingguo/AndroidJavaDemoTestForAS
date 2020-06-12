@@ -1,1 +1,1 @@
-include ':app', ':javatest', ':demotest', ':artchapter3', ':audio2mp3'
+include ':app', ':javatest', ':demotest', ':artchapter3', ':audio2mp3', ':advancelight_chapter_10_mvpsimple'
