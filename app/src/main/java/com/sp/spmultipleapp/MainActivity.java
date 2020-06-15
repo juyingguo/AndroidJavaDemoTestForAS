@@ -23,6 +23,7 @@ import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.KeepAliveTestActivity;
 import com.activity.LinearLayoutTestActivity;
+import com.activity.ScreenOffAdminActivity;
 import com.activity.UpgradeInstallTestActivity;
 import com.activity.ViewTestActivity;
 import com.activity.nettest.NetTestActivity;
@@ -263,6 +264,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_big_image_test
             ,R.id.btn_show_multi_image_test
             ,R.id.btn_sensor_test
+            ,R.id.btn_screen_off_admin
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -315,6 +317,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, ShowMultiImageActivity.class));
         }else if (view.getId() == R.id.btn_sensor_test){
             startActivity(new Intent(mContext, SensorTestActivity.class));
+        }else if (view.getId() == R.id.btn_screen_off_admin){
+            startActivity(new Intent(mContext, ScreenOffAdminActivity.class));
         }
     }
 
