@@ -8,7 +8,8 @@ package com.simpledatatype;
 public class FloatTest {
 
     public static void main(String[] args) {
-        test2();
+//        test2();
+        test3();
 
 
     }
@@ -38,5 +39,14 @@ public class FloatTest {
         System.out.println(huanLineToBytes[0]);
 
         System.out.println(huanLineToBytes[0] == "\n".getBytes()[0]);
+    }
+    private static void test3() {
+        float i = 37.1F;
+        System.out.println(i);
+        System.out.println(i + 0.1F);
+        String format = String.format("%.1f", i + 0.1F);
+        System.out.println(format);
+        float temp = Float.parseFloat(String.format("%.1f",i+0.1F));
+        System.out.println(temp);
     }
 } 

@@ -154,6 +154,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="screen_off_admin" />
+            <Button
+                android:id="@+id/btn_wifi_cast_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="wifi_cast_display" />
+            <Button
+                android:id="@+id/btn_wifi_cast_display_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="wifi_cast_display_off" />
+            <Button
+                android:id="@+id/btn_file_module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="file_module" />
         </LinearLayout>
     </ScrollView>
 

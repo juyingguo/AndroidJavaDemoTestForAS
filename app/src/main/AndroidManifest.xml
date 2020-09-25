@@ -34,6 +34,7 @@
 
     <!-- 唤醒屏幕需要的权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <application
         android:name="com.application.CoreApplication"
         android:allowBackup="true"
@@ -99,6 +100,10 @@
         <activity
             android:name="com.activity.ViewTestActivity"
             android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
+        <activity
+            android:name="com.activity.SwitchTestActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:launchMode="singleTask"/>
         <activity android:name="com.activity.taskstack.TaskStackActivityB" />
         <!--
 <activity android:name="com.activity.taskstack.TaskStackActivityB"
@@ -193,6 +198,7 @@
         <activity android:name=".sensor.SensorTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name="com.activity.ScreenOffAdminActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name="com.activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name="com.activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

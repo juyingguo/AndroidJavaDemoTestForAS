@@ -76,7 +76,7 @@ public class ScreenOffAdminActivity extends AppCompatActivity {
      */
     public void checkScreen(View view) {
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        boolean screenOn = pm.isScreenOn();
+        boolean screenOn = pm != null && pm.isScreenOn();
         if (!screenOn) {//如果灭屏
             //相关操作
             showToast("屏幕是息屏");
@@ -90,7 +90,7 @@ public class ScreenOffAdminActivity extends AppCompatActivity {
     /**
      * @param view 亮屏
      */
-    @SuppressLint("InvalidWakeLockTag")
+    @SuppressLint({"InvalidWakeLockTag", "WakelockTimeout"})
     public void checkScreenOn(View view) {
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "tag");
         mWakeLock.acquire();

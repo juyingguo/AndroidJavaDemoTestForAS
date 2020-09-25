@@ -2,6 +2,7 @@ package com.sp.spmultipleapp;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.activity.AppDetectTestActivity;
 import com.activity.CameraPictureVideoTestActivity;
+import com.activity.FileModuleActivity;
 import com.activity.ImageTestActivity;
 import com.activity.KeepAliveServiceActivity;
 import com.activity.KeepAliveTestActivity;
@@ -265,6 +267,9 @@ public class MainActivity extends Activity {
             ,R.id.btn_show_multi_image_test
             ,R.id.btn_sensor_test
             ,R.id.btn_screen_off_admin
+            ,R.id.btn_wifi_cast_display
+            ,R.id.btn_wifi_cast_display_off
+            ,R.id.btn_file_module
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -319,6 +324,34 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, SensorTestActivity.class));
         }else if (view.getId() == R.id.btn_screen_off_admin){
             startActivity(new Intent(mContext, ScreenOffAdminActivity.class));
+        }else if (view.getId() == R.id.btn_wifi_cast_display){
+            /*try {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$WifiDisplaySettingsActivity"));
+                startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+            String EXTRA_IS_VOICE_START = "is_voice_start";
+             try {
+                Intent intent = new Intent("android.settings.WIFI_DISPLAY_SETTINGS");
+                intent.putExtra(EXTRA_IS_VOICE_START,true);
+//                intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$WifiDisplaySettingsActivity"));
+                 intent.addCategory("android.intent.category.DEFAULT");
+                startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (view.getId() == R.id.btn_wifi_cast_display_off){
+            try {
+                //need android.permission.WRITE_SECURE_SETTINGS;for system app
+                boolean wifiDisplayOnResult = Settings.Global.putInt(getContentResolver(), "wifi_display_on"/*Settings.Global.WIFI_DISPLAY_ON*/, 0);/* Settings.Global.WIFI_DISPLAY_ON is hide*/
+                Log.d(TAG,"wifiDisplayOnResult:" + wifiDisplayOnResult);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (view.getId() == R.id.btn_file_module){
+            startActivity(new Intent(mContext, FileModuleActivity.class));
         }
     }
 

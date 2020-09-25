@@ -10,6 +10,7 @@ public class ScreenOffAdminReceiver extends DeviceAdminReceiver {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
+    // FIXME: 2020/8/10 
     @Override
     public void onEnabled(Context context, Intent intent) {
         showToast(context,

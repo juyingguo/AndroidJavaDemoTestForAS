@@ -38,6 +38,13 @@
                 android:onClick="recyclerViewTest"
                 android:text="recyclerView-Test"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="onSwitchTest"
+                android:text="SwitchTest"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

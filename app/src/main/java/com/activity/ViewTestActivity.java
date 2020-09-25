@@ -33,4 +33,8 @@ public class ViewTestActivity extends AppCompatActivity {
         startActivity(new Intent(this, RecyclerViewTestActivity.class));
 
     }
+
+    public void onSwitchTest(View view) {
+        startActivity(new Intent(this, SwitchTestActivity.class));
+    }
 }

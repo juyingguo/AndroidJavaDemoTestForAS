@@ -72,7 +72,6 @@ public class MoboPlayerTestActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        SystemClock.sleep(8000);
         LogUtil.w(TAG, "onStart>>:");
     }
 
