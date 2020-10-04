@@ -10,12 +10,32 @@ import java.io.IOException;
 public class FileTest {
     private final static  String TAG = FileTest.class.getSimpleName();
     public static void main(String[] args) {
-        test2();
+//        test2();
         test3();
 
     }
 
     private static void test3() {
+        File file = new File("D:\\juying\\test-file","102.wav");
+        System.out.println(TAG + ">>file.exists():" + file.exists());
+        System.out.println(TAG + ">>file.isFile():" + file.isFile());
+        System.out.println(TAG + ">>file.getAbsolutePath():" + file.getAbsolutePath());
+
+        for (int i = 0;i<200;i++){
+            boolean delete = file.delete();
+            System.out.println(TAG + " i=" + i +" delete:" + delete);
+            if (!file.getParentFile().exists()){
+                boolean mkdir = file.getParentFile().mkdir();
+                System.out.println(TAG + ">>mkdir:" + mkdir);
+            }
+            try {
+                boolean createNewFile = file.createNewFile();
+                System.out.println(TAG + ">>createNewFile:" + createNewFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private static void test2() {

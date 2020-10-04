@@ -1,5 +1,7 @@
 package com.file;
 
+import com.utils.MD5;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 
@@ -24,7 +26,8 @@ public class FileMd5Test {
         test2();
         test3();
         test4();
-
+        test5();
+        test6();
     }
 
 
@@ -88,6 +91,18 @@ public class FileMd5Test {
             String fileMD5 = null;
             fileMD5 = getFileMD5Five(file);
             System.out.println(TAG + " test5>>fileMD5:" + fileMD5);
+            //该方式计算后的md5为
+        }
+    }
+    private static void test6() {
+        //原本为：md5='04a986431446e82fcbd26dffbeb03fac'
+
+        File file = new File("D:\\juying\\test-file\\verifyFileMd5","18-变整齐的玩具箱.jpg");
+        System.out.println(TAG + " test6>>file.exists():" + file.exists());
+        if (file.isFile()){
+            String fileMD5 = null;
+            fileMD5 = MD5.fileNameToMD5(file.getAbsolutePath());
+            System.out.println(TAG + " test6>>fileMD5:" + fileMD5);
             //该方式计算后的md5为
         }
     }
