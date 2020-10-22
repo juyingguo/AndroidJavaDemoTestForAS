@@ -30,7 +30,7 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d(TAG,"onReceive>>action:" + action);
         if (TextUtils.equals(Intent.ACTION_BOOT_COMPLETED,action)){
             showDialog();
-            WifiUtils.createAp(true);
+           // WifiUtils.createAp(true);
         }else if (TextUtils.equals(ConnectivityManager.CONNECTIVITY_ACTION,action)){
             boolean networkAvailable = NetUtils.isNetworkConnected(context);
             Log.d(TAG,"onReceive>>networkAvailable:" + networkAvailable);

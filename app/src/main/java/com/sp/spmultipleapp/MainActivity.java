@@ -28,6 +28,7 @@ import com.activity.LinearLayoutTestActivity;
 import com.activity.ScreenOffAdminActivity;
 import com.activity.UpgradeInstallTestActivity;
 import com.activity.ViewTestActivity;
+import com.activity.WifiModuleTestActivity;
 import com.activity.nettest.NetTestActivity;
 import com.activity.taskstack.TaskStackMainActivity;
 import com.handler.HandlerTestActivity;
@@ -352,6 +353,8 @@ public class MainActivity extends Activity {
             }
         }else if (view.getId() == R.id.btn_file_module){
             startActivity(new Intent(mContext, FileModuleActivity.class));
+        }else if (view.getId() == R.id.btn_wifi_module_test){
+            startActivity(new Intent(mContext, WifiModuleTestActivity.class));
         }
     }
 
