@@ -26,7 +26,11 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <!--camera -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera"/>
+    <!---->
     <uses-permission android:name="android.permission.BODY_SENSORS"/>
 
     <!-- 清除屏保需要的权限 -->
@@ -87,6 +91,9 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name="com.activity.CameraTakePhotoTestActivity"
+            android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name="com.activity.CameraTest"
             android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name="com.activity.nettest.NetTestActivity"

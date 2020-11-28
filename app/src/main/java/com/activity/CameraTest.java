@@ -1,0 +1,206 @@
+package com.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.view.TextureView;
+import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.TextureView;
+import android.view.View;
+
+import com.sp.spmultipleapp.R;
+
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * Date:2020/11/28,17:32
+ * author:jy
+ */
+public class CameraTest extends AppCompatActivity implements TextureView.SurfaceTextureListener{
+    private static final String TAG = "CameraTest";
+
+    private Camera camera;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera_for_test);
+
+        ((TextureView) findViewById(R.id.textureView)).setSurfaceTextureListener(this);
+
+        findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                camera.startPreview();
+            }
+        });
+
+        findViewById(R.id.btnStop).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                camera.stopPreview();
+            }
+        });
+    }
+
+    private Camera createCamera(int width, int height) {
+        Camera camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+
+
+        Camera.Parameters parameters = camera.getParameters();
+        Camera.CameraInfo camInfo = new Camera.CameraInfo();
+        Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, camInfo);
+//        Camera.Size bestSize = getOptimalPreviewSize(parameters.getSupportedPreviewSizes(), width, height);
+//        Log.i(TAG, "best preview size: " + bestSize.width + ", " + bestSize.height);
+//        parameters.setPreviewSize(bestSize.width, bestSize.height);
+        parameters.setPreviewSize(width, height);
+//        Camera.Size bestPictureSize = getOptimalPictureSize(parameters.getSupportedPictureSizes(), width, height);
+//        Log.i(TAG, "best picture size: " + bestPictureSize.width + ", " + bestPictureSize.height);
+//        parameters.setPictureSize(bestPictureSize.width, bestPictureSize.height);
+        camera.setParameters(parameters);
+        return camera;
+    }
+
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        Log.i(TAG, "onSurfaceTextureAvailable: " + width + ", " + height);
+        camera = createCamera(width, height);
+        camera.setPreviewCallback(new Camera.PreviewCallback() {
+
+            @Override
+            public void onPreviewFrame(byte[] data, Camera camera) {
+                // Log.i(TAG, "onPreviewFrame: " + data.length);
+            }
+        });
+        try {
+            camera.setPreviewTexture(surface);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        camera.startPreview();
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        camera.setPreviewCallback(null);
+        camera.stopPreview();
+        camera.lock();
+        camera.release();
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+        // NOOP
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+        // NOOP
+    }
+
+    // ======================================== 工具方法 ========================================
+
+    //获取相机最佳预览大小、图像大小
+    //注意每台手机获取的PreviewSize顺序不一样
+    public static Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
+        final double aspectTolerance = 0.1;
+        int width = w;
+        int height = h;
+
+        if (height > width) {
+            int temp = width;
+            width = height;
+            height = temp;
+        }
+
+        double targetRatio = (double) width / height;
+        if (sizes == null) {
+            return null;
+        }
+
+        if (Math.abs(targetRatio - (double) 4 / 3) < 0.1) {
+            targetRatio = (double) 4 / 3;
+        } else {
+            targetRatio = (double) 16 / 9;
+        }
+
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        int targetHeight = h;
+        // Try to find an size match aspect ratio and size
+        for (Camera.Size size : sizes) {
+            double ratio = (double) size.width / size.height;
+            if (Math.abs(ratio - targetRatio) > aspectTolerance) {
+                continue;
+            }
+            //获取的最佳分辨率是经过压缩的
+            if (Math.abs(size.height - targetHeight) < minDiff && (size.width <= w && size.height <= h)
+                    && (optimalSize == null || optimalSize.width < size.width)) {
+                optimalSize = size;
+            }
+        }
+
+        // Cannot find the one match the aspect ratio, ignore the requirement
+        if (optimalSize == null) {
+            optimalSize = getOptimalSize(sizes, targetHeight);
+        }
+        return optimalSize;
+    }
+
+    public static Camera.Size getOptimalPictureSize(List<Camera.Size> sizes, int w, int h) {
+        int minHeight = 1080;
+        final double ASPECT_TOLERANCE = 0.2;
+        double targetRatio = (double) w / h;
+        if (sizes == null)
+            return null;
+
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        int targetHeight = h;
+
+        // Try to find an size match aspect ratio and size
+        for (Camera.Size size : sizes) {
+            double ratio = (double) size.width / size.height;
+            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+                continue;
+            if (minHeight <= size.height && Math.abs(size.height - targetHeight) < minDiff) {
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+        }
+
+        // Cannot find the one match the aspect ratio, ignore the requirement
+        if (optimalSize == null) {
+            minDiff = Double.MAX_VALUE;
+            for (Camera.Size size : sizes) {
+                if (minHeight <= size.height && Math.abs(size.height - targetHeight) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+            }
+        }
+        return optimalSize;
+    }
+
+    private static Camera.Size getOptimalSize(List<Camera.Size> sizes, int targetHeight) {
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+        for (Camera.Size size : sizes) {
+            if (Math.abs(size.height - targetHeight) < minDiff) {
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+        }
+        if (optimalSize == null) {
+            optimalSize = sizes.get(0);
+        }
+        return optimalSize;
+    }
+}

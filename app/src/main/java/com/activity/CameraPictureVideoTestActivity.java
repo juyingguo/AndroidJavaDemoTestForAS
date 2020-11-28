@@ -28,6 +28,7 @@ public class CameraPictureVideoTestActivity extends AppCompatActivity {
     @OnClick({
             R.id.btn_take_photo
             ,R.id.btn_picture_scale_compress
+            ,R.id.btn_camera_preview_test
 
     })
     public void clickView(View view) {
@@ -35,6 +36,8 @@ public class CameraPictureVideoTestActivity extends AppCompatActivity {
             startActivity(new Intent(mContext , CameraTakePhotoTestActivity.class));
         }else if (view.getId() == R.id.btn_picture_scale_compress){
             startActivity(new Intent(mContext , PictureScaleCompressTestActivity.class));
+        }else if (view.getId() == R.id.btn_camera_preview_test){
+            startActivity(new Intent(mContext , CameraTest.class));
         }
     }
 

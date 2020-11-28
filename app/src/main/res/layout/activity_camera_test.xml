@@ -23,6 +23,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="picture_scale_compress" />
+            <Button
+                android:id="@+id/btn_camera_preview_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="camera_preview_test" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
