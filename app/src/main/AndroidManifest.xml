@@ -200,6 +200,7 @@
         <activity android:name="com.activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name="com.activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name="com.activity.WifiModuleTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name="com.activity.WebViewTestActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

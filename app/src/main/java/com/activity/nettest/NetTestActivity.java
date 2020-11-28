@@ -38,7 +38,7 @@ public class NetTestActivity extends AppCompatActivity {
         boolean networkConnected02 = NetUtils.isNetworkConnected02(this);
         boolean netWorkAvailable = NetUtils.isNetWorkAvailable();
 
-        btn_net.setText("networkConnected:" + networkConnected + ",networkConnected02" + networkConnected02 + ",netWorkAvailable:" + netWorkAvailable);
+        btn_net.setText("networkConnected:" + networkConnected + "\n networkConnected02:" + networkConnected02 + "\n netWorkAvailable:" + netWorkAvailable);
     }
 
 
