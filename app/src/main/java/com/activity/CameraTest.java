@@ -1,6 +1,8 @@
 package com.activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Surface;
 import android.view.TextureView;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
+import android.view.Window;
 
 import com.sp.spmultipleapp.R;
 
@@ -25,6 +28,9 @@ public class CameraTest extends AppCompatActivity implements TextureView.Surface
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        setTheme(android.R.style.Theme_Black_NoTitleBar);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏,需要当前activity继承Activity,否则无效果
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏,需要当前activity继承AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_for_test);
 
@@ -49,19 +55,22 @@ public class CameraTest extends AppCompatActivity implements TextureView.Surface
 
     private Camera createCamera(int width, int height) {
         Camera camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-
+//        Camera camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+        Log.d(TAG, "createCamera: " + width + ", " + height);
 
         Camera.Parameters parameters = camera.getParameters();
         Camera.CameraInfo camInfo = new Camera.CameraInfo();
         Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, camInfo);
-//        Camera.Size bestSize = getOptimalPreviewSize(parameters.getSupportedPreviewSizes(), width, height);
-//        Log.i(TAG, "best preview size: " + bestSize.width + ", " + bestSize.height);
-//        parameters.setPreviewSize(bestSize.width, bestSize.height);
-        parameters.setPreviewSize(width, height);
+        Camera.Size bestSize = getOptimalPreviewSize(parameters.getSupportedPreviewSizes(), width, height);
+        Log.i(TAG, "createCamera best preview size: " + bestSize.width + ", " + bestSize.height);
+        parameters.setPreviewSize(bestSize.width, bestSize.height);
+//        parameters.setPreviewSize(width, height);
 //        Camera.Size bestPictureSize = getOptimalPictureSize(parameters.getSupportedPictureSizes(), width, height);
 //        Log.i(TAG, "best picture size: " + bestPictureSize.width + ", " + bestPictureSize.height);
 //        parameters.setPictureSize(bestPictureSize.width, bestPictureSize.height);
         camera.setParameters(parameters);
+        //调用setCameraDisplayOrientation;如果不调用，预览方向与实体不一致。
+        setCameraDisplayOrientation(CameraTest.this, Camera.CameraInfo.CAMERA_FACING_BACK,camera);
         return camera;
     }
 
@@ -203,4 +212,37 @@ public class CameraTest extends AppCompatActivity implements TextureView.Surface
         }
         return optimalSize;
     }
+
+    /**
+     * 设置方向。无论如何旋转，预览画面和看到的实体是一致的。
+     * @param activity
+     * @param cameraId
+     * @param camera
+     */
+    public static void setCameraDisplayOrientation(Activity activity,
+                                                   int cameraId, android.hardware.Camera camera) {
+        Log.d(TAG,"setCameraDisplayOrientation,cameraId:" + cameraId);
+        android.hardware.Camera.CameraInfo info =  new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        Log.d(TAG,"setCameraDisplayOrientation,rotation:" + rotation);
+        Log.d(TAG,"setCameraDisplayOrientation,info.orientation:" + info.orientation);
+          int degrees = 0;
+          switch (rotation) {
+              case Surface.ROTATION_0: degrees = 0; break;
+              case Surface.ROTATION_90: degrees = 90; break;
+              case Surface.ROTATION_180: degrees = 180; break;
+              case Surface.ROTATION_270: degrees = 270; break;
+          }
+
+          int result;
+          if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+              result = (info.orientation + degrees) % 360;
+              result = (360 - result) % 360;  // compensate the mirror
+          } else {  // back-facing
+              result = (info.orientation - degrees + 360) % 360;
+          }
+          Log.d(TAG,"setCameraDisplayOrientation,result:" + result);
+          camera.setDisplayOrientation(result);
+      }
 }
