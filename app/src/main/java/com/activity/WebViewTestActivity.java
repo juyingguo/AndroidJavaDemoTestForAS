@@ -31,8 +31,9 @@ public class WebViewTestActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
 //        webView.loadUrl("file:///android_asset/web/htmljs.html");//加载asset文件夹下html
-        webView.loadUrl("file:///android_asset/web/htmljs_new.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/htmljs_new.html");//加载asset文件夹下html
 //        webView.loadUrl("http://139.196.35.30:8080/OkHttpTest/apppackage/test.html");//加载url
+        webView.loadUrl(TulingK12Config.TULING_DEFAULT_URL);//加载url
 
         //使用webview显示html代码
 //        webView.loadDataWithBaseURL(null,"<html><head><title> 欢迎您 </title></head>" +
@@ -60,7 +61,19 @@ public class WebViewTestActivity extends AppCompatActivity {
         //不显示webview缩放按钮
 //        webSettings.setDisplayZoomControls(false);
     }
-
+    public static class TulingK12Config{
+        private static String APIKEY="a1fa3d36494247aa85888771cc6a6f7c";
+        private static String uid="xzx-001";
+        public static String TULING_DEFAULT_URL="http://iot-ai.tuling123.com/jump/app/source"+
+                "?apiKey="+APIKEY+
+                "&uid="+uid+
+                "&client=android";
+        /**
+         * 用于控制i学优（图灵k12）入口显示的隐藏文件.如果该文件存在就显示入口，否则不显示。<br/>
+         * .开头的文件即为隐藏文件
+         */
+        public static String FILE_PATH_IBOTN_TULING_K12 = "/storage/sd-ext/.ibotn_tuling_k12.txt";
+    }
     //WebViewClient主要帮助WebView处理各种通知、请求事件
     private WebViewClient webViewClient=new WebViewClient(){
         @Override

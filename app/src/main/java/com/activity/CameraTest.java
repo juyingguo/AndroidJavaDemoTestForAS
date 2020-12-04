@@ -58,20 +58,26 @@ public class CameraTest extends AppCompatActivity implements TextureView.Surface
 //        Camera camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
         Log.d(TAG, "createCamera: " + width + ", " + height);
 
-        Camera.Parameters parameters = camera.getParameters();
-        Camera.CameraInfo camInfo = new Camera.CameraInfo();
-        Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, camInfo);
-        Camera.Size bestSize = getOptimalPreviewSize(parameters.getSupportedPreviewSizes(), width, height);
-        Log.i(TAG, "createCamera best preview size: " + bestSize.width + ", " + bestSize.height);
-        parameters.setPreviewSize(bestSize.width, bestSize.height);
+//        Camera.Parameters parameters = camera.getParameters();
+//        Camera.CameraInfo camInfo = new Camera.CameraInfo();
+//        Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, camInfo);
+//        Camera.Size bestSize = getOptimalPreviewSize(parameters.getSupportedPreviewSizes(), width, height);
+//        Log.i(TAG, "createCamera best preview size: " + bestSize.width + ", " + bestSize.height);
+//        parameters.setPreviewSize(bestSize.width, bestSize.height);
 //        parameters.setPreviewSize(width, height);
 //        Camera.Size bestPictureSize = getOptimalPictureSize(parameters.getSupportedPictureSizes(), width, height);
 //        Log.i(TAG, "best picture size: " + bestPictureSize.width + ", " + bestPictureSize.height);
 //        parameters.setPictureSize(bestPictureSize.width, bestPictureSize.height);
-        camera.setParameters(parameters);
+//        camera.setParameters(parameters);
         //调用setCameraDisplayOrientation;如果不调用，预览方向与实体不一致。
         setCameraDisplayOrientation(CameraTest.this, Camera.CameraInfo.CAMERA_FACING_BACK,camera);
         return camera;
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Log.i(TAG, "onAttachedToWindow() call.");
     }
 
     @Override

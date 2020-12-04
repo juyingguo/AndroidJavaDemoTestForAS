@@ -359,6 +359,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, WifiModuleTestActivity.class));
         }else if (view.getId() == R.id.btn_webview_test){
             startActivity(new Intent(mContext, WebViewTestActivity.class));
+
+            sendBroadcast(new Intent("com.ibotn.intent.action.CUSTOM_UPDATE_FILE"));
         }
     }
 

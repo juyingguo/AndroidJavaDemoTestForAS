@@ -21,13 +21,13 @@ public class CoreBroadCastReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Log.d(TAG,"onReceive>>action:" + action);
         if (TextUtils.equals(Intent.ACTION_BOOT_COMPLETED,action)){
-            ThreadUtils.runOnUiThreadDelay(new Runnable() {
+            /*ThreadUtils.runOnUiThreadDelay(new Runnable() {
                 @Override
                 public void run() {
 
                     WifiUtils.createAp(true);
                 }
-            },10000);
+            },10000);*/
         }else if (TextUtils.equals(ConnectivityManager.CONNECTIVITY_ACTION,action)){
             boolean networkAvailable = NetUtils.isNetworkConnected(context);
             Log.d(TAG,"onReceive>>networkAvailable:" + networkAvailable);
