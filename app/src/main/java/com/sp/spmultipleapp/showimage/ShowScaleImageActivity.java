@@ -5,9 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
-import com.customview.ZoomImageView;
+import com.sp.spmultipleapp.customview.ZoomImageView;
 import com.sp.spmultipleapp.R;
 
 import java.io.IOException;

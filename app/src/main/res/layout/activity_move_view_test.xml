@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.activity.MoveViewTestActivity">
+    tools:context=".activity.MoveViewTestActivity">
     <Button
         android:id="@+id/button_move"
         android:layout_width="200dp"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.customview.ScrollButton
+        <com.sp.spmultipleapp.customview.ScrollButton
             android:id="@+id/scrollButton"
             android:layout_width="300dp"
             android:layout_height="100dp"

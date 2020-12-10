@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
 
-import com.application.CoreApplication;
+import com.sp.spmultipleapp.application.CoreApplication;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

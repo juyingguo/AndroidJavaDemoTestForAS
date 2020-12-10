@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.activity.SwitchTestActivity">
+    tools:context=".activity.SwitchTestActivity">
     <Switch
         android:id="@+id/id_switch"
         android:layout_width="wrap_content"

@@ -19,7 +19,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.application.CoreApplication;
+import com.sp.spmultipleapp.application.CoreApplication;
 import com.sp.spmultipleapp.bean.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;

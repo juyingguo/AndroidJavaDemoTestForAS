@@ -40,7 +40,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <application
-        android:name="com.application.CoreApplication"
+        android:name=".application.CoreApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -60,67 +60,67 @@
         </provider>
 
         <activity
-            android:name="com.activity.ViewEventDispatchTestActivity"
+            android:name=".activity.ViewEventDispatchTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.MoveViewTestActivity"
+            android:name=".activity.MoveViewTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.LruCacheTestActivity"
+            android:name=".activity.LruCacheTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.UniversalImageLoaderTestActivity"
+            android:name=".activity.UniversalImageLoaderTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.ImageScaleTypeTestActivity"
+            android:name=".activity.ImageScaleTypeTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.photowall.PhotoWallTestActivity"
+            android:name=".photowall.PhotoWallTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.ImageTestActivity"
+            android:name=".activity.ImageTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.AppDetectTestActivity"
+            android:name=".activity.AppDetectTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.CameraPictureVideoTestActivity"
+            android:name=".activity.CameraPictureVideoTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.PictureScaleCompressTestActivity"
+            android:name=".activity.PictureScaleCompressTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.CameraTakePhotoTestActivity"
+            android:name=".activity.CameraTakePhotoTestActivity"
             android:theme="@style/Theme.AppCompat"/>
         <activity
-            android:name="com.activity.CameraTest"
+            android:name=".activity.CameraTest"
             android:theme="@style/Theme.AppCompat"/>
         <activity
-            android:name="com.activity.nettest.NetTestActivity"
+            android:name=".activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.RecyclerViewTestActivity"
+            android:name=".activity.RecyclerViewTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.RecyclerViewWithSmartRefreshLayoutTestActivity"
+            android:name=".activity.RecyclerViewWithSmartRefreshLayoutTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.activity.ViewTestActivity"
+            android:name=".activity.ViewTestActivity"
             android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
         <activity
-            android:name="com.activity.SwitchTestActivity"
+            android:name=".activity.SwitchTestActivity"
             android:theme="@style/Theme.AppCompat"
             android:launchMode="singleTask"/>
-        <activity android:name="com.activity.taskstack.TaskStackActivityB" />
+        <activity android:name=".activity.taskstack.TaskStackActivityB" />
         <!--
-<activity android:name="com.activity.taskstack.TaskStackActivityB"
+<activity android:name="com.sp.spmultipleapp.activity.taskstack.TaskStackActivityB"
             android:process=":com.process.testB"
             ></activity>
         -->
-        <activity android:name="com.activity.taskstack.TaskStackActivityA" />
-        <activity android:name="com.activity.taskstack.TaskStackMainActivity" />
+        <activity android:name=".activity.taskstack.TaskStackActivityA" />
+        <activity android:name=".activity.taskstack.TaskStackMainActivity" />
         <activity
-            android:name="com.activity.KeepAliveServiceActivity"
+            android:name=".activity.KeepAliveServiceActivity"
             android:theme="@style/Theme.AppCompat" />
 
         <service
@@ -129,12 +129,12 @@
             android:exported="true" />
 
         <activity
-            android:name="com.activity.UpgradeInstallTestActivity"
+            android:name=".activity.UpgradeInstallTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name="com.viewtest.verifyviewmethod.one.InvalidateTestActivity"
+            android:name=".viewtest.verifyviewmethod.one.InvalidateTestActivity"
             android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.LinearLayoutTestActivity" />
+        <activity android:name=".activity.LinearLayoutTestActivity" />
         <activity android:name=".MainActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
@@ -162,7 +162,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.receiver.ScreenOffAdminReceiver"
+            android:name=".receiver.ScreenOffAdminReceiver"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
@@ -190,8 +190,8 @@
         <activity android:name=".FileExploreActivity" />
         <activity android:name=".TouchViewTestActivity" />
         <activity android:name=".MoboPlayerTestActivity" /> <!-- 关键代码 -->
-        <activity android:name="com.handler.HandlerTestActivity" />
-        <activity android:name="com.testokhttp.OkhttpTestActivity" />
+        <activity android:name=".handler.HandlerTestActivity" />
+        <activity android:name=".testokhttp.OkhttpTestActivity" />
         <activity android:name=".gamecourse.GameCourseActivity" />
         <activity android:name=".gamecourse.GameCoursePrimaryClassActivity" />
         <activity android:name=".showbigimage.one.LargeImageViewActivity" android:theme="@style/Theme.AppCompat" />
@@ -203,11 +203,11 @@
         <activity android:name=".showimage.ShowScaleImageActivity"/>
         <activity android:name=".showimage.ShowScaleImageWithPhotoViewActivity"/>
         <activity android:name=".sensor.SensorTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.ScreenOffAdminActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.WifiModuleTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name="com.activity.WebViewTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.ScreenOffAdminActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WifiModuleTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WebViewTestActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

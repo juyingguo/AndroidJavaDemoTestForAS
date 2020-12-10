@@ -3,36 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.activity.ViewEventDispatchTestActivity">
+    tools:context="com.sp.spmultipleapp.activity.ViewEventDispatchTestActivity">
 
-    <com.customview.MyLinearLayout
+    <com.sp.spmultipleapp.customview.MyLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/c2_cff">
-        <com.customview.MyButton
+        <com.sp.spmultipleapp.customview.MyButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="MyButton"/>
-    </com.customview.MyLinearLayout>
+    </com.sp.spmultipleapp.customview.MyLinearLayout>
 
 </LinearLayout>-->
-<com.customview.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sp.spmultipleapp.customview.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/myLinearLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.activity.ViewEventDispatchTestActivity"
+    tools:context=".activity.ViewEventDispatchTestActivity"
     android:background="@color/c3"
    >
     <!--android:focusable="true"
     android:clickable="true"-->
 
-    <com.customview.MyButton
+    <com.sp.spmultipleapp.customview.MyButton
         android:id="@+id/myButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="MyButton"/>
 
-</com.customview.MyLinearLayout>
+</com.sp.spmultipleapp.customview.MyLinearLayout>
