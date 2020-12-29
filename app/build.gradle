@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
     implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
 }

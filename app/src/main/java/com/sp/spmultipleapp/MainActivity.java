@@ -26,6 +26,7 @@ import com.sp.spmultipleapp.activity.LinearLayoutTestActivity;
 import com.sp.spmultipleapp.activity.ScreenOffAdminActivity;
 import com.sp.spmultipleapp.activity.UpgradeInstallTestActivity;
 import com.sp.spmultipleapp.activity.ViewTestActivity;
+import com.sp.spmultipleapp.activity.WebViewListTestActivity;
 import com.sp.spmultipleapp.activity.WebViewTestActivity;
 import com.sp.spmultipleapp.activity.WifiModuleTestActivity;
 import com.sp.spmultipleapp.activity.nettest.NetTestActivity;
@@ -355,7 +356,7 @@ public class MainActivity extends Activity {
         }else if (view.getId() == R.id.btn_wifi_module_test){
             startActivity(new Intent(mContext, WifiModuleTestActivity.class));
         }else if (view.getId() == R.id.btn_webview_test){
-            startActivity(new Intent(mContext, WebViewTestActivity.class));
+            startActivity(new Intent(mContext, WebViewListTestActivity.class));
 
             sendBroadcast(new Intent("com.ibotn.intent.action.CUSTOM_UPDATE_FILE"));
         }

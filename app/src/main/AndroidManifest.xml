@@ -96,6 +96,8 @@
             android:name=".activity.CameraTest"
             android:theme="@style/Theme.AppCompat"/>
         <activity
+            android:name="com.sp.spmultipleapp.activity.CaptureActivity"/>
+        <activity
             android:name=".activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
@@ -208,6 +210,10 @@
         <activity android:name=".activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.WifiModuleTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.WebViewTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WebViewListTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WebViewEliminateTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WebViewSpaceBattleShipTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.WebViewJsJavaCallEachOtherActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

@@ -31,9 +31,17 @@ public class WebViewTestActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
 //        webView.loadUrl("file:///android_asset/web/htmljs.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/pintugame/index.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/fruitNinja/index.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/html5-canvas.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/createjs_h5/src/index.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/html5GameLiveExample/Mario.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/pharse3/game.html");//加载asset文件夹下html
+//        webView.loadUrl("file:///android_asset/web/camera_mui_my/index.html");//加载asset文件夹下html
+        webView.loadUrl("file:///android_asset/web/Barcode/index.html");//加载asset文件夹下html
 //        webView.loadUrl("file:///android_asset/web/htmljs_new.html");//加载asset文件夹下html
 //        webView.loadUrl("http://139.196.35.30:8080/OkHttpTest/apppackage/test.html");//加载url
-        webView.loadUrl(TulingK12Config.TULING_DEFAULT_URL);//加载url
+//        webView.loadUrl(TulingK12Config.TULING_DEFAULT_URL);//加载url
 
         //使用webview显示html代码
 //        webView.loadDataWithBaseURL(null,"<html><head><title> 欢迎您 </title></head>" +
@@ -60,6 +68,11 @@ public class WebViewTestActivity extends AppCompatActivity {
 
         //不显示webview缩放按钮
 //        webSettings.setDisplayZoomControls(false);
+
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+
     }
     public static class TulingK12Config{
         private static String APIKEY="a1fa3d36494247aa85888771cc6a6f7c";
