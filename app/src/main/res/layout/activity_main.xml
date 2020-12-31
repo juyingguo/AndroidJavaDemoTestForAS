@@ -184,6 +184,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="webview_test" />
+            <Button
+                android:id="@+id/btn_dialog_popupwindow_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="dialog_popupwindow_test" />
         </LinearLayout>
     </ScrollView>
 

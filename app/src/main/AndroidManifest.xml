@@ -96,7 +96,10 @@
             android:name=".activity.CameraTest"
             android:theme="@style/Theme.AppCompat"/>
         <activity
-            android:name="com.sp.spmultipleapp.activity.CaptureActivity"/>
+            android:name="com.sp.spmultipleapp.activity.CaptureActivity"/><!-- android:theme="@android:style/Theme.Translucent"-->
+        <activity
+            android:name="com.sp.spmultipleapp.activity.CaptureActivityNew"/><!-- android:theme="@android:style/Theme.Translucent"-->
+
         <activity
             android:name=".activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />
@@ -214,6 +217,9 @@
         <activity android:name=".activity.WebViewEliminateTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.WebViewSpaceBattleShipTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.WebViewJsJavaCallEachOtherActivity" android:theme="@style/Theme.AppCompat" />
+        <!--<activity android:name="com.sp.spmultipleapp.activity.CaptureTransparentPositionTestActivity"/>-->
+        <activity android:name=".activity.DialogCustomTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.PopupWindowTestActivity" android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

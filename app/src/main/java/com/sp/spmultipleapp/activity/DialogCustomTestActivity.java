@@ -1,6 +1,8 @@
 package com.sp.spmultipleapp.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -17,7 +19,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class DialogCustomTestActivity extends AppCompatActivity {
-    private static final String TAG = "AppDetectTestActivity";
+    private static final String TAG = "DialogCustomTestActivity";
 
     Unbinder butterKnifeBind = null;
 
@@ -33,7 +35,7 @@ public class DialogCustomTestActivity extends AppCompatActivity {
 
     @OnClick({
             R.id.btn_dialog
-            ,R.id.btn_app_start
+            ,R.id.btn_popupwindow
 
 
     })
@@ -41,8 +43,8 @@ public class DialogCustomTestActivity extends AppCompatActivity {
         if (view.getId() == R.id.btn_dialog){
 
 
-        }else if (view.getId() == R.id.btn_app_start){
-
+        }else if (view.getId() == R.id.btn_popupwindow){
+            startActivity(new Intent(this,PopupWindowTestActivity.class));
 
         }
     }
@@ -59,6 +61,7 @@ public class DialogCustomTestActivity extends AppCompatActivity {
      * @param packageName app packageName
      * @return boolean
      */
+    @SuppressLint("LongLogTag")
     public boolean checkApkExist(Context context, String packageName) {
         if (context == null){
             throw new NullPointerException("context can not be null");
@@ -82,6 +85,7 @@ public class DialogCustomTestActivity extends AppCompatActivity {
      * @param packageName 主包名 例如com.test.example
      * @return
      */
+    @SuppressLint("LongLogTag")
     public boolean checkApkExist02(Context context, String packageName) {
         if (context == null){
             throw new NullPointerException("context can not be null");

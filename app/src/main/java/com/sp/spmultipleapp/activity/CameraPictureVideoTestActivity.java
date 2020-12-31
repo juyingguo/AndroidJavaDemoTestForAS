@@ -29,6 +29,7 @@ public class CameraPictureVideoTestActivity extends AppCompatActivity {
             ,R.id.btn_picture_scale_compress
             ,R.id.btn_camera_preview_test
             ,R.id.btn_camera_qrcode_scan
+            ,R.id.btn_camera_qrcode_scan_use_interface
 
     })
     public void clickView(View view) {
@@ -40,6 +41,8 @@ public class CameraPictureVideoTestActivity extends AppCompatActivity {
             startActivity(new Intent(mContext , CameraTest.class));
         }else if (view.getId() == R.id.btn_camera_qrcode_scan){
             startActivity(new Intent(mContext , CaptureActivity.class));
+        }else if (view.getId() == R.id.btn_camera_qrcode_scan_use_interface){
+            startActivity(new Intent(mContext , CaptureActivityNew.class));
         }
     }
 

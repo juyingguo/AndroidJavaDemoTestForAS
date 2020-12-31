@@ -1,5 +1,6 @@
 package com.sp.spmultipleapp.activity;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -14,7 +15,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -23,18 +23,22 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.sp.spmultipleapp.R;
 import com.zxing.android.MessageIDs;
+import com.zxing.android.base.DecodeInterface;
 import com.zxing.android.camera.CameraManager;
-import com.zxing.android.decoding.CaptureActivityHandler;
+import com.zxing.android.decoding.BaseCaptureActivityHandler;
 import com.zxing.android.decoding.InactivityTimer;
 import com.zxing.android.view.ViewfinderView;
 
 import java.io.IOException;
 import java.util.Vector;
 
-public class CaptureActivity extends BaseActivity implements Callback, View.OnClickListener {
-	private static final String TAG = "CaptureActivity";
+/**
+ * copy from {@link CaptureActivity},but local handler use {@link BaseCaptureActivityHandler}
+ */
+public class CaptureActivityNew extends BaseActivity implements DecodeInterface, Callback, View.OnClickListener {
+	private static final String TAG = "CaptureActivityNew";
 
-	private CaptureActivityHandler handler;
+	private BaseCaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
 	private SurfaceView surfaceView;
 	private boolean hasSurface;
@@ -54,7 +58,7 @@ public class CaptureActivity extends BaseActivity implements Callback, View.OnCl
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 //		setAlpha();
-		setContentView(R.layout.activity_capture);
+		setContentView(R.layout.activity_capture_new);
 		surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinderview);
         rlDynamicPosition = (RelativeLayout) findViewById(R.id.rl_dynamic_position);
@@ -148,7 +152,7 @@ public class CaptureActivity extends BaseActivity implements Callback, View.OnCl
         openCamera(surfaceHolder);
 
 		if (handler == null) {
-			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
+			handler = new BaseCaptureActivityHandler(this, decodeFormats, characterSet);
 		}
 
 	}
@@ -183,6 +187,7 @@ public class CaptureActivity extends BaseActivity implements Callback, View.OnCl
 		hasSurface = false;
 	}
 
+	@Override
 	public CameraManager getCameraManager() {
 		return cameraManager;
 	}
@@ -203,7 +208,16 @@ public class CaptureActivity extends BaseActivity implements Callback, View.OnCl
 			e.printStackTrace();
 		}
 	}
+	public void mySetResult(int resultCode, Intent data){
 
+	}
+	public void myFinish(){
+    	finish();
+	}
+	@Override
+	public void myStartActivity(Intent intent){
+		startActivity(intent);
+	}
 	public void handleDecode(Result obj, Bitmap barcode) {
 		inactivityTimer.onActivity();
 //		playBeepSoundAndVibrate();

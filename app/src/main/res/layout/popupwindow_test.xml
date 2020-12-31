@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:background="@color/c4"
+    android:orientation="vertical">
+
+    <!--测试popupwindow 含有焦点的view与不含焦点的view-->
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="test"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:textColor="@color/red"
+        />-->
+
+    <Button
+        android:id="@+id/btn_in_popup"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/red"
+        android:text="abc"
+        />
+</LinearLayout>

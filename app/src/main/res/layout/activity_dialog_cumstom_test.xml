@@ -16,13 +16,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="app_detect" />
+                android:text="dialog test" />
             <Button
-                android:id="@+id/btn_app_start"
+                android:id="@+id/btn_popupwindow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="app_start" />
+                android:text="popupwindow test" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

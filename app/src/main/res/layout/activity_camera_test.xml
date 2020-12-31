@@ -35,6 +35,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="camera_qrcode_scan" />
+            <Button
+                android:id="@+id/btn_camera_qrcode_scan_use_interface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="camera qrcode scan use interface" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.sp.spmultipleapp.activity.AppDetectTestActivity;
 import com.sp.spmultipleapp.activity.CameraPictureVideoTestActivity;
+import com.sp.spmultipleapp.activity.DialogCustomTestActivity;
 import com.sp.spmultipleapp.activity.FileModuleActivity;
 import com.sp.spmultipleapp.activity.ImageTestActivity;
 import com.sp.spmultipleapp.activity.KeepAliveTestActivity;
@@ -271,6 +272,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_wifi_cast_display_off
             ,R.id.btn_file_module
             ,R.id.btn_webview_test
+            ,R.id.btn_dialog_popupwindow_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -357,8 +359,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, WifiModuleTestActivity.class));
         }else if (view.getId() == R.id.btn_webview_test){
             startActivity(new Intent(mContext, WebViewListTestActivity.class));
-
-            sendBroadcast(new Intent("com.ibotn.intent.action.CUSTOM_UPDATE_FILE"));
+        }else if (view.getId() == R.id.btn_dialog_popupwindow_test){
+            startActivity(new Intent(mContext, DialogCustomTestActivity.class));
         }
     }
 

@@ -10,8 +10,8 @@ public class BaseActivity extends Activity {
     private View mDecorView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
         mDecorView = getWindow().getDecorView();
     }
 
