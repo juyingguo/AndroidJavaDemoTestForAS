@@ -46,7 +46,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <!-- android8.0需要的配置，主要是调用相机 -->
         <provider
@@ -220,6 +219,7 @@
         <!--<activity android:name="com.sp.spmultipleapp.activity.CaptureTransparentPositionTestActivity"/>-->
         <activity android:name=".activity.DialogCustomTestActivity" android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.PopupWindowTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.DialogTestActivity" android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 
 </manifest>

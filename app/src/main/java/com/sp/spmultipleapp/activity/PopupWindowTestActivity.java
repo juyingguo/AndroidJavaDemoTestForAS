@@ -14,6 +14,9 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.sp.spmultipleapp.R;
+import com.sp.spmultipleapp.application.CoreApplication;
+import com.sp.spmultipleapp.customview.QRCodeScanDialog;
+import com.sp.spmultipleapp.customview.QRCodeScanPopupWindow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,17 +44,19 @@ public class PopupWindowTestActivity extends AppCompatActivity {
     private void showActivityTypePopupWindow() {
 
         View contentView = View.inflate(mContext,R.layout.popupwindow_test,null);
+        //构造函数设置接收焦点
         PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         //获取控件宽度
         int relativeWidth = btnTwo .getWidth(); // TODO: 2018/11/21
         popupWindow.setWidth(relativeWidth*2);
 //        popupWindow.setTouchable(false);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffeb3b")));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00ff00")));
+//        popupWindow.setBackgroundDrawable(null);
 //        popupWindow.setOutsideTouchable(true);
 
         Log.d(TAG,"showActivityTypePopupWindow,popupWindow.isFocusable():" + popupWindow.isFocusable());
         popupWindow.setFocusable(false);
-//        popupWindow.showAsDropDown(btnTwo, 0, 0, Gravity.BOTTOM);
+//        popupWindow.showAsDropDown(btnTwo, 0, 0, Gravity.BOTTOM);//或者指定显示在控件下方。
         int[] location = new int[2];
         View currentRootView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         currentRootView.getLocationOnScreen(location);
@@ -76,5 +81,12 @@ public class PopupWindowTestActivity extends AppCompatActivity {
         showActivityTypePopupWindow();
     }
 
+
+    public void clickShowQRCodeScanPopupWindow(View view) {
+        Log.d(TAG,"clickShowQRCodeScanPopupWindow.");
+        QRCodeScanPopupWindow window = new QRCodeScanPopupWindow(this
+                , View.inflate(this, R.layout.popupwindow_qr_code_scan,null));
+        window.showAtLocationInActivity();
+    }
 
 }

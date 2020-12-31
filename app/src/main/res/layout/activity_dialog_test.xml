@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PopupWindowTestActivity"
+    tools:context=".activity.DialogTestActivity"
     android:orientation="vertical">
 
     <Button
@@ -14,17 +14,17 @@
         android:text="Button 1" />
 
     <Button
-        android:id="@+id/btn_two"
+        android:id="@+id/btn_qr_code_scan_dialog"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickShowPopupWindow"
-        android:text="click Show Popup Window" />
+        android:onClick="clickShowQRCodeScanDialog"
+        android:text="click qr code scan dialog" />
     <Button
-        android:id="@+id/btn_qr_code_scan_popup_widow"
+        android:id="@+id/btn_qr_code_scan_dialog_not_canceled"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickShowQRCodeScanPopupWindow"
-        android:text="click qr code scan popup window" />
+        android:onClick="clickShowQRCodeScanDialogNotCanceled"
+        android:text="click qr code scan dialog not canceled" />
 </LinearLayout>

@@ -8,11 +8,21 @@
 </head>
 <body>
 	<button onclick="javascript:startQrCodeScan()">启动二维码扫描</button>
+	<button onclick="javascript:jsStartQrCodeScanWithPopupWindow()">启动二维码扫描,popupwindow</button>
+	<button onclick="javascript:jsStartQrCodeScanWithDialog()">启动二维码扫描,Dialog</button>
 	<p id="id_qr_result">123</p>
 	<script language="JavaScript">
 	function startQrCodeScan() {
 		// alert("123");
 		javascript:start_qr_code_scan.startQrCodeScan();
+	};
+	function jsStartQrCodeScanWithPopupWindow() {
+		// alert("123");
+		javascript:start_qr_code_scan_with_popup_window.startQrCodeScanWithPopupWindow();
+	};
+	function jsStartQrCodeScanWithDialog() {
+		// alert("123");
+		javascript:start_qr_code_scan_with_popup_window.startQrCodeScanWithDialog();
 	};
 	function showQrCodeScan(result) {
 		document.getElementById("id_qr_result").innerHTML = result;

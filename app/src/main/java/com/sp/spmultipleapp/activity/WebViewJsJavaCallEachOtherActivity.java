@@ -1,9 +1,14 @@
 package com.sp.spmultipleapp.activity;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.widget.Toast;
 
 import com.sp.spmultipleapp.JavaJsInterface;
 import com.sp.spmultipleapp.R;
+import com.sp.spmultipleapp.customview.QRCodeScanDialogNotCanceled;
 
 /**
  * js与java相互调用
@@ -26,12 +32,12 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
     static String TAG  = "WebViewJsJavaCallEachOtherActivity";
     private static WebView webView;
     private ProgressBar progressBar;
-
+    private static WebViewJsJavaCallEachOtherActivity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_js_java_call_each_other);
-
+        activity = this;
         progressBar= (ProgressBar)findViewById(R.id.progressbar);//进度条
 
         webView = (WebView) findViewById(R.id.webview);
@@ -47,7 +53,10 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
 
         WebSettings webSettings=webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
-        webView.addJavascriptInterface(new JavaJsInterface(),"start_qr_code_scan");
+        JavaJsInterface javaJsInterface = new JavaJsInterface();
+        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan");
+        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_popup_window");
+        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_dialog");
 
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
@@ -67,8 +76,26 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
-
+        IntentFilter filter = new IntentFilter(QRCodeScanDialogNotCanceled.ACTION_RESULT);
+        registerReceiver(receiver,filter);
     }
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (TextUtils.equals(intent.getAction(),QRCodeScanDialogNotCanceled.ACTION_RESULT)){
+                String result = intent.getStringExtra("result");
+                webView.loadUrl("javascript:showQrCodeScan('" + result + "')");
+            }
+        }
+    };
+    public static WebViewJsJavaCallEachOtherActivity getInstance(){
+        return activity;
+    }
+
+    /**
+     * java.lang.RuntimeException: java.lang.Throwable: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread. (Expected Looper Looper (main, tid 1) {f8e5cff} called on Looper (JavaBridge, tid 416) {decfde2}, FYI main Looper is Looper (main, tid 1) {f8e5cff})
+     * @param result
+     */
     public static void  showQrResult(String result){
         Log.d(TAG,"showQrResult,result:" + result);
         Log.d(TAG,"showQrResult,android.os.Build.VERSION.SDK_INT:" + android.os.Build.VERSION.SDK_INT);
@@ -179,5 +206,6 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         //释放资源
         webView.destroy();
         webView=null;
+        unregisterReceiver(receiver);
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.sp.spmultipleapp.R;
+import com.sp.spmultipleapp.customview.QRCodeScanDialogNotCanceled;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,10 +43,11 @@ public class DialogCustomTestActivity extends AppCompatActivity {
     public void clickView(View view) {
         if (view.getId() == R.id.btn_dialog){
 
+            startActivity(new Intent(this, DialogTestActivity.class));
 
         }else if (view.getId() == R.id.btn_popupwindow){
-            startActivity(new Intent(this,PopupWindowTestActivity.class));
 
+            startActivity(new Intent(this,PopupWindowTestActivity.class));
         }
     }
 
