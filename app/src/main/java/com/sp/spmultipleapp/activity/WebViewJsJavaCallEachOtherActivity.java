@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.sp.spmultipleapp.JavaJsInterface;
 import com.sp.spmultipleapp.R;
-import com.sp.spmultipleapp.customview.QRCodeScanDialogNotCanceled;
+import com.sp.spmultipleapp.customview.QRCodeScanDialogOutsideClick;
 
 /**
  * js与java相互调用
@@ -57,6 +57,7 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan");
         webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_popup_window");
         webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_dialog");
+        webView.addJavascriptInterface(WebViewJsJavaCallEachOtherActivity.this,"dismiss_dialog_by_send_broadcast");
 
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
@@ -76,15 +77,16 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
-        IntentFilter filter = new IntentFilter(QRCodeScanDialogNotCanceled.ACTION_RESULT);
+        IntentFilter filter = new IntentFilter(QRCodeScanDialogOutsideClick.ACTION_RESULT);
         registerReceiver(receiver,filter);
     }
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (TextUtils.equals(intent.getAction(),QRCodeScanDialogNotCanceled.ACTION_RESULT)){
+            if (TextUtils.equals(intent.getAction(), QRCodeScanDialogOutsideClick.ACTION_RESULT)){
                 String result = intent.getStringExtra("result");
                 webView.loadUrl("javascript:showQrCodeScan('" + result + "')");
+                dismissDialogBySendBroadCast();
             }
         }
     };
@@ -92,6 +94,11 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         return activity;
     }
 
+    @JavascriptInterface
+    public void dismissDialogBySendBroadCast(){
+        Log.d(TAG,"dismissDialogBySendBroadCast call,to send ACTION_DISMISS_DIALOG");
+        sendBroadcast(new Intent(QRCodeScanDialogOutsideClick.ACTION_DISMISS_DIALOG));
+    }
     /**
      * java.lang.RuntimeException: java.lang.Throwable: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread. (Expected Looper Looper (main, tid 1) {f8e5cff} called on Looper (JavaBridge, tid 416) {decfde2}, FYI main Looper is Looper (main, tid 1) {f8e5cff})
      * @param result

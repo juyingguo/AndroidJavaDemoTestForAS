@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.sp.spmultipleapp.R;
-import com.sp.spmultipleapp.customview.QRCodeScanDialogNotCanceled;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

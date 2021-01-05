@@ -233,8 +233,8 @@ public class CaptureActivityNew extends BaseActivity implements DecodeInterface,
 		//url = "http://edu.ibotn.com/download/test/test_pic_3.jpg";
 
 		Log.i("jlzou", "result--> " + url);
-		WebViewJsJavaCallEachOtherActivity.showQrResult(url);
-		finish();
+//		WebViewJsJavaCallEachOtherActivity.showQrResult(url);
+//		finish();
 	}
 
 	public void restartPreviewAfterDelay(long delayMS) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="300dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/rl_dynamic_position"
@@ -16,7 +16,7 @@
 
         <!--二维码扫描线条-->
         <com.zxing.android.view.ViewfinderView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/viewfinderview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

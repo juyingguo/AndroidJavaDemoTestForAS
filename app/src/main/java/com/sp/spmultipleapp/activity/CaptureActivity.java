@@ -219,8 +219,7 @@ public class CaptureActivity extends BaseActivity implements Callback, View.OnCl
 		//url = "http://edu.ibotn.com/download/test/test_pic_3.jpg";
 
 		Log.i("jlzou", "result--> " + url);
-		WebViewJsJavaCallEachOtherActivity.showQrResult(url);
-		finish();
+		restartPreviewAfterDelay(0L);
 	}
 
 	public void restartPreviewAfterDelay(long delayMS) {

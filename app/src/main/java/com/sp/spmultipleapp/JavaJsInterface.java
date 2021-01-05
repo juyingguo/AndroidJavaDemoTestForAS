@@ -8,7 +8,7 @@ import android.webkit.JavascriptInterface;
 import com.sp.spmultipleapp.activity.CaptureActivity;
 import com.sp.spmultipleapp.activity.WebViewJsJavaCallEachOtherActivity;
 import com.sp.spmultipleapp.application.CoreApplication;
-import com.sp.spmultipleapp.customview.QRCodeScanDialogNotCanceled;
+import com.sp.spmultipleapp.customview.QRCodeScanDialogOutsideClick;
 import com.sp.spmultipleapp.customview.QRCodeScanPopupWindow;
 
 /**
@@ -30,10 +30,18 @@ public class JavaJsInterface {
         QRCodeScanPopupWindow window = new QRCodeScanPopupWindow(WebViewJsJavaCallEachOtherActivity.getInstance()
                 , View.inflate(WebViewJsJavaCallEachOtherActivity.getInstance(), R.layout.popupwindow_qr_code_scan,null));
         window.showAtLocationInActivity();
-    }@JavascriptInterface
+    }
+    @JavascriptInterface
     public void startQrCodeScanWithDialog() {
         Log.d(TAG,"startQrCodeScanWithDialog.");
-        QRCodeScanDialogNotCanceled dialogNotCanceled = new QRCodeScanDialogNotCanceled(WebViewJsJavaCallEachOtherActivity.getInstance());
+        QRCodeScanDialogOutsideClick dialogNotCanceled = new QRCodeScanDialogOutsideClick(WebViewJsJavaCallEachOtherActivity.getInstance());
         dialogNotCanceled.showAtLocationInActivity();
+    }
+    @JavascriptInterface
+    public void startQrCodeScanWithDialogParam(int x,int y) {
+        Log.d(TAG,"startQrCodeScanWithDialogParam,x:" + x + ",y:" + y);
+        QRCodeScanDialogOutsideClick dialogNotCanceled = new QRCodeScanDialogOutsideClick(WebViewJsJavaCallEachOtherActivity.getInstance());
+
+        dialogNotCanceled.showAtLocationInActivityParam(x,y);
     }
 }
