@@ -9,11 +9,15 @@
         android:layout_height="match_parent">
         <SurfaceView
             android:id="@+id/surfaceview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_centerInParent="true"/>
         <!--android:background="@mipmap/main_bg"-->
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/camera_bg_2" />
         <!--二维码扫描线条-->
         <com.zxing.android.view.ViewfinderView
             android:visibility="gone"

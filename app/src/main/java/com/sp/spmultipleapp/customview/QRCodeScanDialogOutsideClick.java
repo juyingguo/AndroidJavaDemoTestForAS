@@ -266,8 +266,8 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
 //        layoutParams.width = 300/*activity.getResources().getDisplayMetrics().widthPixels / 3*/;
 //        layoutParams.height = 300/*activity.getResources().getDisplayMetrics().heightPixels / 4 * 3*/;
-        layoutParams.width = 300;
-        layoutParams.height = 250;
+        layoutParams.width = 430;
+        layoutParams.height = 430;
         layoutParams.gravity = Gravity.TOP | Gravity.START;
         layoutParams.x = this.x;
         layoutParams.y = this.y;
