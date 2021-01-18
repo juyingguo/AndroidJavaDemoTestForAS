@@ -1,2 +1,2 @@
-include ':app', ':javatest', ':demotest', ':artchapter3', ':audio2mp3', ':advancelight_chapter_10_mvpsimple'
+include ':app', ':javatest', ':demotest', ':artchapter3', ':audio2mp3', ':advancelight_chapter_10_mvpsimple',':ndkBuildJni'
 include ':videoTalk0823'
