@@ -8,7 +8,7 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
 JNIEXPORT jstring JNICALL Java_com_example_ndkbuildjni_MyJni_get
-  (JNIEnv *env, jclass jz){
+  (JNIEnv *env, jclass j){
 
         //LOGI("hello，这里是native层");
         return env->NewStringUTF("hello jni , you are so easy!");
