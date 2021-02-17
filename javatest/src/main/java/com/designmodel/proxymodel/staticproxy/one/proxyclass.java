@@ -1,5 +1,9 @@
 package com.designmodel.proxymodel.staticproxy.one;
-
+/**
+ * 代理类
+ * @author username
+ *
+ */
 class proxyclass implements buy_car {
    
     private people people;

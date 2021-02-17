@@ -1,5 +1,10 @@
 package com.designmodel.proxymodel.staticproxy.one;
 
+/**
+ * 被代理类
+ * @author username
+ *
+ */
 class people implements buy_car {
  
    private int cash;
