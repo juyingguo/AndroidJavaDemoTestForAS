@@ -54,9 +54,9 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         WebSettings webSettings=webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
         JavaJsInterface javaJsInterface = new JavaJsInterface();
-        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan");
-        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_popup_window");
-        webView.addJavascriptInterface(javaJsInterface,"start_qr_code_scan_with_dialog");
+        webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
+        webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
+        webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
         webView.addJavascriptInterface(WebViewJsJavaCallEachOtherActivity.this,"dismiss_dialog_by_send_broadcast");
 
         /**
