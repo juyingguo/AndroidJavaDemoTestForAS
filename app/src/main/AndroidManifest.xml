@@ -12,33 +12,32 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <!--camera -->
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" /> <!-- camera -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera"/>
-    <!---->
-    <uses-permission android:name="android.permission.BODY_SENSORS"/>
-
-    <!-- 清除屏保需要的权限 -->
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-
-    <!-- 唤醒屏幕需要的权限 -->
+    <uses-feature android:name="android.hardware.camera" /> <!--  -->
+    <uses-permission android:name="android.permission.BODY_SENSORS" /> <!-- 清除屏保需要的权限 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 唤醒屏幕需要的权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
     <application
         android:name=".application.CoreApplication"
         android:allowBackup="true"
@@ -47,6 +46,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".activity.aidltest.AidlTestActivity"
+            android:theme="@style/Theme.AppCompat.Light">
+
+        </activity>
         <!-- android8.0需要的配置，主要是调用相机 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -90,15 +93,12 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.CameraTakePhotoTestActivity"
-            android:theme="@style/Theme.AppCompat"/>
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.CameraTest"
-            android:theme="@style/Theme.AppCompat"/>
-        <activity
-            android:name="com.sp.spmultipleapp.activity.CaptureActivity"/><!-- android:theme="@android:style/Theme.Translucent"-->
-        <activity
-            android:name="com.sp.spmultipleapp.activity.CaptureActivityNew"/><!-- android:theme="@android:style/Theme.Translucent"-->
-
+            android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".activity.CaptureActivity" /> <!-- android:theme="@android:style/Theme.Translucent" -->
+        <activity android:name=".activity.CaptureActivityNew" /> <!-- android:theme="@android:style/Theme.Translucent" -->
         <activity
             android:name=".activity.nettest.NetTestActivity"
             android:theme="@style/Theme.AppCompat" />
@@ -113,8 +113,8 @@
             android:theme="@style/Theme.AppCompat" /> <!-- android:taskAffinity="com.taskAffinity.b" -->
         <activity
             android:name=".activity.SwitchTestActivity"
-            android:theme="@style/Theme.AppCompat"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activity.taskstack.TaskStackActivityB" />
         <!--
 <activity android:name="com.sp.spmultipleapp.activity.taskstack.TaskStackActivityB"
@@ -145,30 +145,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--android:enabled="true"-->
-        <receiver
-            android:name=".MyReceiver">
+        </activity> <!-- android:enabled="true" -->
+        <receiver android:name=".MyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE"
                     tools:ignore="BatteryLife" />
                 <!-- <action android:name="action_test_abc" /> -->
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".CoreBroadCastReceiver">
+        <receiver android:name=".CoreBroadCastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE"
                     tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".receiver.ScreenOffAdminReceiver"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
@@ -198,28 +196,63 @@
         <activity android:name=".testokhttp.OkhttpTestActivity" />
         <activity android:name=".gamecourse.GameCourseActivity" />
         <activity android:name=".gamecourse.GameCoursePrimaryClassActivity" />
-        <activity android:name=".showbigimage.one.LargeImageViewActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".showbigimage.one.BitmapRegionDecoderTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".showbigimage.one.LargeImageViewWithScaleActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".showbigimage.ShowBigImageTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".showbigimage.one.LargeImageWithGalleryActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".showimage.ShowMultiImageActivity"/>
-        <activity android:name=".showimage.ShowScaleImageActivity"/>
-        <activity android:name=".showimage.ShowScaleImageWithPhotoViewActivity"/>
-        <activity android:name=".sensor.SensorTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.ScreenOffAdminActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.KeepAliveTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.FileModuleActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WifiModuleTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WebViewTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WebViewListTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WebViewEliminateTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WebViewSpaceBattleShipTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.WebViewJsJavaCallEachOtherActivity" android:theme="@style/Theme.AppCompat" />
-        <!--<activity android:name="com.sp.spmultipleapp.activity.CaptureTransparentPositionTestActivity"/>-->
-        <activity android:name=".activity.DialogCustomTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.PopupWindowTestActivity" android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.DialogTestActivity" android:theme="@style/Theme.AppCompat.Light"/>
+        <activity
+            android:name=".showbigimage.one.LargeImageViewActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".showbigimage.one.BitmapRegionDecoderTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".showbigimage.one.LargeImageViewWithScaleActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".showbigimage.ShowBigImageTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".showbigimage.one.LargeImageWithGalleryActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".showimage.ShowMultiImageActivity" />
+        <activity android:name=".showimage.ShowScaleImageActivity" />
+        <activity android:name=".showimage.ShowScaleImageWithPhotoViewActivity" />
+        <activity
+            android:name=".sensor.SensorTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.ScreenOffAdminActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.KeepAliveTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.FileModuleActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WifiModuleTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WebViewTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WebViewListTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WebViewEliminateTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WebViewSpaceBattleShipTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.WebViewJsJavaCallEachOtherActivity"
+            android:theme="@style/Theme.AppCompat" /> <!-- <activity android:name="com.sp.spmultipleapp.activity.CaptureTransparentPositionTestActivity"/> -->
+        <activity
+            android:name=".activity.DialogCustomTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.PopupWindowTestActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.DialogTestActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>
