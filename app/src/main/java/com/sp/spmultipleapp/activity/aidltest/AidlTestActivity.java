@@ -53,6 +53,11 @@ public class AidlTestActivity extends AppCompatActivity {
             // 获取AIDL接口对象，用来通信
             LogUtil.d(TAG,">>mServiceConnection>>onServiceConnected()>>" );
             mIContactAidlInterface = IContactAidlInterface.Stub.asInterface(service);
+            try {
+                service.linkToDeath(deathRecipient,0);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             isBoundRemoteContactService = true;
 
             isExistContact(testName);
@@ -60,7 +65,7 @@ public class AidlTestActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            LogUtil.e(TAG ,  ">>mServiceConnection>>onServiceDisconnected()>>" );
+            LogUtil.e(TAG ,  ">>mServiceConnection>>onServiceDisconnected(),Thread.currentThread().getName():" + Thread.currentThread().getName());
             mIContactAidlInterface = null;
             isBoundRemoteContactService = false;
         }
@@ -83,7 +88,17 @@ public class AidlTestActivity extends AppCompatActivity {
 //            unBindRemoteContactService();
         }
     };
-
+    //bind死亡通知
+    private  IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            LogUtil.d(TAG,"binderDied()，Thread.currentThread().getName():" + Thread.currentThread().getName());
+            if (mIContactAidlInterface == null) return;
+            mIContactAidlInterface.asBinder().unlinkToDeath(deathRecipient,0);
+            mIContactAidlInterface = null;
+            // TODO: 2021/3/5 此处可重新
+        }
+    };
     /**
      * 检查联系人是否存在
      * @param contactName 联系人名
