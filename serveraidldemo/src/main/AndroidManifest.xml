@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.demo.serveraidldemo">
-
+    <!--添加访问远程服务的权限限制--><!--这种方式一直不成功，暂时不知道为什么-->
+    <permission android:name="com.demo.serveraidldemo.permission.ACCESS_CONTACT_SERVICE"
+        android:protectionLevel="normal"></permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.demo.serveraidldemo.service.ContactRemoteService"
-            ><!--android:process="com.remoteService"-->
+        <service android:name="com.demo.serveraidldemo.service.ContactRemoteService"><!--android:process="com.remoteService"-->
+            <!-- 在此也可设置权限-->
+            <!-- android:permission="com.demo.serveraidldemo.permission.ACCESS_CONTACT_SERVICE" -->
             <intent-filter>
                 <!--远程服务配置action-->
                 <action android:name="com.demo.serveraidldemo.action.contact.remote.service"/>
