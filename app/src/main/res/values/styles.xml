@@ -6,7 +6,7 @@
     </style>
     <!--对话框样式,透明-->
     <style name="Theme_CustomDialog_Shape_Transparent_Fillet" parent="@android:style/Theme.Dialog">
-        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowNoTitle">true</item>
         <!-- dialog背景样式 -->
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>

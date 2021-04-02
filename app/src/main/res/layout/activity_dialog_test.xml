@@ -27,4 +27,12 @@
         android:layout_height="wrap_content"
         android:onClick="clickShowQRCodeScanDialogNotCanceled"
         android:text="click qr code scan dialog not canceled" />
+
+    <Button
+        android:id="@+id/btn_to_fullscreen"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickToFullscreen"
+        android:text="clickToFullscreen" />
 </LinearLayout>

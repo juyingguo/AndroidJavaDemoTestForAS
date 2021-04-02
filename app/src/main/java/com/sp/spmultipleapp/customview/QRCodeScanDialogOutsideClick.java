@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -56,7 +57,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
     Activity activity;
     public static String ACTION_RESULT = "ACTION_RESULT";
     public static String ACTION_DISMISS_DIALOG = "ACTION_DISMISS_DIALOG";
-    private final int DEFAULT_X = 350;
+    private final int DEFAULT_X = 350 + 200;
     private final int DEFAULT_Y = 170;
     int x = DEFAULT_X;
     int y = DEFAULT_Y;
@@ -74,7 +75,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_not_canceled_qr_code_scan);
         surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinderview);
@@ -122,6 +123,13 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @SuppressLint("LongLogTag")
@@ -238,7 +246,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
         intent.setAction(ACTION_RESULT);
         intent.putExtra("result",result);
         activity.sendBroadcast(intent);
-        restartPreviewAfterDelay(3000L);
+        restartPreviewAfterDelay(200L);
     }
     public void restartPreviewAfterDelay(long delayMS) {
         if (handler != null) {

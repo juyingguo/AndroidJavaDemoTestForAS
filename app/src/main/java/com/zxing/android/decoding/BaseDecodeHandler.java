@@ -103,6 +103,7 @@ final class BaseDecodeHandler extends Handler {
 
 		if (rawResult != null) {
 			long end = System.currentTimeMillis();
+			Log.d(TAG, "decode,width:" + width + ",height:" + height);
 			Log.d(TAG, "Found barcode (" + (end - start) + " ms):\n" + rawResult.toString());
 			Message message = Message.obtain(activity.getHandler(), MessageIDs.decode_succeeded, rawResult);
 			Bundle bundle = new Bundle();

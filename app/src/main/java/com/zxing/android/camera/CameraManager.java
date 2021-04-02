@@ -42,10 +42,11 @@ public final class CameraManager {
 
 	private static final String TAG = CameraManager.class.getSimpleName();
 
-	private static final int MIN_FRAME_WIDTH = 300;
-	private static final int MIN_FRAME_HEIGHT = 300;
-	private static final int MAX_FRAME_WIDTH = 300;
-	private static final int MAX_FRAME_HEIGHT = 300;
+	private static final int ADD= 100;
+	private static final int MIN_FRAME_WIDTH = 300 + ADD;
+	private static final int MIN_FRAME_HEIGHT = 300 + ADD;
+	private static final int MAX_FRAME_WIDTH = 300 + ADD;
+	private static final int MAX_FRAME_HEIGHT = 300 + ADD;
 
 	private final Context context;
 	private final CameraConfigurationManager configManager;
@@ -233,10 +234,12 @@ public final class CameraManager {
 			} else if (height > MAX_FRAME_HEIGHT) {
 				height = MAX_FRAME_HEIGHT;
 			}
-//			int leftOffset = (screenResolution.x - width) / 2;
-			int leftOffset = 361;
-//			int topOffset = (screenResolution.y - height) * 2 / 5;
-			int topOffset = 150;
+			int leftOffset = (screenResolution.x - width) / 2;
+//			int leftOffset = 361;
+//			int leftOffset = 0;
+			int topOffset = (screenResolution.y - height) * 2 / 5;
+//			int topOffset = 150;
+//			int topOffset = 0;
 			framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
 			Log.d(TAG, "Calculated framing rect: " + framingRect);
 		}
@@ -271,6 +274,7 @@ public final class CameraManager {
 			//rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
 			framingRectInPreview = rect;
 		}
+		Log.d(TAG, "getFramingRectInPreview rect: " + framingRectInPreview);
 		return framingRectInPreview;
 	}
 

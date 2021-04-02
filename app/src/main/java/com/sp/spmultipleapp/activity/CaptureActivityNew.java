@@ -33,7 +33,9 @@ import java.io.IOException;
 import java.util.Vector;
 
 /**
- * copy from {@link CaptureActivity},but local handler use {@link BaseCaptureActivityHandler}
+ * 1.copy from {@link CaptureActivity},but local handler use {@link BaseCaptureActivityHandler}<br/>
+ * 2.一次扫描识别完成后，再次启动下一轮的扫描识别，需要调用{@link #restartPreviewAfterDelay}
+ *
  */
 public class CaptureActivityNew extends BaseActivity implements DecodeInterface, Callback, View.OnClickListener {
 	private static final String TAG = "CaptureActivityNew";
@@ -233,6 +235,7 @@ public class CaptureActivityNew extends BaseActivity implements DecodeInterface,
 		//url = "http://edu.ibotn.com/download/test/test_pic_3.jpg";
 
 		Log.i("jlzou", "result--> " + url);
+		restartPreviewAfterDelay(200);
 //		WebViewJsJavaCallEachOtherActivity.showQrResult(url);
 //		finish();
 	}
