@@ -12,4 +12,5 @@ tasks.withType(JavaCompile) {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'junit:junit:4.12'
 }

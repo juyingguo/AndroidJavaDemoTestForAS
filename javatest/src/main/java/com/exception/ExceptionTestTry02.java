@@ -22,14 +22,13 @@ public class ExceptionTestTry02 {
         try {
             int a = 10 * 10;
             System.out.println(TAG + ">>a:" + a);
-            int b = a /0;
-            System.out.println(TAG + ">>b:" + b);
-
+//            int b = a /0;
+//            System.out.println(TAG + ">>b:" + b);
+            return;
         }catch (Exception e){
-            System.out.println(TAG + ">>e:" + e.getMessage());
-        }
-        finally {
-            System.out.println(TAG + ">>testTryFinally end");
+            System.out.println(TAG + ">>testTry catch e:" + e.getMessage());
+        }finally {
+            System.out.println(TAG + ">>testTry finally end");
         }
         System.out.println(TAG + ">>testTry end");
     }
