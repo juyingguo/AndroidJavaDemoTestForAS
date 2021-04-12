@@ -28,4 +28,8 @@ public class StringUtils {
 
         return result;
     }
+    public static boolean isSpace(String str) {
+
+        return null == str || str.trim().equalsIgnoreCase("");
+    }
 }
