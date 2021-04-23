@@ -1496,5 +1496,35 @@ public class FileUtils {
     public static long getFileSize(String filePath) {
         return getFileSize(getFileByPath(filePath)) ;
     }
+    /**
+     * 读取字符文本文件
+     * @param fileName 文件全称
+     * @return String
+     */
+    public static String readFileContent(String fileName) {
+        File file = new File(fileName);
+        BufferedReader reader = null;
+        StringBuffer sbf = new StringBuffer();
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempStr;
+            while ((tempStr = reader.readLine()) != null) {
+                sbf.append(tempStr);
+            }
+            reader.close();
+            return sbf.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return sbf.toString();
+    }
 
 }

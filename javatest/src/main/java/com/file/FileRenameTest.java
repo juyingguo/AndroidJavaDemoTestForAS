@@ -14,7 +14,7 @@ public class FileRenameTest {
     public static void main(String[] args) {
         renameFile();        
     }
-    private static String ROOT_DIR = "D:\\juying\\test-file";
+    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\view\\2B_10_FindFriends";
     private static void renameFile() {
         new Thread(new Runnable() {
             @Override
@@ -34,7 +34,7 @@ public class FileRenameTest {
                         String name = FileUtils.getFileName(file);
                         if (name.startsWith("test_")){
                             String newName = name.substring("test_".length());
-                            System.out.println("renameFile(),find file [ file name start with test_ ],rename to no test_ prefix.");
+                            System.out.println("renameFile(),find file [ file name start with test_ ],rename to no test_ prefix. old name:" + name);
                             file.renameTo(new File(file.getParentFile(),newName));
 //                            System.out.println("renameFile(),file new name file.getName():" + file.getName());
 
