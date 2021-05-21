@@ -6,8 +6,8 @@ public class StringTest {
 
 
 
-        test05();
-
+//        test05();
+          test06();
     }
 
     private static void test05() {
@@ -23,6 +23,17 @@ public class StringTest {
         System.out.println(String.format("温度: %5.1f",35.555));
         System.out.println(String.format("温度: %-5.5f",35.555));
         System.out.println(String.format("温度: %-5.5f",35.555));
+
+    }
+    private static void test06() {
+
+        final String str = "abcba";
+        String[] array = str.split("");
+        for (int i=0;i<array.length;i++){
+            System.out.println(array[i]);
+
+        }
+        System.out.println(array.length);
 
     }
 
