@@ -3,45 +3,14 @@ package com.utils;
 import android.util.Log;
 
 /**
- * modiy by
+ * modify by
  */
 public class LogUtil {
 
-	private static final String KEY = "LogUtil";
     /**
 	 * model true:debug,release should false.
 	 */
-	public static final boolean FLAG = true;
-
-	public static void i(Object message) {
-		if (FLAG) {
-			Log.i(KEY, message.toString());
-		}
-	}
-
-	public static void e(Object message) {
-		if (FLAG) {
-			Log.e(KEY, message.toString());
-		}
-	}
-	
-	public static void d(Object message) {
-		if (FLAG) {
-			Log.d(KEY, message.toString());
-		}
-	}
-	
-	public static void w(Object message) {
-		if (FLAG) {
-			Log.w(KEY, message.toString());
-		}
-	}
-
-	public static void w(Object message, Throwable tr) {
-		if (FLAG) {
-			Log.w(KEY, message.toString(), tr);
-		}
-	}
+	private static final boolean FLAG = true;
 
 	public static void i(Object obj, Object message) {
 		if (FLAG) {

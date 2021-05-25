@@ -17,6 +17,7 @@ public class CoreApplication extends Application {
     String TAG = CoreApplication.class.getSimpleName();
 
     private static Context mContext;
+    private AppLifecycle appLifecycle;
     public static Context getInstance() {
         return mContext;
     }
@@ -32,16 +33,16 @@ public class CoreApplication extends Application {
 //        Intent intent = new Intent(this, SdcardReadWriteDealService.class);
 //        bindService(intent,connect, Service.BIND_AUTO_CREATE);
 
-
-
-
-
         /////////////////////
 //        startService(new Intent(this, TestService.class));
 
 //        startSeviceByAlarm();
+        appLifecycle = new AppLifecycle();
+        registerActivityLifecycleCallbacks(appLifecycle);
     }
-
+    public AppLifecycle getAppLifecycle() {
+        return appLifecycle;
+    }
     private void startSeviceByAlarm() {
         Intent intent = new Intent(getApplicationContext(), TestService.class);
         PendingIntent sender=PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
