@@ -2,21 +2,16 @@ package com.csst.videotalk;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.csst.ffmpeg.FFMpegIF;
 import com.csst.ffmpeg.control.ConnectListeningServer;
-import com.csst.videotalk.R;
-import com.csst.videotalk.VideoTalkActivity.RunState;
 import com.onLineDetect.service.OnLineDetectService;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -27,18 +22,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 public class FfmpegActivity extends Activity {
     /** Called when the activity is first created. */
@@ -89,15 +77,16 @@ public class FfmpegActivity extends Activity {
         edit_To = (EditText)findViewById(R.id.edit_to);
         video_Talk=(ImageButton) findViewById(R.id.imageButton1);
         video_monitor=(ImageButton) findViewById(R.id.imageButton2);
-		ButtonListenser btnListener = new ButtonListenser();
+		ButtonListener btnListener = new ButtonListener();
 		video_Talk.setOnClickListener(btnListener);
 		video_monitor.setOnClickListener(btnListener);
 		
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   //应用运行时，保持屏幕高亮，不锁屏
-		localIp=getlocalIp();
+		localIp= getLocalIp();
+		Log.d(TAG,"onCreate,localIp:" + localIp);
 		new ConnectListeningServer(this).start();
-		this.setTitle(this.getTitle()+"  (请把设备至于同一 WLAN 中)"+"  -- "+getlocalIp()+" # 交流QQ：480474041");
-		if(localIp!=""){
+		this.setTitle(this.getTitle()+"  (请把设备至于同一 WLAN 中)"+"  -- "+ getLocalIp()+" # 交流QQ：480474041");
+		if(localIp != null && !localIp.equals("")){
 			localIpHead=localIp.substring(0, localIp.lastIndexOf('.')+1);
 		}    
     }
@@ -108,14 +97,14 @@ public class FfmpegActivity extends Activity {
      * 
      * @return
      */
-    public String getlocalIp(){  
-       WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);    
+    public String getLocalIp(){
+       @SuppressLint("WifiManagerLeak") WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
        WifiInfo mWifiInfo = wifiManager.getConnectionInfo();   
        if(mWifiInfo ==null){
     	   return "ip=null";
        }else{
            int ipAddress=mWifiInfo.getIpAddress();
-           Log.e("222","!!=="+ipAddress+"===");
+           Log.d(TAG,"getLocalIp ipAddress="+ipAddress);
            if(ipAddress==0)  return "ip=null";
            return "ip="+((ipAddress & 0xff)+"."+(ipAddress>>8 & 0xff)+"."  
                    +(ipAddress>>16 & 0xff)+"."+(ipAddress>>24 & 0xff));  
@@ -182,7 +171,7 @@ public class FfmpegActivity extends Activity {
 			 }
 		}.start();
     }
-    class ButtonListenser implements OnClickListener{
+    class ButtonListener implements OnClickListener{
 
 		@Override
 		public void onClick(View v) {
@@ -193,7 +182,7 @@ public class FfmpegActivity extends Activity {
 				startCallSomeBody();  //备用的
 			}
 		}	
-	}//buttonlistening is over here
+	}//ButtonListener is over here
     
     
     
@@ -229,7 +218,6 @@ public class FfmpegActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
     	Log.d(TAG, "--onpause");    	
 
@@ -237,10 +225,8 @@ public class FfmpegActivity extends Activity {
 	
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-		
-		super.onPause();
-    	Log.d(TAG, "--onStop");      	
+		super.onStop();
+		Log.d(TAG, "--onStop");
 
 	}
 	

@@ -32,7 +32,7 @@ public class VideoTalkActivity extends Activity  {
 
 	private final int beCalledImageDrawRate=100;    //被叫的影响的刷新间隔时间，单位 毫秒
 
-	private String tag = "ffmpegdemo";
+	private String tag = "ffmpeg_talk_demo";
 	
 	/*设定录像的像素大小*/
 	public  static int CAMERA_W = 640;
@@ -85,29 +85,26 @@ public class VideoTalkActivity extends Activity  {
 	    Bundle bundle = intent.getExtras();
 	    connectIp=bundle.getString("CONNECTIP");
 	    connectType=bundle.getString("CONNECTTYPE");
+		Log.d(tag, "onCreate,connectIp:" + connectIp + ",connectType:" + connectType);
 	}
-	
-	
 
-	
-	
 	public void startVideoCall(){
 		FFMpegIF.Init();
-        
+		Log.i(tag, "startVideoCall(),encodeState:" + encodeState);
 		//启动编码的线程
 		if(encodeState == RunState.RUN_STATE_IDLE) {
 			//启动线程，在线程中启动编码
-			Log.i(tag, "start encode thread");
+			Log.i(tag, "startVideoCall(),start encode thread");
 			encodeState = RunState.RUN_STATE_READY;
 			//create decode thread and run
 			EncodeThread encthread = new EncodeThread(); 
 			new Thread(encthread).start();
 		}
-
+		Log.i(tag, "startVideoCall(),decodeState:" + decodeState);
 		//启动解码的线程
 		if(decodeState == RunState.RUN_STATE_IDLE) {
 			//启动线程，在线程中启动解码，因为解码会一直等待数据，如果不用线程，则程序会阻塞在ffmpegif.StartDecode()中
-			Log.i(tag, "start decode thread");
+			Log.i(tag, "startVideoCall(),start decode thread");
 			decodeState = RunState.RUN_STATE_READY; 
 			//create decode thread and run
 			DecodeThread decThread = new DecodeThread(); 
@@ -187,16 +184,16 @@ public class VideoTalkActivity extends Activity  {
 //				String urlFrm = "rtp://"+textFrm.getText().toString();
 				
 				String urlFrm="rtp://"+connectIp+":"+port1;
-				Log.i(tag, "from:"+urlFrm);
+				Log.i(tag, "DecodeThread,from:"+urlFrm);
 				
 				if(FFMpegIF.StartDecode(urlFrm)<0) {
-					Log.e(tag, "Start decode failed");
+					Log.e(tag, "DecodeThread,Start decode failed");
 					FFMpegIF.StopDecode();
 					decodeState = RunState.RUN_STATE_IDLE;
 					return;
 				}
 				
-				Log.i(tag, "Start decode successed");
+				Log.i(tag, "DecodeThread,Start decode successed");
 				decodeState = RunState.RUN_STATE_RUNNING;
 					
 				/*获取接收到的视频resolution，以设置bitmap的参数*/
@@ -211,7 +208,7 @@ public class VideoTalkActivity extends Activity  {
 				} while(remote_w==0&&remote_h==0&&decodeState==RunState.RUN_STATE_RUNNING);
 				
 				if(decodeState==RunState.RUN_STATE_RUNNING) {
-					Log.i("222", "width="+remote_w+" height="+remote_h);
+					Log.i(tag, "DecodeThread,width="+remote_w+" height="+remote_h);
 					beCalledBitmap = Bitmap.createBitmap(remote_w, remote_h, Bitmap.Config.ARGB_8888);
 				}
 			} 
@@ -256,12 +253,10 @@ public class VideoTalkActivity extends Activity  {
     	Message 	msg;
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			if(encodeState == RunState.RUN_STATE_READY) {
 				String urlTo="rtp://"+connectIp+":"+port2;
-				
 				if(FFMpegIF.StartEncode(urlTo, CAMERA_W, CAMERA_H,10)<0) {
-					Log.e(tag, "Start encode failed");
+					Log.e(tag, "EncodeThread,Start encode failed");
 					FFMpegIF.StopEncode();
 					return;
 				}
@@ -269,7 +264,7 @@ public class VideoTalkActivity extends Activity  {
 				encodeState = RunState.RUN_STATE_RUNNING;
 				doCalledImageView.startEncodeNow(true);
 			} 
-			Log.i(tag, "Start encode successed");
+			Log.i(tag, "EncodeThread Start encode successed");
 
 		}
     }
@@ -278,7 +273,7 @@ public class VideoTalkActivity extends Activity  {
 		new Thread(){ 
 			 @Override
 			 public void run(){
-				 Log.e(tag,"connectType:"+connectType);
+				 Log.e(tag,"onStart(),thread run(),connectType:"+connectType);
 
 				 if(connectType.equals("BECALLER")){
 					 int temp=port1;
@@ -313,35 +308,29 @@ public class VideoTalkActivity extends Activity  {
 
 		FFMpegIF.StopEncode();
 		encodeState = RunState.RUN_STATE_IDLE;
-
-	
 		FFMpegIF.Release();
     }
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();	
+		super.onResume();
 	}
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 	}	
 	
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-		beCalledImageView=null;
+		super.onStop();
+		beCalledImageView = null;
 		decodeState = RunState.RUN_STATE_STOP;
-		
-		super.onPause();
+
 	}
 	
 	@Override
 	protected void onDestroy()
 	{
-		// TODO Auto-generated method stub
 		stopVideoTalk();
 		super.onDestroy();
 		

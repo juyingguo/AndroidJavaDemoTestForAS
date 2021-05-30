@@ -38,7 +38,6 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 
 	private boolean playFlag=true;            
 
-
     /**
      * 本构造方法用于测试使用
      *    
@@ -52,9 +51,7 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 	    getHolder().setFormat(PixelFormat.TRANSLUCENT);  
 	    setFocusable(true); 
 	}
-	
 
-	
 	/**
 	 * 暂时不用   
 	 * 
@@ -70,7 +67,6 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 //		setZOrderOnTop(true);   //
 	}
 	
-	
 	/**
 	 * 本构造方法可以通过资源文件来进行构造并设置样式
 	 * @param context     环境变量上下文
@@ -81,7 +77,7 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 	    sHolder = this.getHolder();// 获取holder
 	    sHolder.addCallback(this);	
 	    setFocusable(true); // 设置焦点  
-		Log.d(TAG,"Surface_Width" +sWidth+"Surface_Height"+sHeight);
+		Log.d(TAG,"BeCalledImageView Surface_Width" +sWidth+"Surface_Height"+sHeight);
 
 	}
 
@@ -97,8 +93,7 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 		Log.d(TAG,"Surface_Width 1" +sWidth+"Surface_Height"+sHeight);
 
 	}
-	  
-	
+
     /**
      * This is called immediately after any structural changes
      * (format or size) have been made to the surface.
@@ -108,11 +103,8 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 				int height) {
-		// TODO Auto-generated method stub
- 
 	}
-	
-	
+
 	/**
 	 * This is called immediately after the surface is first created.
 	 * 
@@ -121,15 +113,11 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 	public void surfaceCreated(SurfaceHolder holder) {
 	    sWidth=sHolder.getSurfaceFrame().width();    
 	    sHeight=sHolder.getSurfaceFrame().height();  
-		Log.d(TAG,"Surface_Width 2" +sWidth+"Surface_Height"+sHeight);
+		Log.d(TAG,"surfaceCreated Surface_Width 2" +sWidth+"Surface_Height"+sHeight);
 		mPaint=new Paint();
 		Resources res = getResources();
-//	   Resources res = getResources();
-
 		cameraBitmap=BitmapFactory.decodeResource(res, R.drawable.camerapic);
-
 	}
-     
 
 	/**
 	 * 
@@ -145,8 +133,7 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 	
 	/**
 	 * 刷新解码后的图像
-	 * 
-	 * 
+	 *
 	 */
 	public void drawBecalledImage(){
 	    	try {
@@ -160,11 +147,11 @@ public class BeCalledImageView extends SurfaceView implements SurfaceHolder.Call
 			    		   mPaint);
 //			       canvas.drawBitmap(VideoTalkActivity.beCalledBitmap,0,0,mPaint);
 			    }else{
-			       Log.e(TAG,"画图或图像为空："+"    canvas:"+canvas+"    bitmap:"+VideoTalkActivity.beCalledBitmap);
+			       Log.e(TAG,"drawBecalledImage 画图或图像为空："+"    canvas:"+canvas+"    bitmap:"+VideoTalkActivity.beCalledBitmap);
 			    }
 	
 	    	} catch (Exception e) {
-	    		Log.d(TAG, "draw is Error!"+e.getMessage());
+	    		Log.d(TAG, "drawBecalledImage draw is Error!"+e.getMessage());
 	    	} finally {
 	    		if(canvas!=null&&sHolder!=null){
 		    		sHolder.unlockCanvasAndPost(canvas);
