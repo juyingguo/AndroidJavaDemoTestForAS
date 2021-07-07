@@ -28,7 +28,17 @@ import jxl.write.WriteException;
  */
 public class ScriptGetNetResource {
     private static String TAG = "ScriptGetNetResource";
-    public static String[] animalArray = new String[]{"老虎","狮子","大象"};
+    public static String[] animalArray = new String[]{
+            //动物类
+            "老虎","狮子","大象","狼","老鼠","长颈鹿","大象","貂","猴子","斑马","狗","狐狸","斑马"
+            ,"熊","豹子","熊猫","大熊猫","羚羊","驯鹿","考拉","犀牛","袋鼠","穿山甲","河马","猩猩","海牛","水獭","海豹","海豚","海象","鸭嘴兽"
+            ,"刺猬","北极熊","鲸鱼","兔子","小白兔"
+            //鱼类
+            ,"鲨鱼","章鱼","水獭","鳄鱼","鲈鱼","鲤鱼","金枪鱼","鲟鱼","水獭"
+            ///鸟类
+            ,"老鹰","鹰","鹅","企鹅","鹦鹉","啄木鸟","鸵鸟","翠鸟","天鹅","蜂鸟","信天翁","鹤","夜莺","海鸥","夜莺"
+
+    };
     private static String nlpDouDouUrlPrefix = "http://api.doudoubot.cn/rsvpbot/general/chat?appid=rsvpupR18lm6q8i0&token=HD8Mn045gGzZ8foc&userid=123456&question=";
     public static void main(String[] args) {
         new Thread(new Runnable() {
@@ -41,7 +51,10 @@ public class ScriptGetNetResource {
 
     private static void getResources() {
         LinkedHashMap<String,String> hashMap = new LinkedHashMap<String,String>();
+        long firstTimeMs = System.currentTimeMillis();
+        long currTimeMs = 0L;
         for(int i=0 ; i <animalArray.length ; i++){
+            currTimeMs = System.currentTimeMillis();
             String url = nlpDouDouUrlPrefix + HttpURLConnectionHelp.encodeStr(animalArray[i]);
             String result = HttpURLConnectionHelp.doGet(url);
             System.out.println("getResources(),animal:" + animalArray[i] + ",result:" + result);
@@ -54,34 +67,42 @@ public class ScriptGetNetResource {
             JsonElement parse = jsonObject.parse(result);
             JsonObject asJsonObject = parse.getAsJsonObject();
             int status = asJsonObject.get("status").getAsInt();
+            ///动物名称不同，豆豆返回的json结构不同
+            ///狮子,result:{"stage":[{"image":"http://resource.doudoubot.cn/download/image/domain/animal/animal_24.jpg","message":"狮子的体型大，躯体均匀，四肢中长。","url":"http://resource.doudoubot.cn/download/audio/domain/animal/shizi_24.mp3"}],"status":0}
+            ///大象,result:{"stage":[{"message":"小i唱一首《大象》，要掌声鼓励哦！"},{"image":"http://resource.doudoubot.cn/download/image/play/play_song.jpg","url":"http://resource.doudoubot.cn/download/audio/play/01-daxiang.mp3"}],"status":0}
             if (status == 0){
                 JsonArray stageArray = asJsonObject.getAsJsonArray("stage");
-                JsonObject jsonBean = stageArray.get(0).getAsJsonObject();
-                if (jsonBean == null) continue;
+                JsonObject jsonBean = null;
+                for(int j = 0;j<stageArray.size();j++){
+                    jsonBean = stageArray.get(j).getAsJsonObject();
+                    if (jsonBean == null) continue;
 
-                if (jsonBean.has("message")){
-                    outJson.addProperty("answer",jsonBean.get("message").getAsString());
+                    if (jsonBean.has("message")){
+                        outJson.addProperty("answer",jsonBean.get("message").getAsString());
+                    }
+                    if (jsonBean.has("image")){
+                        outJson.addProperty("imageUrl",jsonBean.get("image").getAsString());
+                    }
+                    if (jsonBean.has("url")){
+                        outJson.addProperty("audioUrl",jsonBean.get("url").getAsString());
+                    }
                 }
-                if (jsonBean.has("image")){
-                    outJson.addProperty("imageUrl",jsonBean.get("image").getAsString());
-                }
-                if (jsonBean.has("url")){
-                    outJson.addProperty("audioUrl",jsonBean.get("url").getAsString());
-                }
-
                 refactorOutStr = "..JSON_IBOTN_IFLYTEK_"+ outJson.toString();
                 System.out.println("getResources(),animal:" + animalArray[i] + ",refactorOutStr:" + refactorOutStr);
                 hashMap.put(animalArray[i],refactorOutStr);
             }
+            System.out.println("getResources(),consume time:" + (System.currentTimeMillis() - currTimeMs));
         }
-
+        System.out.println("getResources(),current consume time total:" + (System.currentTimeMillis() - firstTimeMs));
         //////////////////保存数据到excel中///////////////
         createExcelEnter(hashMap);
+
+        System.out.println("getResources(),consume time total(contain save to excel):" + (System.currentTimeMillis() - firstTimeMs));
     }
 
     private static void createExcelEnter(LinkedHashMap hashMap){
 
-        String fileAbsPath = "D:/动物问答库.xls";
+        String fileAbsPath = "D:/动物问答库-测试.xls";
         try {
             File file = new File(fileAbsPath);
             boolean orExistsFile = FileUtils.createOrExistsFile(file);
@@ -113,7 +134,7 @@ public class ScriptGetNetResource {
         sheet.addCell(label1);
         Label label2 = new Label(2,0,"答案");
         sheet.addCell(label2);
-        Label label3 = new Label(2,0,"情绪");
+        Label label3 = new Label(3,0,"情绪");
         sheet.addCell(label3);
 
         int i = 0;
@@ -126,25 +147,19 @@ public class ScriptGetNetResource {
 
             System.out.println("key = " + keyName + ", value = " + valueName);
 
-            Label a = new Label(0,i,keyName);
+            Label a = new Label(0,i*3-2,keyName);
             sheet.addCell(a);
-            Label b = new Label(1,i,"我想看" + keyName);
+            Label b = new Label(1,i*3-2,keyName);
             sheet.addCell(b);
-            Label c = new Label(1,i*2,keyName + "长什么样子");
+            Label b1 = new Label(1,i*3-1,"我想看" + keyName);
+            sheet.addCell(b1);
+            Label c = new Label(1,i*3,keyName + "长什么样子");
             sheet.addCell(c);
-            Label d = new Label(2,i,valueName);
+            Label d = new Label(2,i*3-2,valueName);
             sheet.addCell(d);
-            Label e = new Label(3,i,"默认");
+            Label e = new Label(3,i*3-2,"默认");
             sheet.addCell(e);
         }
-
-
-        Label qinghua = new Label(0,1,"清华大学");
-        sheet.addCell(qinghua);
-        Label jisuanji = new Label(1,1,"计算机专业");
-        sheet.addCell(jisuanji);
-        Label gao = new Label(2,1,"高");
-        sheet.addCell(gao);
 
         //把创建的内容写入到输出流中，并关闭输出流
         workbook.write();
