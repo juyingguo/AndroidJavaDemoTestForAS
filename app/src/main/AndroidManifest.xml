@@ -255,6 +255,12 @@
         <activity
             android:name=".activity.DialogTestActivity"
             android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.AudioModuleActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.AudioRecordWavActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>

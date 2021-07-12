@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sp.spmultipleapp.activity.AppDetectTestActivity;
+import com.sp.spmultipleapp.activity.AudioModuleActivity;
 import com.sp.spmultipleapp.activity.CameraPictureVideoTestActivity;
 import com.sp.spmultipleapp.activity.DialogCustomTestActivity;
 import com.sp.spmultipleapp.activity.FileModuleActivity;
@@ -275,6 +276,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_webview_test
             ,R.id.btn_dialog_popupwindow_test
             ,R.id.btn_aidl_test
+            ,R.id.btn_audio_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -365,6 +367,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, DialogCustomTestActivity.class));
         }else if (view.getId() == R.id.btn_aidl_test){
             startActivity(new Intent(mContext, AidlTestActivity.class));
+        }else if (view.getId() == R.id.btn_audio_test){
+            startActivity(new Intent(mContext, AudioModuleActivity.class));
         }
     }
 
