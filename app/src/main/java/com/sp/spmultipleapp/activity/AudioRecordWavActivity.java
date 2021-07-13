@@ -31,7 +31,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
     private boolean mRecording = false;
     private Handler mHandler = new Handler();
 
-    private static final int RECORDER_BPP = 16;///PCM 16 bit per sample
+    private static final int RECORDER_BPS = 16;///PCM 16 bit per sample
     private static final int RECORDER_SAMPLERATE = 16000; //8000;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
@@ -79,7 +79,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        mAudioFilePath_Temp = dirPath + File.separator + baseFileName + ".raw";
+        mAudioFilePath_Temp = dirPath + File.separator + baseFileName + ".pcm";
         mRecordFilePath = dirPath + File.separator + baseFileName + ".wav";
     }
 
@@ -102,7 +102,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
             startRecording();
         }
     };
-    private Runnable mTimeoutRecordRunnble = new Runnable() {
+    private Runnable mTimeoutRecordRunnable = new Runnable() {
         @Override
         public void run() {
             stopRecording();
@@ -138,7 +138,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
             }, "mAudioRecordingThread Thread");
 
             mAudioRecordingThread.start();
-            mHandler.postDelayed(mTimeoutRecordRunnble, MAX_RECORDING_TIME);
+            mHandler.postDelayed(mTimeoutRecordRunnable, MAX_RECORDING_TIME);
         } catch (IllegalThreadStateException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
@@ -150,7 +150,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
 
     private void stopRecording() {
         LogUtil.d(TAG, "stopRecording()");
-        mHandler.removeCallbacks(mTimeoutRecordRunnble);
+        mHandler.removeCallbacks(mTimeoutRecordRunnable);
         mRecording = false;
         if (mAudioRecorder != null) {
             mAudioRecorder.stop();
@@ -218,7 +218,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
         long totalDataLen = totalAudioLen + 36;///录音数据长度 +（44 -8） （4个字节）
         long longSampleRate = RECORDER_SAMPLERATE;
         int channels = 1;///声道数，1为单声道，2为多声道
-        long byteRate = RECORDER_BPP * RECORDER_SAMPLERATE * channels / 8;
+        long byteRate = RECORDER_BPS * RECORDER_SAMPLERATE * channels / 8;
         byte[] data = new byte[mRecBufferSize];
         try {
             in = new FileInputStream(inFilename);
@@ -243,7 +243,7 @@ public class AudioRecordWavActivity extends AppCompatActivity implements View.On
     private void WriteWaveFileHeader(FileOutputStream out, long totalAudioLen,
                                      long totalDataLen, long longSampleRate, int channels, long byteRate)
             throws IOException {
-        int bps = RECORDER_BPP; /// bits per sample
+        int bps = RECORDER_BPS; /// bits per sample
         byte[] header = new byte[44];
         header[0] = 'R'; // RIFF/WAVE header
         header[1] = 'I';
