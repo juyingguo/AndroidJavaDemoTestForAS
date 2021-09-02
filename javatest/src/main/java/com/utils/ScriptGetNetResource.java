@@ -1,25 +1,29 @@
 package com.utils;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.helper.HttpURLConnectionHelp;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedList;
 
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Date:2021/6/30,14:21
@@ -30,7 +34,7 @@ public class ScriptGetNetResource {
     private static String TAG = "ScriptGetNetResource";
     public static String[] animalArray = new String[]{
             ////动物类 、
-            "老虎","狮子","大象","狼","老鼠","长颈鹿","大象","貂","猴子","斑马","狗","狐狸","斑马"
+            "老虎","狮子","大象"/*,"狼","老鼠","长颈鹿","大象","貂","猴子","斑马","狗","狐狸","斑马"
             ,"熊","豹子","熊猫","大熊猫","羚羊","驯鹿","考拉","犀牛","袋鼠","穿山甲","河马","猩猩"
             ,"海牛","水獭","海豹","海豚","海象","鸭嘴兽","蝙蝠","","",""
             ,"刺猬","北极熊","鲸鱼","兔子","小白兔","黄鼠狼","","","",""
@@ -46,19 +50,72 @@ public class ScriptGetNetResource {
             ///昆虫  肉足虫 藤壶
             ,"蝴蝶","蜻蜓","蝎子","珊瑚","纤毛虫","绦虫","","吸虫","水蚤","","蟋蟀","蜈蚣","蝗虫","","","","",""
             ///其他动物  草履虫
-            ,"蚯蚓","知了","蝉","恐龙","海蜇","海参","海绵","水母","水螅","海星","乌贼","海葵","海胆","","","","",""
+            ,"蚯蚓","知了","蝉","恐龙","海蜇","海参","海绵","水母","水螅","海星","乌贼","海葵","海胆","","","","",""*/
     };
     private static String nlpDouDouUrlPrefix = "http://api.doudoubot.cn/rsvpbot/general/chat?appid=rsvpupR18lm6q8i0&token=HD8Mn045gGzZ8foc&userid=123456&question=";
+    private static LinkedList<String> mImageList = new LinkedList<String>();
+    private static LinkedList<String> mAudioList = new LinkedList<String>();
     public static void main(String[] args) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 getResources();
+                downloadMediaResource();
             }
         }).start();
     }
 
+    private static void downloadMediaResource() {
+        System.out.println(TAG + "downloadMediaResource enter.");
+        String url = null, fileDir = null, fileName = null;
+        boolean isImage = true;
+        if (!mImageList.isEmpty()){
+            url = mImageList.removeFirst();
+            isImage = true;
+        }else {
+            if (!mAudioList.isEmpty()){
+                url = mAudioList.removeFirst();
+                isImage = false;
+            }
+        }
+        if (url == null || url.equals("")) {
+            System.out.println(TAG + "downloadMediaResource url is null,all finish.");
+            return;
+        }
+
+        if (isImage){
+            fileDir = "D:/Download/animal/image";
+        }else {
+            fileDir = "D:/Download/animal/audio";
+        }
+        fileName = FileUtils.getFileNameByHttpUrl(url);
+        System.out.println(TAG + "downloadMediaResource fileName:" + fileName);
+        OkHttpUtils.get().url(url).build().execute(new FileCallBack(fileDir,fileName) {
+            @Override
+            public void onBefore(Request request, int id) {
+                super.onBefore(request, id);
+                System.out.println(TAG + "onBefore>>id:" + id);
+                downloadMediaResource();
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int i) {
+                System.out.println(TAG + "onError>>e:" + e);
+                downloadMediaResource();
+            }
+
+            @Override
+            public void onResponse(File file, int i) {
+                System.out.println(TAG + "onResponse>>file:" + file);
+                downloadMediaResource();
+            }
+        });
+    }
+
     private static void getResources() {
+        mImageList.clear();
+        mAudioList.clear();
+
         LinkedHashMap<String,String> hashMap = new LinkedHashMap<String,String>();
         long firstTimeMs = System.currentTimeMillis();
         long currTimeMs = 0L;
@@ -79,9 +136,10 @@ public class ScriptGetNetResource {
             JsonElement parse = jsonObject.parse(result);
             JsonObject asJsonObject = parse.getAsJsonObject();
             int status = asJsonObject.get("status").getAsInt();
-            ///动物名称不同，豆豆返回的json结构不同
+            ///动物名称不同，豆豆返回的json结构不同，即：stage的jsonObject不同，有的文本图像音频在一个jsonObject中，有的分布在不同的jsonObject中。
             ///狮子,result:{"stage":[{"image":"http://resource.doudoubot.cn/download/image/domain/animal/animal_24.jpg","message":"狮子的体型大，躯体均匀，四肢中长。","url":"http://resource.doudoubot.cn/download/audio/domain/animal/shizi_24.mp3"}],"status":0}
             ///大象,result:{"stage":[{"message":"小i唱一首《大象》，要掌声鼓励哦！"},{"image":"http://resource.doudoubot.cn/download/image/play/play_song.jpg","url":"http://resource.doudoubot.cn/download/audio/play/01-daxiang.mp3"}],"status":0}
+            ///存在问题：图片名称例如：animal_24.jpg，而音乐为：shizi_24.mp3；为了便于查看，此时将图片名称改为和音乐名称一致。
             if (status == 0){
                 JsonArray stageArray = asJsonObject.getAsJsonArray("stage");
                 JsonObject jsonBean = null;
@@ -92,13 +150,19 @@ public class ScriptGetNetResource {
                     if (jsonBean.has("message")){
                         outJson.addProperty("answer",jsonBean.get("message").getAsString());
                     }
-                    if (jsonBean.has("image")){
-                        outJson.addProperty("imageUrl",jsonBean.get("image").getAsString());
-                    }
                     if (jsonBean.has("url")){
                         outJson.addProperty("audioUrl",jsonBean.get("url").getAsString());
+                        mAudioList.add(jsonBean.get("url").getAsString());
+                    }
+                    if (jsonBean.has("image")){
+                        outJson.addProperty("imageUrl",jsonBean.get("image").getAsString());
+                        mImageList.add(jsonBean.get("image").getAsString());
                     }
                 }
+                /*//此时将图片名称改为和音乐名称一致，后缀保持原样
+                JsonElement audioUrl = outJson.get("audioUrl");
+                JsonElement imageUrl = outJson.get("imageUrl");
+                System.out.println("getResources(),audioUrl:" + audioUrl);*/
                 refactorOutStr = "..JSON_IBOTN_IFLYTEK_"+ outJson.toString();
                 System.out.println("getResources(),animal:" + animalArray[i] + ",refactorOutStr:" + refactorOutStr);
                 hashMap.put(animalArray[i],refactorOutStr);

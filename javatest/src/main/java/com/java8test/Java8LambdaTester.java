@@ -1,8 +1,8 @@
 package com.java8test;
 
-public class Java8LamdaTester {
+public class Java8LambdaTester {
    public static void main(String args[]){
-      Java8LamdaTester tester = new Java8LamdaTester();
+      Java8LambdaTester tester = new Java8LambdaTester();
         
       // 类型声明
       MathOperation addition = (int a, int b) -> a + b;
@@ -69,12 +69,13 @@ public class Java8LamdaTester {
     * 2.不使用Lambda,就得使用匿名方法
     */
    private static void useCommonWay() {
-      System.out.println("useCommonWay 10 + 5 = " + new MathOperation(){
-         @Override
-         public int operation(int a, int b) {
-            return a+b;
-         }
-      }.operation(10,5));
+       MathOperation add = new MathOperation(){
+           @Override
+           public int operation(int a, int b) {
+               return a+b;
+           }
+       };
+      System.out.println("useCommonWay 10 + 5 = " + add.operation(10,5));
    }
    private static void useCommonWay2() {
       MathOperation mathOperationAdd = new MathOperation(){

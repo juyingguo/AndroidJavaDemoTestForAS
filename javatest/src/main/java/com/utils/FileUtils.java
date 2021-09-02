@@ -1048,7 +1048,32 @@ public class FileUtils {
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? filePath : filePath.substring(lastSep + 1);
     }
- 
+    /**
+     * 获取下载地址url(地址最后含完整的文件名)中的文件名
+     * @param url 下载地址url,地址最后含完整的文件名
+     * @return 文件名
+     */
+    public static String getFileNameByHttpUrl(String url) {
+        if (StringUtils.isSpace(url)) return url;
+        int lastSep = url.lastIndexOf("/");
+        return lastSep == -1 ? url : url.substring(lastSep + 1);
+    }/**
+     * 获取下载地址url(地址最后含完整的文件名)中的文件名
+     * @param url 下载地址url,地址最后含完整的文件名
+     * @return 不带拓展名的文件名
+     */
+    public static String getFileNameNoExtensionByHttpUrl(String url) {
+        if (StringUtils.isSpace(url)) return url;
+        int lastPoi = url.lastIndexOf('.');
+        int lastSep = url.lastIndexOf("/");
+        if (lastSep == -1) {
+            return (lastPoi == -1 ? url : url.substring(0, lastPoi));
+        }
+        if (lastPoi == -1 || lastSep > lastPoi) {
+            return url.substring(lastSep + 1);
+        }
+        return url.substring(lastSep + 1, lastPoi);
+    }
     /**
      * 获取全路径中的不带拓展名的文件名
      *

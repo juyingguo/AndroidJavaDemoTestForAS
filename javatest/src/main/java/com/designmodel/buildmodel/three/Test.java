@@ -1,6 +1,6 @@
 package com.designmodel.buildmodel.three;
 /**
- * Test.java
+ * Java8ThisTest.java
  *  测试类
  */
 public class Test {
