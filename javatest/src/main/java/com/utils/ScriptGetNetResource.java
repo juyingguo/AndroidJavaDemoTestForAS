@@ -1,5 +1,6 @@
 package com.utils;
 
+import com.bean.AnimalBean;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -37,36 +38,20 @@ import okhttp3.Request;
  * <p>1.4保留原始图片地址，便于下载用，json字段命名为rawImageUrl；
  * <p>1.5使用map,动物名称的拼音作为key,观察结果，可用音频不带后缀的文件名作为key,图片和音频地址组合成集合作为value;待图片下载时，将key + 原图片后缀名共同作为图片下载后的本地存储文件名。
  * <p>1.5.1 有些只有图片，不好统一处理，暂且不处理了。
+ * <p>1.6 重复的动物名称忽略，不重复请求搜集。
+ * <p>2.新增逻辑处理，因为科大兜底服务，目前包含动物类别，常见动物有答案，目前仅有文本内容。
+ * <p>2.1 所以豆豆只需搜集有图片的动物即可（因为豆豆，要么有图片（有图片时可能有音频可能没有音频），要么只有文本（此时回答对于一些不太常见的动物，经常回答答非所问））
  */
 public class ScriptGetNetResource {
     private static String TAG = "ScriptGetNetResource";
     //，,
-    public static String[] animalArray = new String[]{
-            //动物综合分类： 宠物 哺乳 鸟类 鱼类 爬行 两栖 昆虫 无脊
-
-            ////哺乳动物类
-            "老虎","狮子","大象","狼","老鼠","长颈鹿","驯鹿","梅花鹿","大象","貂","猴子","狒狒","斑马","狗","狐狸","斑马"
-            ,"熊","熊猫","浣熊","豹子","羚羊","考拉","犀牛","袋鼠","穿山甲","河马","猩猩",""
-            ,"海牛","水獭","海豹","海豚","海象","鸭嘴兽","蝙蝠","蚂蚁","山羊","松鼠"
-            ,"刺猬","北极熊","鲸鱼","虎鲸","逆戟鲸","小白兔","黄鼠狼","兔子","树懒","",""
-            ,"猪","牛","水牛","羊","马","骆驼","兔子","猫","狗","藏獒","驴","骡子","","",""
-            //鱼类
-            ,"鲨鱼","章鱼","鳄鱼","鲈鱼","鲤鱼","金枪鱼","鲟鱼",""
-            ///鸟类
-            ,"老鹰","鹰","鹅","企鹅","鹦鹉","啄木鸟","鸵鸟","翠鸟","天鹅","蜂鸟","信天翁","鹤","夜莺","海鸥","孔雀","","","",""
-            ,"鸡","公鸡","母鸡","小鸡","鸭子","鹅","火鸡","鸽子","鹌鹑","","","",""
-            ///爬行
-
-            ///两栖动物
-            ,"海狮","乌龟","蜥蜴","蟾蜍","青蛙","蛇","",""
-            ///昆虫  肉足虫 藤壶
-            ,"蝴蝶","蜻蜓","蝎子","珊瑚","纤毛虫","绦虫","","吸虫","水蚤","","蟋蟀","蜈蚣","蝗虫","","","","",""
-            ///其他动物  草履虫
-            ,"蚯蚓","知了","蝉","恐龙","海蜇","海参","海绵","水母","水螅","海星","乌贼","海葵","海胆","","","","",""
-    };
+    private static String[] animalArray = AnimalBean.animalArray;
     private static String nlpDouDouUrlPrefix = "http://api.doudoubot.cn/rsvpbot/general/chat?appid=rsvpupR18lm6q8i0&token=HD8Mn045gGzZ8foc&userid=123456&question=";
     private static LinkedList<String> mImageList = new LinkedList<>();
     private static LinkedList<String> mAudioList = new LinkedList<>();
+    /** 用来存储已经使用过的动物名称，便于重复使用检测 */
+    private static LinkedHashMap<String,String> mAnimalCheckHashMap = new LinkedHashMap<String,String>();
+    private static ArrayList<String> mAnimalCheckArray = new ArrayList<>();
     //private static HashMap<String,LinkedList<String>> storeToDownloadMediaResMap = new HashMap<>();
     public static void main(String[] args) {
         new Thread(new Runnable() {
@@ -88,7 +73,10 @@ public class ScriptGetNetResource {
         for(int i=0 ; i <animalArray.length ; i++){
             currTimeMs = System.currentTimeMillis();
 
+            //名称为空不处理
             if (animalArray[i] == null || animalArray[i].trim().equalsIgnoreCase("")) continue;
+
+            if (mAnimalCheckArray.contains(animalArray[i])) continue;
 
             String url = nlpDouDouUrlPrefix + HttpURLConnectionHelp.encodeStr(animalArray[i]);
             String result = HttpURLConnectionHelp.doGet(url);
@@ -129,6 +117,11 @@ public class ScriptGetNetResource {
 
                 FileUtils.getFileNameNoExtensionByHttpUrl()
                 JsonElement imageUrl = outJson.get("imageUrl");*/ ///这种情况先不处理了。
+
+                //动物，没有图片，也不处理，忽略该动物。
+                if (!outJson.has("imageUrl")) continue;
+
+                mAnimalCheckArray.add(animalArray[i]);//如果使用该动物，就添加到{mAnimalCheckArray}中
 
                 refactorOutStr = "..JSON_IBOTN_IFLYTEK_"+ outJson.toString();
                 System.out.println("getResources(),animal:" + animalArray[i] + ",refactorOutStr:" + refactorOutStr);
@@ -215,8 +208,8 @@ public class ScriptGetNetResource {
 
 
     private static void downloadMediaResource() {
-        System.out.println(TAG + ",downloadMediaResource enter.");
-        String url = null, fileDir = null, fileName = null;
+        System.out.println(TAG + ",downloadMediaResource enter,mImageList.size():" + mImageList.size());
+        String url = null, fileDir, fileName;
         boolean isImage = true;
         if (!mImageList.isEmpty()){
             url = mImageList.removeFirst();
