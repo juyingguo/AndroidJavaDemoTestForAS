@@ -134,6 +134,7 @@ public class ScriptGetNetResource {
         createExcelEnter(hashMap);
 
         System.out.println("getResources(),consume time total(contain save to excel):" + (System.currentTimeMillis() - firstTimeMs));
+        System.out.println(TAG + ",getResources(),mImageList.size():" + mImageList.size());
     }
 
     private static void createExcelEnter(LinkedHashMap hashMap){
@@ -208,7 +209,7 @@ public class ScriptGetNetResource {
 
 
     private static void downloadMediaResource() {
-        System.out.println(TAG + ",downloadMediaResource enter,mImageList.size():" + mImageList.size());
+        System.out.println(TAG + ",downloadMediaResource enter.");
         String url = null, fileDir, fileName;
         boolean isImage = true;
         if (!mImageList.isEmpty()){
@@ -232,6 +233,15 @@ public class ScriptGetNetResource {
         }
         fileName = FileUtils.getFileNameByHttpUrl(url);
         System.out.println(TAG + ",downloadMediaResource fileName:" + fileName);
+
+        //如果存在就不重复下载
+        boolean fileExists = FileUtils.isFileExists(new File(fileDir, fileName));
+        System.out.println(TAG + ",downloadMediaResource fileExists:" + fileExists);
+        if (fileExists){
+            downloadMediaResource();
+            return;
+        }
+
         OkHttpUtils.get().url(url).build().execute(new FileCallBack(fileDir,fileName) {
             @Override
             public void onBefore(Request request, int id) {
