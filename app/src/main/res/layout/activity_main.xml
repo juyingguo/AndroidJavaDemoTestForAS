@@ -26,20 +26,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="file_explore" />
+                android:text="file_explore"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
 
             <Button
                 android:id="@+id/tv_touch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="触摸测试" />
+                android:text="触摸测试"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/tv_send_broadcast_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="发送广播" />
+                android:text="发送广播"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
@@ -50,158 +56,226 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="发送PendingIntent广播" />
+                android:text="发送PendingIntent广播"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/tv_test_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="测试视频" />
+                android:text="测试视频"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
              <Button
                 android:id="@+id/btn_game_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="游戏课程" />
+                android:text="游戏课程"
+                 android:textAllCaps="false"
+                 tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_linearlayout_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="linearlayout 测试" />
+                android:text="linearlayout 测试"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_view_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="view测试" />
+                android:text="view测试"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_handler_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="handler_test" />
+                android:text="handler_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_install_upgrade_imitate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="install_upgrade_imitate" />
+                android:text="install_upgrade_imitate"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_keep_alive_service_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="keep_alive_service_test" />
+                android:text="keep_alive_service_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_activity_task_stack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="activity_task_stack" />
+                android:text="activity_task_stack"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_activity_image_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="activity_image_test" />
+                android:text="activity_image_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_activity_net_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="activity_net_test" />
+                android:text="activity_net_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_activity_camera_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="activity_camera_test" />
+                android:text="activity_camera_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_app_detect_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="app_detect_test" />
+                android:text="app_detect_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btn_start_wifi_ap_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="start_wifi_ap_test" />
+                android:text="start_wifi_ap_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
             <Button
                 android:id="@+id/btn_big_image_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="big_image_test" />
+                android:text="big_image_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_show_multi_image_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="show_multi_image_test" />
+                android:text="show_multi_image_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_sensor_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="sensor_test" />
+                android:text="sensor_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_screen_off_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="screen_off_admin" />
+                android:text="screen_off_admin"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_wifi_cast_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="wifi_cast_display" />
+                android:text="wifi_cast_display"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_wifi_cast_display_off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="wifi_cast_display_off" />
+                android:text="wifi_cast_display_off"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_file_module"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="file_module" />
+                android:text="file_module"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_wifi_module_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="wifi_module_test" />
+                android:text="wifi_module_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_webview_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="webview_test" />
+                android:text="webview_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_dialog_popupwindow_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="dialog_popupwindow_test" />
+                android:text="dialog_popupwindow_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_aidl_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="aidl_test" />
+                android:text="aidl_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
             <Button
                 android:id="@+id/btn_audio_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="audio_test" />
+                android:text="audio_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText"/>
+            <Button
+                android:id="@+id/btn_android_thread_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="thread_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
+            <Button
+                android:id="@+id/btn_event_bus_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="event_bus_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </ScrollView>
 

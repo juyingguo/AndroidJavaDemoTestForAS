@@ -36,10 +36,9 @@
     <uses-permission android:name="android.permission.BODY_SENSORS" /> <!-- 清除屏保需要的权限 -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 唤醒屏幕需要的权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" /> <!-- aidl通讯。添加访问远程服务的权限限制，这个是自定义权限 -->
+    <uses-permission android:name="com.demo.serveraidldemo.permission.ACCESS_CONTACT_SERVICE" />
 
-    <!--aidl通讯。添加访问远程服务的权限限制，这个是自定义权限-->
-    <uses-permission android:name="com.demo.serveraidldemo.permission.ACCESS_CONTACT_SERVICE"/>
     <application
         android:name=".application.CoreApplication"
         android:allowBackup="true"
@@ -48,11 +47,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.aidltest.AidlTestActivity"
-            android:theme="@style/Theme.AppCompat.Light">
-
-        </activity>
-        <!-- android8.0需要的配置，主要是调用相机 -->
+        <activity
+            android:name=".activity.aidltest.AidlTestActivity"
+            android:theme="@style/Theme.AppCompat.Light"></activity> <!-- android8.0需要的配置，主要是调用相机 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.sp.spmultipleapp.fileprovider"
@@ -260,6 +257,15 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.AudioRecordWavActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.ThreadTestActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".eventbustest.EventBusMainActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".eventbustest.EventBusSecondActivity"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
 

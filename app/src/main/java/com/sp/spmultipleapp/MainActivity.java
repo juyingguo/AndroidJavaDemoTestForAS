@@ -26,6 +26,7 @@ import com.sp.spmultipleapp.activity.ImageTestActivity;
 import com.sp.spmultipleapp.activity.KeepAliveTestActivity;
 import com.sp.spmultipleapp.activity.LinearLayoutTestActivity;
 import com.sp.spmultipleapp.activity.ScreenOffAdminActivity;
+import com.sp.spmultipleapp.activity.ThreadTestActivity;
 import com.sp.spmultipleapp.activity.UpgradeInstallTestActivity;
 import com.sp.spmultipleapp.activity.ViewTestActivity;
 import com.sp.spmultipleapp.activity.WebViewListTestActivity;
@@ -34,6 +35,7 @@ import com.sp.spmultipleapp.activity.WifiModuleTestActivity;
 import com.sp.spmultipleapp.activity.aidltest.AidlTestActivity;
 import com.sp.spmultipleapp.activity.nettest.NetTestActivity;
 import com.sp.spmultipleapp.activity.taskstack.TaskStackMainActivity;
+import com.sp.spmultipleapp.eventbustest.EventBusMainActivity;
 import com.sp.spmultipleapp.handler.HandlerTestActivity;
 import com.sp.spmultipleapp.rxjava2test.DoOnSubscribeTest;
 import com.sp.spmultipleapp.bean.MessageEvent;
@@ -277,6 +279,8 @@ public class MainActivity extends Activity {
             ,R.id.btn_dialog_popupwindow_test
             ,R.id.btn_aidl_test
             ,R.id.btn_audio_test
+            ,R.id.btn_android_thread_test
+            ,R.id.btn_event_bus_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -369,6 +373,10 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, AidlTestActivity.class));
         }else if (view.getId() == R.id.btn_audio_test){
             startActivity(new Intent(mContext, AudioModuleActivity.class));
+        }else if (view.getId() == R.id.btn_android_thread_test){
+            startActivity(new Intent(mContext, ThreadTestActivity.class));
+        }else if (view.getId() == R.id.btn_event_bus_test){
+            startActivity(new Intent(mContext, EventBusMainActivity.class));
         }
     }
 

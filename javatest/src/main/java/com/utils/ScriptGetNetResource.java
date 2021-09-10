@@ -67,6 +67,8 @@ public class ScriptGetNetResource {
         mImageList.clear();
         mAudioList.clear();
 
+        System.out.println("getResources(),animalArray.length:" + animalArray.length);
+
         LinkedHashMap<String,String> hashMap = new LinkedHashMap<String,String>();
         long firstTimeMs = System.currentTimeMillis();
         long currTimeMs = 0L;
