@@ -64,10 +64,6 @@ public class EventBusMainActivity extends AppCompatActivity {
         //取消注册事件
         EventBus.getDefault().unregister(this);
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMoonEventTest(/*MessageEvent messageEvent*/){
-        tv_message.setText(/*messageEvent.getMessage()*/"");
-    }
 
     public void clickForSubscriptionCustomBuilder(View view) {
         if(!EventBusCustom.CUSTOM_DEFAULT_EVENT_BUS.isRegistered(EventBusMainActivity.this)) {
@@ -78,12 +74,16 @@ public class EventBusMainActivity extends AppCompatActivity {
         }
     }
 
-    /*@Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(MessageEvent messageEvent){
+        tv_message.setText(messageEvent.getMessage());
+    }
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void onMoonEventTest(MessageEvent messageEvent){
         tv_message.setText(messageEvent.getMessage());
     }
     @Subscribe(sticky = true)
     public void onMoonStickyEvent(MessageEvent messageEvent){
         tv_message.setText(messageEvent.getMessage());
-    }*/
+    }
 }
