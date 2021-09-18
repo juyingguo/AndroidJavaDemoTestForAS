@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.sp.spmultipleapp.R;
 import com.utils.ThreadUtils;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,6 +22,9 @@ public class ThreadTestActivity extends AppCompatActivity {
     private String TAG = "ThreadTestActivity";
     @BindView(R.id.textView2)
     TextView textView2;
+
+    ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(5);
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +34,28 @@ public class ThreadTestActivity extends AppCompatActivity {
 
         textView2.setText("test butter knife");
     }
-    @OnClick({R.id.btn_create_thread_test})
+    @OnClick({R.id.btn_create_thread_test,R.id.btn_create_thread_pool_test})
     public void click(View view){
-        ThreadUtils.runOnBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(TAG,"click(),Thread.currentThread().getName():" + Thread.currentThread().getName() + " and thread id:" + Thread.currentThread().getId());
-                SystemClock.sleep(50*1000);
+        if (view.getId() == R.id.btn_create_thread_test){
+            for (int i = 0; i <5 ;i++){
+                ThreadUtils.runOnBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG,"click(),Thread.currentThread().getName():" + Thread.currentThread().getName() + " and thread id:" + Thread.currentThread().getId());
+                        SystemClock.sleep(5*1000);
+                    }
+                });
             }
-        });
+        }else if (view.getId() == R.id.btn_create_thread_pool_test){
+            for (int i = 0; i <5 ;i++){
+                newFixedThreadPool.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG,"newFixedThreadPool run(),Thread.currentThread().getName():" + Thread.currentThread().getName() + " and thread id:" + Thread.currentThread().getId());
+                        SystemClock.sleep(5*1000);
+                    }
+                });
+            }
+        }
     }
 }

@@ -13,6 +13,13 @@
         android:textAllCaps="false"
         android:text="create thread"
         tools:ignore="HardcodedText" />
+    <Button
+        android:id="@+id/btn_create_thread_pool_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="thread pool test"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView2"
