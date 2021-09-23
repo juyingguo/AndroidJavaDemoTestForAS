@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Shop {
     List<String> data = new ArrayList<String>();
-    public void produce(){
+    public void produceToMaxOne(){
         synchronized (data) {
             if(data.size()>0){
                 System.out.println("可以卖面包了");
@@ -18,18 +18,35 @@ public class Shop {
                 try {
                     data.wait();
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
             String a = "面包"+System.currentTimeMillis();
             data.add(a);
             System.out.println("生成了："+a+",找人来吃，现在面包个数为："+data.size());
-            //data.notify();
+            data.notify();
         }
  
     }
- 
+    public void produceContinueToLimitNumToWait(){
+        synchronized (data) {
+            if(data.size()>0){
+                System.out.println("可以卖面包了");
+                data.notify();
+                if (data.size() >= 5){
+                    try {
+                        data.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            String a = "面包"+System.currentTimeMillis();
+            data.add(a);
+            System.out.println("生成了："+a+",找人来吃，现在面包个数为："+data.size());
+            data.notify();
+        }
+    }
     public void sale(){
         synchronized (data) {
             if(data.size()==0){
@@ -38,7 +55,6 @@ public class Shop {
                     data.notify();
                     data.wait();
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -56,8 +72,6 @@ public class Shop {
         Thread customer = new Thread(new Customer(shop));
         productor.start();
         customer.start();
-
- 
     }
 }
 class Productor implements Runnable{
@@ -71,16 +85,14 @@ class Productor implements Runnable{
     @Override
     public void run() {
         while(true){
-            shop.produce();
+//            shop.produceToMaxOne();
+            shop.produceContinueToLimitNumToWait();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-        // TODO Auto-generated method stub
- 
     }
 }
 class Customer implements Runnable {

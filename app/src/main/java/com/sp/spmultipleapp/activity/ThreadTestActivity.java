@@ -42,7 +42,7 @@ public class ThreadTestActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.i(TAG,"click(),Thread.currentThread().getName():" + Thread.currentThread().getName() + " and thread id:" + Thread.currentThread().getId());
-                        SystemClock.sleep(5*1000);
+                        SystemClock.sleep(10*1000);
                     }
                 });
             }
@@ -52,7 +52,7 @@ public class ThreadTestActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.i(TAG,"newFixedThreadPool run(),Thread.currentThread().getName():" + Thread.currentThread().getName() + " and thread id:" + Thread.currentThread().getId());
-                        SystemClock.sleep(5*1000);
+                        SystemClock.sleep(10*1000);
                     }
                 });
             }
