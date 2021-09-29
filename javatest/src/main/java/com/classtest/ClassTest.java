@@ -1,5 +1,7 @@
 package com.classtest;
 
+import org.junit.Test;
+
 /**
  * Date:2021/9/10,10:09
  * author:jy
@@ -40,6 +42,16 @@ public class ClassTest {
             System.out.println(superclass1);
         }
 
+    }
+
+    @Test
+    public void testSuperclassForString(){
+        String str = "Hello";
+        Class<?> aClass = str.getClass();
+        while(aClass != null){
+            System.out.println("testSuperclassForString() " + aClass);
+            aClass = aClass.getSuperclass();
+        }
     }
 
     interface TestInterface{
