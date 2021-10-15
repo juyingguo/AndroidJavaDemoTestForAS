@@ -40,7 +40,8 @@ public class WebViewTestActivity extends AppCompatActivity {
 //        webView.loadUrl("file:///android_asset/web/camera_mui_my/index.html");//加载asset文件夹下html
 //        webView.loadUrl("file:///android_asset/web/Barcode/index.html");//加载asset文件夹下html
 //        webView.loadUrl("file:///android_asset/web/htmljs_new.html");//加载asset文件夹下html
-        webView.loadUrl("file:///android_asset/web/phaser2/phaser-video/index-load-video.html");//加载asset文件夹下html
+        webView.loadUrl("file:///android_asset/web/phaser2/phaser-video/index-load-video.html");//phaser-video/index-load-video.html
+//        webView.loadUrl("file:///android_asset/web/html5/01-html5-video.html");//web/html5/01-html5-video.html
 //        webView.loadUrl("http://139.196.35.30:8080/OkHttpTest/apppackage/test.html");//加载url
 //        webView.loadUrl(TulingK12Config.TULING_DEFAULT_URL);//加载url
 
