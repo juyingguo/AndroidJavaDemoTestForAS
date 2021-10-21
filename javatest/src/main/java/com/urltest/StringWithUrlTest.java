@@ -36,7 +36,7 @@ public class StringWithUrlTest {
         System.out.println("oldImgUrl(after java.net.URLEncoder.encode):" + oldImgUrl);
         oldImgUrl = "https://spdbimg.idoupiao.com/film/my/美国队长3";
         oldImgUrl = URLEncoder.encode(oldImgUrl, "UTF-8");
-//        oldImgUrl = oldImgUrl.replace("+", "%20");//经过URLEncoder.encode空格会被转换为+，无法使用，将其替换为%20，
+        oldImgUrl = oldImgUrl.replace("+", "%20");//经过URLEncoder.encode空格会被转换为+，无法使用，将其替换为%20，
         System.out.println("oldImgUrl:" + oldImgUrl);
 
 //        oldImgUrl = new String(Base64.getEncoder().encode(oldImgUrl.getBytes()));

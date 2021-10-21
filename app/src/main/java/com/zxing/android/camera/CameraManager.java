@@ -42,11 +42,11 @@ public final class CameraManager {
 
 	private static final String TAG = CameraManager.class.getSimpleName();
 
-	private static final int ADD= 100;
-	private static final int MIN_FRAME_WIDTH = 300 + ADD;
-	private static final int MIN_FRAME_HEIGHT = 300 + ADD;
-	private static final int MAX_FRAME_WIDTH = 300 + ADD;
-	private static final int MAX_FRAME_HEIGHT = 300 + ADD;
+	private static final int ADD= 0;
+	private static final int MIN_FRAME_WIDTH = 720 + ADD;
+	private static final int MIN_FRAME_HEIGHT = 480 + ADD;
+	private static final int MAX_FRAME_WIDTH = 1024 + ADD;
+	private static final int MAX_FRAME_HEIGHT = 600 + ADD;
 
 	private final Context context;
 	private final CameraConfigurationManager configManager;
@@ -241,7 +241,7 @@ public final class CameraManager {
 //			int topOffset = 150;
 //			int topOffset = 0;
 			framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
-			Log.d(TAG, "Calculated framing rect: " + framingRect);
+			Log.d(TAG, "getFramingRect(),Calculated framing rect: " + framingRect);
 		}
 		return framingRect;
 	}
