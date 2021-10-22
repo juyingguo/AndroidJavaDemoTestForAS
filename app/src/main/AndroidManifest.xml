@@ -47,9 +47,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".activity.AnimationTestActivity"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.aidltest.AidlTestActivity"
-            android:theme="@style/Theme.AppCompat.Light"></activity> <!-- android8.0需要的配置，主要是调用相机 -->
+            android:theme="@style/Theme.AppCompat.Light" /> <!-- android8.0需要的配置，主要是调用相机 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.sp.spmultipleapp.fileprovider"

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -21,6 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.zxing.BarcodeFormat;
@@ -48,6 +53,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
     private BaseCaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
     private SurfaceView surfaceView;
+    private ImageView imageViewRotate;
     private boolean hasSurface;
     private Vector<BarcodeFormat> decodeFormats;
     private String characterSet;
@@ -77,9 +83,10 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_not_canceled_qr_code_scan);
-        surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
-        viewfinderView = (ViewfinderView) findViewById(R.id.viewfinderview);
-        rlDynamicPosition = (RelativeLayout) findViewById(R.id.rl_dynamic_position);
+        surfaceView = findViewById(R.id.surfaceview);
+        viewfinderView = findViewById(R.id.viewfinderview);
+        rlDynamicPosition = findViewById(R.id.rl_dynamic_position);
+        imageViewRotate = findViewById(R.id.iv_rotate);
 
         setCanceledOnTouchOutside(false);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
@@ -96,6 +103,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
                     handler = null;
                 }
                 Log.i(TAG, "onDismiss().");
+                imageViewRotate.clearAnimation();
                 cameraManager.closeDriver(true);
                 activity.unregisterReceiver(receiver);
             }
@@ -104,6 +112,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
 
         IntentFilter filter = new IntentFilter(QRCodeScanDialogOutsideClick.ACTION_DISMISS_DIALOG);
         this.activity.registerReceiver(receiver,filter);
+        animationRotateTest();
     }
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @SuppressLint("LongLogTag")
@@ -130,6 +139,12 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    private void animationRotateTest() {
+        Animation operatingAnim = AnimationUtils.loadAnimation(this.activity,R.anim.anim_rotation_image);
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        operatingAnim.setInterpolator(linearInterpolator);
+        imageViewRotate.startAnimation(operatingAnim);
     }
 
     @SuppressLint("LongLogTag")
@@ -275,7 +290,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
 //        layoutParams.width = 300/*activity.getResources().getDisplayMetrics().widthPixels / 3*/;
 //        layoutParams.height = 300/*activity.getResources().getDisplayMetrics().heightPixels / 4 * 3*/;
         layoutParams.width = 430;
-        layoutParams.height = 430;
+        layoutParams.height = 438;
         layoutParams.gravity = Gravity.TOP | Gravity.START;
         layoutParams.x = this.x;
         layoutParams.y = this.y;

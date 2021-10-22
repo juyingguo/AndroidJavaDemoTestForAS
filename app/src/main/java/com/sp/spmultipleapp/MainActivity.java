@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sp.spmultipleapp.activity.AnimationTestActivity;
 import com.sp.spmultipleapp.activity.AppDetectTestActivity;
 import com.sp.spmultipleapp.activity.AudioModuleActivity;
 import com.sp.spmultipleapp.activity.CameraPictureVideoTestActivity;
@@ -281,6 +282,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_audio_test
             ,R.id.btn_android_thread_test
             ,R.id.btn_event_bus_test
+            ,R.id.btn_animation_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -377,6 +379,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, ThreadTestActivity.class));
         }else if (view.getId() == R.id.btn_event_bus_test){
             startActivity(new Intent(mContext, EventBusMainActivity.class));
+        }else if (view.getId() == R.id.btn_animation_test){
+            startActivity(new Intent(mContext, AnimationTestActivity.class));
         }
     }
 
