@@ -107,7 +107,7 @@ final class BaseDecodeHandler extends Handler {
 			Log.d(TAG, "Found barcode (" + (end - start) + " ms):\n" + rawResult.toString());
 			Message message = Message.obtain(activity.getHandler(), MessageIDs.decode_succeeded, rawResult);
 			Bundle bundle = new Bundle();
-			bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
+			bundle.putParcelable(BaseDecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
 			message.setData(bundle);
 			// Log.d(TAG, "Sending decode succeeded message...");
 			message.sendToTarget();

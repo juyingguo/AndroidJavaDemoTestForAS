@@ -88,7 +88,7 @@ public final class BaseCaptureActivityHandler extends Handler {
         state = State.SUCCESS;
         Bundle bundle = message.getData();
         Bitmap barcode = bundle == null ? null :
-            (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
+            (Bitmap) bundle.getParcelable(BaseDecodeThread.BARCODE_BITMAP);
         activity.handleDecode((Result) message.obj, barcode);
         break;
       case MessageIDs.decode_failed:

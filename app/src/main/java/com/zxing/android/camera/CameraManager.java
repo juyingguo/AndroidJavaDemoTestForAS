@@ -240,6 +240,7 @@ public final class CameraManager {
 			int topOffset = (screenResolution.y - height) * 2 / 5;
 //			int topOffset = 150;
 //			int topOffset = 0;
+            Log.d(TAG, "getFramingRect(),after refactor,width: " + width + ",height: " + height);
 			framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
 			Log.d(TAG, "getFramingRect(),Calculated framing rect: " + framingRect);
 		}
@@ -273,8 +274,8 @@ public final class CameraManager {
 			//rect.top = rect.top * cameraResolution.x / screenResolution.y;
 			//rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
 			framingRectInPreview = rect;
+		    Log.d(TAG, "getFramingRectInPreview rect: " + framingRectInPreview);
 		}
-		Log.d(TAG, "getFramingRectInPreview rect: " + framingRectInPreview);
 		return framingRectInPreview;
 	}
 
