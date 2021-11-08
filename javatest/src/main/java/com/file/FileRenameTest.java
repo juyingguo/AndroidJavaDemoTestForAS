@@ -9,12 +9,15 @@ import java.util.List;
 /**
  * Date:2021/4/12,15:19
  * author:jy
+ * <p>file name rename tool</p>
+ * <p>for example case: if file name start with "test_" ,trim it and remain the later string</p>
  */
 public class FileRenameTest {
     public static void main(String[] args) {
         renameFile();        
     }
-    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\view\\2B_10_FindFriends";
+    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\view\\2B_7_LittleAssembler";
+//    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\assets\\images";
     private static void renameFile() {
         new Thread(new Runnable() {
             @Override
@@ -34,7 +37,7 @@ public class FileRenameTest {
                         String name = FileUtils.getFileName(file);
                         if (name.startsWith("test_")){
                             String newName = name.substring("test_".length());
-                            System.out.println("renameFile(),find file [ file name start with test_ ],rename to no test_ prefix. old name:" + name);
+                            System.out.println("renameFile(),find file [ file name start with test_ ],rename to no test_ prefix,old name:" + name);
                             file.renameTo(new File(file.getParentFile(),newName));
 //                            System.out.println("renameFile(),file new name file.getName():" + file.getName());
 
