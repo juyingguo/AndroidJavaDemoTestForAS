@@ -37,4 +37,8 @@ public class ViewTestActivity extends AppCompatActivity {
     public void onSwitchTest(View view) {
         startActivity(new Intent(this, SwitchTestActivity.class));
     }
+
+    public void onCircleImageViewTest(View view) {
+        startActivity(new Intent(this, CircleImageViewTestActivity.class));
+    }
 }

@@ -6,7 +6,7 @@ package com.demo.serveraidldemo;
 interface IContactAidlInterfaceCallback {
     /**
      * Demonstrates some basic types that you can use as parameters
-     * and return values in AIDL.
+     * and return values in AIDL.IContactAidlInterfaceCallback
      * 如果存在就contactName联系人实际姓名；否则为null
      */
     void handleResult(String contactName);
