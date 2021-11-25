@@ -16,7 +16,7 @@ public class FileRenameTest {
     public static void main(String[] args) {
         renameFile();        
     }
-    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\view\\2B_11_DoItWithMe";
+    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\view\\2B_12_MusicFestival";
 //    private static String ROOT_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\assets\\images";
     private static void renameFile() {
         new Thread(new Runnable() {
