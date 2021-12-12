@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 /**
  * 功能描述：一个简洁而高效的圆形ImageView
@@ -19,13 +20,27 @@ import android.util.AttributeSet;
  * @author (作者) edward（冯丰枫）
  * @link http://www.jianshu.com/u/f7176d6d53d2
  * 创建时间： 2018/4/17 0017
+ * <p>
+ *     a,onMeasure,width:100.0 height:100.0 radius:50.0
+ *     initBitmapShader,bitmap.getWidth():1920 bitmap.getHeight():1080 scale:0.925
+ *     采用float scale = Math.max(width / bitmap.getWidth(), height / bitmap.getHeight());//效果不是从中间画的
+ *     采用float scale = Math.min(width / bitmap.getWidth(), height / bitmap.getHeight());//效果居中,但可能高度不够时边缘会被一直延伸。
+ *
+ *      b,如何居中画图?
+ *      要从BitmapShader中心画，宽高使用控件的（根据控件宽高计算圆的半径。）
+ *
+ * </p>
  */
 public class CircleImageView extends AppCompatImageView {
+    String TAG = "CircleImageView";
     private float width;
     private float height;
     private float radius;
     private Paint paint;
     private Matrix matrix;
+    private float mBitmapWidth;
+    private float mBitmapHeight;
+    private float mScale;
 
     public CircleImageView(Context context) {
         this(context, null);
@@ -51,10 +66,21 @@ public class CircleImageView extends AppCompatImageView {
         width = getMeasuredWidth();
         height = getMeasuredHeight();
         radius = Math.min(width, height) / 2;
+
+        Log.d(TAG,"onMeasure,width:" + width + " height:" + height + " radius:" + radius);
+        //for example onMeasure,width:1024.0 height:1080.0 radius:512.0
     }
 
-     @Override
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG,"onLayout,left:" + left + " top:" + top + " right:" + right + " bottom:" + bottom);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG,"onDraw call.");
+
         Drawable drawable = getDrawable();
         if (drawable == null) {
             super.onDraw(canvas);
@@ -62,7 +88,17 @@ public class CircleImageView extends AppCompatImageView {
         }
         if (drawable instanceof BitmapDrawable) {
             paint.setShader(initBitmapShader((BitmapDrawable) drawable));//将着色器设置给画笔
-            canvas.drawCircle(width / 2, height / 2, radius, paint);//使用画笔在画布上画圆
+            canvas.drawCircle(width / 2, height / 2, radius, paint);//使用画笔在画布上画圆。使用控件宽高一半计算的来的半径。
+            ////一下代码，效果是大半圆，右边是黑的，如何解释？
+//            radius = Math.min(mBitmapWidth*mScale, mBitmapHeight*mScale) / 2;
+//            canvas.drawCircle(mBitmapWidth*mScale / 2, mBitmapHeight*mScale / 2, radius, paint);//使用画笔在画布上画圆
+            //log::
+            //c,onMeasure,width:100.0 height:100.0 radius:50.0
+            //initBitmapShader,bitmap.getWidth():1920 bitmap.getHeight():1080 scale:0.09259259
+            //mBitmapWidth*mScale = 177,mBitmapHeight*mScale = 100;radius = 50
+            //用画图分析：在宽177/2 = 88.5出画半径为50的圆。已经超过控件100*100的右侧，所以是黑色的。
+            //使用专业工具画圆。记录下。
+            ////
             return;
         }
         super.onDraw(canvas);
@@ -74,9 +110,15 @@ public class CircleImageView extends AppCompatImageView {
     private BitmapShader initBitmapShader(BitmapDrawable drawable) {
         Bitmap bitmap = drawable.getBitmap();
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        float scale = Math.max(width / bitmap.getWidth(), height / bitmap.getHeight());
+        float scale = Math.max(width / bitmap.getWidth(), height / bitmap.getHeight());// use max
+//        float scale = Math.min(width / bitmap.getWidth(), height / bitmap.getHeight());
         matrix.setScale(scale, scale);//将图片宽高等比例缩放，避免拉伸
         bitmapShader.setLocalMatrix(matrix);
+        mBitmapWidth = bitmap.getWidth();
+        mBitmapHeight = bitmap.getHeight();
+        mScale = scale;
+        Log.d(TAG,"initBitmapShader,bitmap.getWidth():" + bitmap.getWidth() + " bitmap.getHeight():" + bitmap.getHeight() + " scale:" + scale);
+        //for example initBitmapShader,bitmap.getWidth():1920 bitmap.getHeight():1080 scale:1.0
         return bitmapShader;
     }
 }
