@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Producer extends Thread{
 	
 	private String TAG = Producer.class.getSimpleName();
-	private Stack<Integer> stack;
+	private final Stack<Integer> stack;
 	
 	Producer( Stack<Integer> stack){
 		super();

@@ -4,7 +4,7 @@ import java.util.Stack;
  
 public class Consumer extends Thread{
 	private String TAG = Consumer.class.getSimpleName();
-	private Stack<Integer> stack;
+	private final Stack<Integer> stack;
 	
 	Consumer( Stack<Integer> stack){
 		super();
