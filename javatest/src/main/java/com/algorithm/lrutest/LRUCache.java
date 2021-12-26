@@ -47,7 +47,7 @@ public class LRUCache<K,V> {
             // 3.1 容器实际大小 是否大于 所允许存放的最大数量
             if (caches.size() >= capacity) {
                 if(mLogSwitch){
-                    System.out.println(TAG + " put caches.size():" + caches.size() + ">= capacity size [" + capacity + "] to remove tail.");
+                    System.out.println(TAG + " put caches.size() [" + caches.size() + "] >= capacity size [" + capacity + "] to remove tail.");
                 }
                 // 3.1.1 若容器实际大小大于所允许存放的最大数量 将容器尾部的CacheNode节点(活跃度不高的节点)删除
                 caches.remove(tail.key);
@@ -88,7 +88,7 @@ public class LRUCache<K,V> {
      *  2. 若当前节点的pre节点不为空 将当前节点的前继节点的后继节点指向当前节点的后继节点
      *  3. 将tail节点等于当前节点 更新tail节点指向 将tail节点指向当前节点的前继节点
      *  4. 若head和tail节点都为空 直接将当前节点赋值给head和tail节点 -- 表示第一次添加k-v键值对
-     * @param cacheNode
+     * @param cacheNode CacheNode
      */
     private void moveToFirst(CacheNode cacheNode) {
         if(mLogSwitch){
@@ -126,15 +126,15 @@ public class LRUCache<K,V> {
      */
     private void removeLast() {
         if (tail != null) {
+            if(mLogSwitch){
+                System.out.println(TAG + " removeLast tail:" + tail.key + ":" + tail.value);
+            }
             // 将tail节点更新为它的前继节点
             tail = tail.pre;
             // 若tail节点为空 表示容器中无节点 将head置为空
             if (tail == null) head = null;
                 // 否则 将tail节点的next置为空
             else {
-                if(mLogSwitch){
-                    System.out.println(TAG + " removeLast tail.next:" + tail.next.key + ":" + tail.next.value);
-                }
                 tail.next = null;
             }
         }

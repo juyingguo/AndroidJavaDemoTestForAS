@@ -10,7 +10,7 @@ public class LRUCacheTest {
     @Test
     public void test() {
         LRUCache<Integer, String> lru = new LRUCache<>(3);
-        LRUCache.mLogSwitch = false;
+        LRUCache.mLogSwitch = true;
         lru.put(1, "a");
         System.out.println(lru.toString());
         lru.put(2, "b");    // 2:b 1:a

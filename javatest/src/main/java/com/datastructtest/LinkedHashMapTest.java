@@ -13,12 +13,26 @@ public class LinkedHashMapTest {
              map.put("1", "a");
              map.put("2", "b");
              map.put("3", "c");
-             map.put("4ad", "e");
+             map.put("4", "e");
 
              for (Iterator<String> iterator = map.values().iterator(); iterator.hasNext();) {
                      String name = (String) iterator.next();
-                     System.out.print(name);
+                     System.out.println(name);
              }
+    }
+    @Test
+    public void paramAccessOrderIsTruePrintTest(){
+        Map<String, String> map = new LinkedHashMap<String, String>(16,0.75f,true);
+        map.put("1", "a");
+        map.put("2", "b");
+        map.put("3", "c");
+        map.put("4", "e");
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+        Map.Entry<String, String> toEvict = map.entrySet().iterator().next();
+        System.out.println(toEvict.getKey() + ":" + toEvict.getValue());
     }
     @Test
     public void paramAccessOrderIsTrueGetOperateTest(){
@@ -33,7 +47,10 @@ public class LinkedHashMapTest {
         map.get("1");
         for (Iterator<String> iterator = map.values().iterator(); iterator.hasNext();) {
             String name = (String) iterator.next();
-            System.out.print(name);
+            System.out.println(name);
+        }
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
         }
     }
 }
