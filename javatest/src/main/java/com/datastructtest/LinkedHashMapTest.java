@@ -14,6 +14,7 @@ public class LinkedHashMapTest {
              map.put("2", "b");
              map.put("3", "c");
              map.put("4", "e");
+             map.put("1", "a1");
 
              for (Iterator<String> iterator = map.values().iterator(); iterator.hasNext();) {
                      String name = (String) iterator.next();
