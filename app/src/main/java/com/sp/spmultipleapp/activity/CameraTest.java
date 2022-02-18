@@ -22,7 +22,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Date:2020/11/28,17:32
- * author:jy
+ * author:jy<br/>
+ * 前后摄像头配置在函数{@link com.sp.spmultipleapp.activity.CameraTest#createCamera(int, int)}中
  */
 public class CameraTest extends AppCompatActivity implements TextureView.SurfaceTextureListener ,EasyPermissions.PermissionCallbacks{
     private static final String TAG = "CameraTest";

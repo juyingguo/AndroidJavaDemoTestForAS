@@ -47,6 +47,10 @@ public final class CameraManager {
 	private static final int MIN_FRAME_HEIGHT = 480 + ADD;
 	private static final int MAX_FRAME_WIDTH = 1024 + ADD;
 	private static final int MAX_FRAME_HEIGHT = 600 + ADD;
+//	private static final int MIN_FRAME_WIDTH = 300 + ADD;
+//	private static final int MIN_FRAME_HEIGHT = 300 + ADD;
+//	private static final int MAX_FRAME_WIDTH = 300 + ADD;
+//	private static final int MAX_FRAME_HEIGHT = 300 + ADD;
 
 	private final Context context;
 	private final CameraConfigurationManager configManager;
@@ -274,6 +278,8 @@ public final class CameraManager {
 			//rect.top = rect.top * cameraResolution.x / screenResolution.y;
 			//rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
 			framingRectInPreview = rect;
+			//reset the rect use screenResolution.//add 20220218
+			framingRectInPreview = new Rect(0,0,screenResolution.x,screenResolution.y); //test
 		    Log.d(TAG, "getFramingRectInPreview rect: " + framingRectInPreview);
 		}
 		return framingRectInPreview;
