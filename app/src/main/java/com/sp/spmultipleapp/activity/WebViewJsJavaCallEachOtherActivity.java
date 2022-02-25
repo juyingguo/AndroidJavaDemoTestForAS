@@ -55,8 +55,6 @@ public class WebViewJsJavaCallEachOtherActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);//允许使用js
         JavaJsInterface javaJsInterface = new JavaJsInterface();
         webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
-        webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
-        webView.addJavascriptInterface(javaJsInterface,"javaJsInterfaceQr");
         webView.addJavascriptInterface(WebViewJsJavaCallEachOtherActivity.this,"dismiss_dialog_by_send_broadcast");
 
         /**
