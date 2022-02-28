@@ -12,13 +12,15 @@ function startQrCodeScan() {
 	};
 	function jsStartQrCodeScanWithDialogParam(x,y,displaySizeType) {
 		// alert("123");
-		if(arguments.length == 2){
+		if(arguments.length == 2){//兼容之前的两个参数的函数
             javascript:javaJsInterfaceQr.startQrCodeScanWithDialogParam(x,y);
 		}else if(arguments.length == 3){
             if(displaySizeType<=0)
                 javascript:javaJsInterfaceQr.startQrCodeScanWithDialogParam(x,y,0);
-            else if(displaySizeType >=1)
+            else if(displaySizeType >0 && displaySizeType <=1)
                 javascript:javaJsInterfaceQr.startQrCodeScanWithDialogParam(x,y,1);
+            else if(displaySizeType >1)
+                javascript:javaJsInterfaceQr.startQrCodeScanWithDialogParam(x,y,2);
 		}
 	};
 	function showQrCodeScan(result) {

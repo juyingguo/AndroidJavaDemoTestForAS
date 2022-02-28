@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -19,8 +18,6 @@ import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -31,7 +28,6 @@ import android.widget.RelativeLayout;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.sp.spmultipleapp.R;
-import com.sp.spmultipleapp.activity.WebViewJsJavaCallEachOtherActivity;
 import com.zxing.android.MessageIDs;
 import com.zxing.android.base.DecodeInterface;
 import com.zxing.android.camera.CameraManager;
@@ -117,20 +113,7 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
         this.activity.registerReceiver(receiver,filter);
         animationRotateTest();
 
-        displayType();
-    }
-
-    @SuppressLint("LongLogTag")
-    private void displayType() {
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) surfaceView.getLayoutParams();
-        if (mDisplaySizeType == 0){
-            layoutParams.width = 180;
-            layoutParams.height = 120;
-        }else if (mDisplaySizeType == 1){
-            layoutParams.width = 260;
-            layoutParams.height = 180;
-        }
-        surfaceView.setLayoutParams(layoutParams);
+        displayByType();
     }
 
     BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -287,6 +270,23 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
             handler.sendEmptyMessageDelayed(MessageIDs.restart_preview, delayMS);
         }
     }
+
+    @SuppressLint("LongLogTag")
+    private void displayByType() {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) surfaceView.getLayoutParams();
+        if (mDisplaySizeType == 0){
+            layoutParams.width = 180;
+            layoutParams.height = 120;
+        }else if (mDisplaySizeType == 1){
+            layoutParams.width = 220;
+            layoutParams.height = 150;
+        }else if (mDisplaySizeType == 2){
+            layoutParams.width = 260;
+            layoutParams.height = 180;
+        }
+        surfaceView.setLayoutParams(layoutParams);
+    }
+
     public void showAtLocationInActivity() {
         show();
     }
@@ -304,12 +304,14 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
      * 可以指定坐标和显示扫描框大小类型
      * @param x x坐标
      * @param y y坐标
-     * @param displaySizeType 0对应默认大小的框，1值对应稍大些的框
+     * @param displaySizeType 0对应默认大小的框(框直径220)，1值对应稍大些的框(框直径270),2值对应稍大些的框(框直径320),
      */
     @SuppressLint("LongLogTag")
     public void showAtLocationInActivityParam(int x,int y,int displaySizeType) {
         if (displaySizeType <=0) displaySizeType = 0;
-        if (displaySizeType >=1) displaySizeType = 1;
+        else if (displaySizeType == 1)
+            displaySizeType = 1;
+        else displaySizeType = 2;
         this.x = x;
         this.y = y;
         this.mDisplaySizeType = displaySizeType;
@@ -327,12 +329,21 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
 //        layoutParams.height = 300/*activity.getResources().getDisplayMetrics().heightPixels / 4 * 3*/;
         /**
          * 窗口及摄像头预览SurfaceView大小配置：
+         * SurfaceView大小要和摄像头分辨率或屏幕分辨率宽高比例保存一致，否则会出现变形，比例差别越大，变形月明显。
+         * 1280/720 = 1.777;
+         * 1024/600 = 1.706
          * a.
          *  220，220
          * SurfaceView
          *             android:layout_width="180dp"
          *             android:layout_height="120dp"
          * b.
+         * layoutParams.width = 270
+         * layoutParams.height = 270 还有些大。
+         *  SurfaceView
+         *             android:layout_width="220dp"
+         *             android:layout_height="150dp"
+         * c.
          * layoutParams.width = 320
          * layoutParams.height = 320 还有些大。
          *  SurfaceView
@@ -343,6 +354,9 @@ public class QRCodeScanDialogOutsideClick extends Dialog implements DecodeInterf
             layoutParams.width = 220;
             layoutParams.height = 220;
         }else if (mDisplaySizeType == 1){
+            layoutParams.width = 270;
+            layoutParams.height = 270;
+        }else if (mDisplaySizeType == 2){
             layoutParams.width = 320;
             layoutParams.height = 320;
         }
