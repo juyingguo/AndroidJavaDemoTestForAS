@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="categoryOne"
+        android:title="General">
+        <Preference
+            android:key="prefAndroid"
+            android:title="安卓"
+            android:summary="点一下更新内容"/>
+        <Preference
+            android:key="prefIos"
+            android:title="IOS"
+            android:summary="可以作为一个设置项"/>
+        <CheckBoxPreference
+            android:key="prefCheckBoxOne"
+            android:title="这相当于一个CheckBox"/>
+        <CheckBoxPreference
+            android:key="prefCheckBoxTwo"
+            android:title="还可以设置summary"
+            android:summaryOn="选中了"
+            android:summaryOff="没选中"/>
+        <CheckBoxPreference
+            android:key="TestCheckBoxTwo"
+            android:title="testsummary" />
+        <EditTextPreference
+            android:key="prefEditText"
+            android:title="这相当于一个EditText"
+            android:summary="我是EditText的一个summary"/>
+        <ListPreference
+            android:key="prefList"
+            android:title="这相当于一个List表"/>
+
+        <Preference android:key="up_time"
+            android:enabled="false"
+            android:shouldDisableView="false"
+            android:title="Up time"
+            android:summary="hh:min:sec"
+            android:persistent="false" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="prefCategoryTwo"
+        android:title="Inactive" >
+        <MultiSelectListPreference
+            android:key="prefMultiSelect"
+            android:title="这相当于一个MultiSelect"/>
+        <SwitchPreference
+            android:key="prefSwitch"
+            android:title="这相当于一个Switch"
+            android:switchTextOn="switchTextOn选中了"
+            android:switchTextOff="switchTextOff没选中"
+            android:summaryOn="summaryOn选中了"
+            android:summaryOff="summaryOff没选中"
+            android:shadowColor="#0df10d"/>
+        <RingtonePreference
+            android:key="prefRingtone"
+            android:title="这相当于一个"
+            android:summary="请选择铃声"
+            android:icon="@mipmap/ic_launcher_round"/>
+    </PreferenceCategory>
+</PreferenceScreen>

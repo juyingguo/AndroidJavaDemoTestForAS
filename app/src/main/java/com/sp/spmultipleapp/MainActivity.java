@@ -283,6 +283,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_android_thread_test
             ,R.id.btn_event_bus_test
             ,R.id.btn_animation_test
+            ,R.id.btn_preference_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -381,6 +382,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, EventBusMainActivity.class));
         }else if (view.getId() == R.id.btn_animation_test){
             startActivity(new Intent(mContext, AnimationTestActivity.class));
+        }else if (view.getId() == R.id.btn_preference_test){
+            startActivity(new Intent(mContext, PreferenceTestActivity.class));
         }
     }
 

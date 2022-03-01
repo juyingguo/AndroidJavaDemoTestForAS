@@ -47,7 +47,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.AnimationTestActivity"
+        <activity android:name=".PreferenceTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.AnimationTestActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.aidltest.AidlTestActivity"
@@ -127,7 +129,9 @@
         <activity
             android:name=".activity.KeepAliveServiceActivity"
             android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".activity.CircleImageViewTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".activity.CircleImageViewTestActivity"
+            android:theme="@style/Theme.AppCompat" />
 
         <service
             android:name=".service.keepaliveservice.one.KeepAliveTest01Service"
