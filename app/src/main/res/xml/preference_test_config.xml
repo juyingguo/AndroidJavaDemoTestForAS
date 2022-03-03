@@ -17,6 +17,7 @@
         <CheckBoxPreference
             android:key="prefCheckBoxTwo"
             android:title="还可以设置summary"
+            android:textColor="@color/c3"
             android:summaryOn="选中了"
             android:summaryOff="没选中"/>
         <CheckBoxPreference
@@ -36,6 +37,12 @@
             android:title="Up time"
             android:summary="hh:min:sec"
             android:persistent="false" />
+        <Preference android:key="current_time"
+            android:enabled="false"
+            android:shouldDisableView="false"
+            android:title="Current time"
+            android:summary="hh:min:sec"
+            android:persistent="false"/>
 
 
     </PreferenceCategory>

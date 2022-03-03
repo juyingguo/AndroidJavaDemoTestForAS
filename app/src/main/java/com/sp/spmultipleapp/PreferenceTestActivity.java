@@ -8,12 +8,18 @@ import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sp.spmultipleapp.fragment.PreferenceSetTestFragment;
+import com.utils.DateUtils;
+
+import java.util.Date;
 
 public class PreferenceTestActivity extends AppCompatActivity {
+    private Date mDate;
     public static Preference mUptime;
-    private Handler mHandler;
+    public static Preference mCurrentTime;
+    private Handler mHandler = new MyHandler();
     private static final int EVENT_UPDATE_STATS = 500;
-    private  class MyHandler extends Handler {
+    PreferenceSetTestFragment fragment;
+    private class MyHandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {
@@ -30,20 +36,26 @@ public class PreferenceTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference_test);
-        PreferenceSetTestFragment fragment = new PreferenceSetTestFragment();
+        fragment = new PreferenceSetTestFragment();
         getFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
-        mUptime = fragment.findPreference("up_time");
         mHandler.sendEmptyMessageDelayed(EVENT_UPDATE_STATS, 1000);
     }
     private  void updateTimes() {
-        long at = SystemClock.uptimeMillis() / 1000;
+        mDate = new Date();
+        long at = mDate.getTime() / 1000;
         long ut = SystemClock.elapsedRealtime() / 1000;
 
         if (ut == 0) {
             ut = 1;
         }
 
+        if (mUptime == null)
+            mUptime = fragment.findPreference("up_time");//如果在创建对象PreferenceSetTestFragment()的时候获取是获取不到的，因为需要在生命周期函数中才填充数据，方可获取。
         mUptime.setSummary(convert(ut));
+        if (mCurrentTime == null){
+            mCurrentTime = fragment.findPreference("current_time");
+        }
+        mCurrentTime.setSummary(DateUtils.formatDate(mDate,1));
     }
     private String pad(int n) {
         if (n >= 10) {
