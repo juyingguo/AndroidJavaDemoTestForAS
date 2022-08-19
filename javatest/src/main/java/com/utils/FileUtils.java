@@ -275,10 +275,11 @@ public class FileUtils {
         // 源文件不存在或者不是文件则返回false
         if (!srcFile.exists() || !srcFile.isFile()) return false;
         // 目标文件存在，如果存在就删除 ；add jy
-        if (destFile.exists() && destFile.isFile())
+        // TODO: 2022/8/19 可以不删除，复制后会覆盖
+        /*if (destFile.exists() && destFile.isFile())
     	{
     		deleteFile(destFile);
-    	}
+    	}*/
         // 目标目录不存在返回false
         if (!createOrExistsDir(destFile.getParentFile())) return false;
         try {
