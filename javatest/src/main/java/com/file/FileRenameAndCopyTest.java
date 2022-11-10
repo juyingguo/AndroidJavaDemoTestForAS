@@ -2,6 +2,8 @@ package com.file;
 
 import com.utils.FileUtils;
 
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
@@ -14,11 +16,12 @@ public class FileRenameAndCopyTest {
     public static void main(String[] args) {
 //        renameWithTrimPrefixFile();
         renameWithReplaceNameFile();
+//        deleteFile();
     }
-    private static String ROOT_SRC_DIR = "D:\\用户目录\\下载\\启动页";
+    private static String ROOT_SRC_DIR = "D:\\用户目录\\下载\\消息-分组 8";
     private static String ROOT_DEST_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\IbotnNewApp_family\\app\\src\\main\\res";
     private final static String[] COPY_UNDER_DIR = {"drawable-hdpi","drawable-mdpi","drawable-xhdpi","drawable-xxhdpi","drawable-xxxhdpi"};
-    private static String NEW_FILE_NAME_PREFIX = "icon_splash";
+    private static String NEW_FILE_NAME_PREFIX = "ic_msg_track";
     //    private static String ROOT_SRC_DIR = "D:\\juying\\as1_5project\\ibotnsvn\\ibotncourse\\IbotnIzlCourseNT_as\\izlcoursezbnt\\src\\main\\assets\\web\\IbotnCourse_zb\\assets\\images";
 
     /**
@@ -114,5 +117,34 @@ public class FileRenameAndCopyTest {
                 }
             }
         }
+    }
+    private static String DELETE_FILE_NAME = "icon_login_bg.png";
+
+//    @Test
+    private static void deleteFile(){
+        System.out.println("delete files start.");
+        if (FileUtils.isDir(ROOT_DEST_DIR)){
+            List<File> files = FileUtils.listFilesInDirWithFilter(ROOT_DEST_DIR, new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    if (FileUtils.isImage(new File(dir, name).getAbsolutePath())
+                            && name.equals(DELETE_FILE_NAME)) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            File newDestFile = null;
+            for (File file:files) {
+                File parentFile = file.getParentFile();
+                String parentName = parentFile.getName();
+                for (String currentName : COPY_UNDER_DIR) {
+                    if (currentName.equals(parentName)){
+                        FileUtils.deleteFile(file);
+                    }
+                }
+            }
+        }
+        System.out.println("delete files finish.");
     }
 }
