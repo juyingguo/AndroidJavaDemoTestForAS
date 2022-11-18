@@ -23,7 +23,7 @@ public class LambdaTestTwo {
         Consumer<String> ins1 = r -> System.out.println(r);
         ins1.accept("1");
         Consumer<String> ins2 =System.out::println;
-        ins1.accept("2");
+        ins2.accept("2");
     }
 
     /**

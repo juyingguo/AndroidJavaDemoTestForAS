@@ -1,5 +1,7 @@
 package com.utils;
 
+import org.junit.Test;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -150,32 +152,39 @@ public class ByteUtil {
     }
 
     public static void main(String[] args) {  
-        short s = 122;  
-        int i = 122;  
-        long l = 1222222;  
-  
-        char c = 'a';  
-  
-        float f = 122.22f;  
-        double d = 122.22;  
-  
-        String string = "我是好孩子";  
-        System.out.println(s);  
-        System.out.println(i);  
-        System.out.println(l);  
-        System.out.println(c);  
-        System.out.println(f);  
-        System.out.println(d);  
-        System.out.println(string);  
-  
-        System.out.println("**************");  
-  
-        System.out.println(getShort(getBytes(s)));  
-        System.out.println(getInt(getBytes(i)));  
-        System.out.println(getLong(getBytes(l)));  
-        System.out.println(getChar(getBytes(c)));  
-        System.out.println(getFloat(getBytes(f)));  
-        System.out.println(getDouble(getBytes(d)));  
-        System.out.println(getString(getBytes(string)));  
-    }  
+        short s = 122;
+        int i = 122;
+        long l = 1222222;
+
+        char c = 'a';
+
+        float f = 122.22f;
+        double d = 122.22;
+
+        String string = "我是好孩子";
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(c);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(string);
+
+        System.out.println("**************");
+
+        System.out.println(getShort(getBytes(s)));
+        System.out.println(getInt(getBytes(i)));
+        System.out.println(getLong(getBytes(l)));
+        System.out.println(getChar(getBytes(c)));
+        System.out.println(getFloat(getBytes(f)));
+        System.out.println(getDouble(getBytes(d)));
+        System.out.println(getString(getBytes(string)));
+    }
+    @Test
+    public void byteToChar(){
+        byte[] bytes = new byte[]{1,0};
+        System.out.println("byte to char:" + getChar(getBytes('1')));
+        System.out.println("byte to char:" + getChar(bytes));
+        System.out.println("byte to char:" + getBytes('1').length);
+    }
 } 

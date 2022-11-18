@@ -20,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum=""
             android:orientation="vertical">
             <Button
                 android:id="@+id/tv_file_explore"
@@ -282,6 +283,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="android_animation_test"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
+            <Button
+                android:id="@+id/btn_preference_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="android_preference_test"
                 android:textAllCaps="false"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

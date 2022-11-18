@@ -71,4 +71,19 @@ public class RegExpUtils {
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();
     }
+    /**
+     * 只匹配中文和字母。通过反向方式获取匹配的字符串
+     */
+    public String getChineseAndLetter(String inputStr) {
+        Matcher matcher = Pattern.compile("[\\u4e00-\\u9fa5a-zA-Z]+").matcher(inputStr);
+        StringBuilder nameBuilder = new StringBuilder();
+        while (matcher.find()){
+            String group = inputStr.substring(matcher.start(),matcher.end());
+            //String group = matcher.group();
+            //System.out.println("group:" + group);
+            nameBuilder.append(group);
+        }
+        inputStr = nameBuilder.toString();
+        return inputStr;
+    }
 }

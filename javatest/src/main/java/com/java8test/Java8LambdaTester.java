@@ -16,11 +16,15 @@ public class Java8LambdaTester {
       // 没有大括号及返回语句
       MathOperation division = (int a, int b) -> a / b;
         
+      System.out.println("10 + 5 = " + addition.operation(10,5));
       System.out.println("10 + 5 = " + tester.operate(10, 5, addition));
+      System.out.println("10 - 5 = " + subtraction.operation(10,5));
       System.out.println("10 - 5 = " + tester.operate(10, 5, subtraction));
+      System.out.println("10 x 5 = " + multiplication.operation(10,5));
       System.out.println("10 x 5 = " + tester.operate(10, 5, multiplication));
+      System.out.println("10 / 5 = " + division.operation(10,5));
       System.out.println("10 / 5 = " + tester.operate(10, 5, division));
-        
+
       // 不用括号
       GreetingService greetService1 = message ->
       System.out.println("Hello " + message);

@@ -44,4 +44,11 @@ public class JavaJsInterface {
 
         dialogNotCanceled.showAtLocationInActivityParam(x,y);
     }
+    @JavascriptInterface
+    public void startQrCodeScanWithDialogParam(int x,int y,int displaySizeType) {
+        Log.d(TAG,"startQrCodeScanWithDialogParam,x:" + x + ",y:" + y + ",displaySizeType:" + displaySizeType);
+        QRCodeScanDialogOutsideClick dialogNotCanceled = new QRCodeScanDialogOutsideClick(WebViewJsJavaCallEachOtherActivity.getInstance());
+
+        dialogNotCanceled.showAtLocationInActivityParam(x,y,displaySizeType);
+    }
 }
