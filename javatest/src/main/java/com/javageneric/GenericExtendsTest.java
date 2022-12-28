@@ -23,7 +23,7 @@ public class GenericExtendsTest {
       System.out.println("data :" + data.get(0));
    }
    
-   public static void getUperNumber(List<? extends Number> data) {
+    public static void getUperNumber(List<? extends Number> data) {
           System.out.println("data :" + data.get(0));
-       }
+    }
 }

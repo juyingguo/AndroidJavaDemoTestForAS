@@ -12,5 +12,14 @@ public class ConsumerTest {
             System.out.println(content);
         };
         consumer.accept("hello, world");
+
+        Consumer<String> consumer2 = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println( s);
+            }
+        };
+
+        consumer.accept("hello consumer2.");
     }
 }
