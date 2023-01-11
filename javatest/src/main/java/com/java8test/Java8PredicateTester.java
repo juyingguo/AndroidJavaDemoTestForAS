@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
  
-public class Java8FunctionalInterfaceTester {
+public class Java8PredicateTester {
    public static void main(String args[]){
       List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         
@@ -13,10 +13,11 @@ public class Java8FunctionalInterfaceTester {
       // n 如果存在则 test 方法返回 true
         
       System.out.println("输出所有数据:");
-        
+      Predicate<Integer> predicate = n->true;
       // 传递参数 n
-      eval(list, n->true);
-        
+//      eval(list, n->true);
+      eval(list, predicate);
+
       // Predicate<Integer> predicate1 = n -> n%2 == 0
       // n 是一个参数传递到 Predicate 接口的 test 方法
       // 如果 n%2 为 0 test 方法返回 true
