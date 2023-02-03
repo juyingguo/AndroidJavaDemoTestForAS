@@ -166,22 +166,32 @@ public class MainActivity extends Activity {
             String externalStorageState = Environment.getExternalStorageState();
             Log.w(TAG,"checkStorage>>externalStorageState:" + externalStorageState);
             if (Environment.MEDIA_MOUNTED.equals(externalStorageState)){
-                File externalStorageDirectory = Environment.getExternalStorageDirectory();
-                if (externalStorageDirectory != null){
-                    String absolutePath = externalStorageDirectory.getAbsolutePath();
-                    Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath);
+                File externalStorageDirectoryFile = Environment.getExternalStorageDirectory();
+                if (externalStorageDirectoryFile != null){
+                    String externalStorageDirectory = externalStorageDirectoryFile.getAbsolutePath();
+                    Log.w(TAG,"checkStorage>>externalStorageDirectory:" + externalStorageDirectory);
                 }
             }
-            String absolutePath = getCacheDir().getAbsolutePath();
-            String absolutePath1 = getExternalCacheDir().getAbsolutePath();
-            String absolutePath2 = getFilesDir().getAbsolutePath();
-            String absolutePath3 = getExternalFilesDir("test").getAbsolutePath();
+            String getCacheDir = getCacheDir().getAbsolutePath();
+            String getExternalCacheDir = getExternalCacheDir().getAbsolutePath();
+            String getFilesDir = getFilesDir().getAbsolutePath();
+            String getExternalFilesDirForTest = getExternalFilesDir("test").getAbsolutePath();
+            String getExternalFilesDirForhMusic = getExternalFilesDir(android.os.Environment.DIRECTORY_MUSIC).getAbsolutePath();
+            Log.d(TAG,"checkStorage>>getCacheDir:" + getCacheDir + "\n getExternalCacheDir:" + getExternalCacheDir
+                    + "\n getFilesDir:" + getFilesDir + "\n getExternalFilesDirForTest:" + getExternalFilesDirForTest
+                    + "\n getExternalFilesDirForhMusic:" + getExternalFilesDirForhMusic
+            );
             //打印记录：：
-            ////2020-03-12 11:01:59.732 32558-32558/com.sp.spmultipleapp W/MainActivity: checkStorage>>absolutePath:/data/user/0/com.sp.spmultipleapp/cache,
-            // absolutePath1:/storage/emulated/0/Android/data/com.sp.spmultipleapp/cache,
-            // absolutePath2:/data/user/0/com.sp.spmultipleapp/files,
-            // absolutePath3:/storage/emulated/0/Android/data/com.sp.spmultipleapp/files/test
-            Log.w(TAG,"checkStorage>>absolutePath:" + absolutePath + ",absolutePath1:" + absolutePath1 + ",absolutePath2:" + absolutePath2 + ",absolutePath3:" + absolutePath3);
+            /*
+            checkStorage>>externalStorageDirectory:/storage/sdcard
+                #查看文件系统ls -l,/storage/sdcard与 sdcard建立了链接即： sdcard -> /storage/sdcard
+            checkStorage>>getCacheDir:/data/data/com.sp.spmultipleapp/cache
+            getExternalCacheDir:/storage/sdcard/Android/data/com.sp.spmultipleapp/cache
+            getFilesDir:/data/data/com.sp.spmultipleapp/files
+            getExternalFilesDirForTest:/storage/sdcard/Android/data/com.sp.spmultipleapp/files/test
+            getExternalFilesDirForhMusic:/storage/sdcard/Android/data/com.sp.spmultipleapp/files/Music
+
+             */
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,7 +271,10 @@ public class MainActivity extends Activity {
 
     @OnClick({R.id.tv_file_explore,R.id.tv_touch,R.id.tv_send_broadcast_default,
             R.id.tv_send_broadcast_pendingintent,R.id.tv_test_video,R.id.btn_game_course
-            ,R.id.btn_linearlayout_test,R.id.btn_view_test,R.id.btn_install_upgrade_imitate
+            ,R.id.btn_linearlayout_test
+            ,R.id.btn_view_test
+            ,R.id.btn_handler_test
+            ,R.id.btn_install_upgrade_imitate
             ,R.id.btn_keep_alive_service_test
             ,R.id.btn_activity_task_stack
             ,R.id.btn_activity_image_test

@@ -36,7 +36,7 @@ public class Java8LambdaTester {
       greetService1.sayMessage("Runoob");
       greetService2.sayMessage("Google");
       
-      useCommonWay();
+      useCommonOldWay();
       accessVariable();
       accessLocalVariable2();
    }
@@ -72,23 +72,23 @@ public class Java8LambdaTester {
     * 1.Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。
     * 2.不使用Lambda,就得使用匿名方法
     */
-   private static void useCommonWay() {
+   private static void useCommonOldWay() {
        MathOperation add = new MathOperation(){
            @Override
            public int operation(int a, int b) {
                return a+b;
            }
        };
-      System.out.println("useCommonWay 10 + 5 = " + add.operation(10,5));
+      System.out.println("useCommonOldWay 10 + 5 = " + add.operation(10,5));
    }
-   private static void useCommonWay2() {
+   private static void useCommonOldWay2() {
       MathOperation mathOperationAdd = new MathOperation(){
          @Override
          public int operation(int a, int b) {
             return a+b;
          }
       };
-      System.out.println("useCommonWay 10 + 5 = " + mathOperationAdd.operation(10,5));
+      System.out.println("useCommonOldWay2, 10 + 5 = " + mathOperationAdd.operation(10,5));
    }
 
    interface MathOperation {

@@ -1,2 +1,2 @@
-include ':app', ':javatest', ':demotest', ':artchapter3', ':audio2mp3',':ndkBuildJni', ':serveraidldemo', ':androidlibtestjdk6', ':androidlibtestsdk25'
+include ':app', ':javatest', ':artchapter3', ':audio2mp3',':ndkBuildJni', ':serveraidldemo'
 include ':videoTalk0823'

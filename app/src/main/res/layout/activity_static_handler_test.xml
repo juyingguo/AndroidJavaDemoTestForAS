@@ -3,26 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".handler.HandlerTestActivity"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="StaticHandlerTestActivity"
-        android:textAllCaps="false"
-        android:onClick="clickStaticHandlerTestActivity"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="StaticHandlerProgressTestActivity"
-        android:onClick="clickStaticHandlerProgressBarTestActivity"
-        android:textAllCaps="false"
-        tools:ignore="HardcodedText" />
+        android:text="Button"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="42dp" />
 
     <TextView
         android:id="@+id/textView"

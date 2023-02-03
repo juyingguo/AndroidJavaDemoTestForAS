@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion COMPILE_SDK_VER
-    buildToolsVersion BUILD_TOOLS_VER
+//    buildToolsVersion BUILD_TOOLS_VER
     defaultConfig {
         applicationId "com.sp.spmultipleapp"
         minSdkVersion MIN_SDK_VER
