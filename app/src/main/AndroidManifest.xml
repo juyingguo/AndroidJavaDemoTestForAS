@@ -44,7 +44,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".PreferenceTestActivity" android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".datastruct.SparseArrayActivityTest" android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name=".PreferenceTestActivity"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.AnimationTestActivity"
             android:theme="@style/Theme.AppCompat" />

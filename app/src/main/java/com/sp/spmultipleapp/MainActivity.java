@@ -36,6 +36,7 @@ import com.sp.spmultipleapp.activity.WifiModuleTestActivity;
 import com.sp.spmultipleapp.activity.aidltest.AidlTestActivity;
 import com.sp.spmultipleapp.activity.nettest.NetTestActivity;
 import com.sp.spmultipleapp.activity.taskstack.TaskStackMainActivity;
+import com.sp.spmultipleapp.datastruct.SparseArrayActivityTest;
 import com.sp.spmultipleapp.eventbustest.EventBusMainActivity;
 import com.sp.spmultipleapp.handler.HandlerTestActivity;
 import com.sp.spmultipleapp.rxjava2test.DoOnSubscribeTest;
@@ -297,6 +298,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_event_bus_test
             ,R.id.btn_animation_test
             ,R.id.btn_preference_test
+            ,R.id.btn_sparse_array_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -397,6 +399,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, AnimationTestActivity.class));
         }else if (view.getId() == R.id.btn_preference_test){
             startActivity(new Intent(mContext, PreferenceTestActivity.class));
+        }else if (view.getId() == R.id.btn_sparse_array_test){
+            startActivity(new Intent(mContext, SparseArrayActivityTest.class));
         }
     }
 

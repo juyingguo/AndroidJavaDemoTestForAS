@@ -6,7 +6,7 @@ public class GenericMethodTest
    private static < E > void printArray(E[] inputArray)
    {
       // 输出数组元素            
-         for ( E element : inputArray ){        
+         for ( E element : inputArray ){
             System.out.printf( "%s ", element );
          }
          System.out.println();
