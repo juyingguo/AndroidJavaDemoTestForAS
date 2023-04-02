@@ -300,6 +300,14 @@
                 android:text="sparse_array_test"
                 android:textAllCaps="false"
                 tools:ignore="HardcodedText" />
+            <Button
+                android:id="@+id/btn_proximity_screen_fff_mock_incall_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="ProximityScreenOffMockInCallTest"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </ScrollView>
 

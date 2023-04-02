@@ -26,6 +26,7 @@ import com.sp.spmultipleapp.activity.FileModuleActivity;
 import com.sp.spmultipleapp.activity.ImageTestActivity;
 import com.sp.spmultipleapp.activity.KeepAliveTestActivity;
 import com.sp.spmultipleapp.activity.LinearLayoutTestActivity;
+import com.sp.spmultipleapp.activity.ProximityScreenOffMockInCallTest;
 import com.sp.spmultipleapp.activity.ScreenOffAdminActivity;
 import com.sp.spmultipleapp.activity.ThreadTestActivity;
 import com.sp.spmultipleapp.activity.UpgradeInstallTestActivity;
@@ -299,6 +300,7 @@ public class MainActivity extends Activity {
             ,R.id.btn_animation_test
             ,R.id.btn_preference_test
             ,R.id.btn_sparse_array_test
+            ,R.id.btn_proximity_screen_fff_mock_incall_test
                 })
     public void clickView(View view){
         if (view.getId() == R.id.tv_file_explore){
@@ -401,6 +403,8 @@ public class MainActivity extends Activity {
             startActivity(new Intent(mContext, PreferenceTestActivity.class));
         }else if (view.getId() == R.id.btn_sparse_array_test){
             startActivity(new Intent(mContext, SparseArrayActivityTest.class));
+        }else if (view.getId() == R.id.btn_proximity_screen_fff_mock_incall_test){
+            startActivity(new Intent(mContext, ProximityScreenOffMockInCallTest.class));
         }
     }
 
