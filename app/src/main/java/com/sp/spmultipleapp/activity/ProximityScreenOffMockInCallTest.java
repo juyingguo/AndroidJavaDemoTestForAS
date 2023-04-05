@@ -28,14 +28,18 @@ public class ProximityScreenOffMockInCallTest extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proximity_screen_off_mock_in_call_test);
 
-//        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-//        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
         //息屏设置
         mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = mPowerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK,
                 "proximity_screen_off_wake_lock_test");
+//        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+//                "proximity_screen_off_wake_lock_test");
+//        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
+//                "screen_dim_wake_lock_test");
     }
 
     @Override
@@ -43,10 +47,10 @@ public class ProximityScreenOffMockInCallTest extends AppCompatActivity implemen
         super.onResume();
         Log.d(TAG,"onResume");
         //注册传感器,先判断有没有传感器
-//        if (mSensor != null)
-//            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        if (!mWakeLock.isHeld())
-            mWakeLock.acquire();
+        if (mSensor != null)
+            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        if (!mWakeLock.isHeld())
+//            mWakeLock.acquire();
     }
 
     @Override
@@ -70,8 +74,8 @@ public class ProximityScreenOffMockInCallTest extends AppCompatActivity implemen
 //            audioManager.setSpeakerphoneOn(false);
 //            audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
             //关闭屏幕
-//            if (!mWakeLock.isHeld())
-//                mWakeLock.acquire();
+            if (!mWakeLock.isHeld())
+                mWakeLock.acquire();
 
         } else {
             //离开手机
@@ -80,8 +84,8 @@ public class ProximityScreenOffMockInCallTest extends AppCompatActivity implemen
 //            audioManager.setSpeakerphoneOn(true);
 
             //唤醒设备
-//            if (mWakeLock.isHeld())
-//                mWakeLock.release();
+            if (mWakeLock.isHeld())
+                mWakeLock.release();
         }
     }
 
